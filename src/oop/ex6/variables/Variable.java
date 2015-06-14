@@ -7,7 +7,7 @@ package oop.ex6.variables;
 public abstract class Variable {
 
     protected VARIABLE_TYPES type;
-    protected boolean isInitialized;
+    protected boolean initialized;
 
     /**
      * create a new variable, initialize with the value of an old one to initialize.
@@ -40,7 +40,9 @@ public abstract class Variable {
      * by initialize method)
      * @return true if the variable was initialized, false otherwise.
      */
-    abstract public boolean isInitialized();
+    public boolean isInitialized() {
+        return initialized;
+    };
 
     /**
      * initalize the variable with a value.
@@ -48,7 +50,7 @@ public abstract class Variable {
      */
     public void initialize(String value){
         if (isValueLegal(value)) {
-            isInitialized = true;
+            initialized = true;
         } else {
             // TODO throw exception
         }
