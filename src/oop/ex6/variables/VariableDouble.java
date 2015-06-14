@@ -1,13 +1,13 @@
 package oop.ex6.variables;
 
-
 /**
  * Created by Erez Levanon on 14/06/2015.
  */
-public class VariableInteger extends Variable {
+public class VariableDouble extends Variable{
 
-    private final static VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER};
-    private final static String LEGAL_VAL = "\\-?\\d+";
+    private final static VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER,
+                                                                                    VARIABLE_TYPES.DOUBLE};
+    private final static String LEGAL_VAL = "\\-?\\d+\\.?\\d+";
 
     /**
      * determines whether a string is legal as the value of the specific variable type.
@@ -27,12 +27,6 @@ public class VariableInteger extends Variable {
      */
     @Override
     protected boolean canGetVariable(Variable otherVariable) {
-        VARIABLE_TYPES otherType = otherVariable.getVariableType();
-        for (VARIABLE_TYPES type : LEGAL_TYPES) {
-            if (type == otherType) {
-                return true;
-            }
-        }
         return false;
     }
 
@@ -43,6 +37,6 @@ public class VariableInteger extends Variable {
      */
     @Override
     public VARIABLE_TYPES getVariableType() {
-        return VARIABLE_TYPES.INTEGER;
+        return null;
     }
 }
