@@ -122,7 +122,7 @@ public class Scope {
         }
         found = searchVariableUpwards(variableName);
         if (found != null) {
-            return deepCopyVariable(found);
+            return VariableUtils.deepCopyVariable(found);
         }
         return null;
     }

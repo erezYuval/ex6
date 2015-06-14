@@ -3,7 +3,7 @@ package oop.ex6.variables;
 /**
  * a collection of static utility methods to Variable class.
  */
-class VariableUtils {
+public class VariableUtils {
 
     /**
      * determines whether a string is legal as a variable name.
@@ -15,7 +15,7 @@ class VariableUtils {
         return false;
     }
 
-    static Variable deepCopyVariable(Variable variable){
+    public static Variable deepCopyVariable(Variable variable){
         Variable variableCopy = VariableFactory.produceVariable(variable.getVariableType(),variable.toString());
         if(variable.isInitialized()){
             variableCopy.setInitialized();
