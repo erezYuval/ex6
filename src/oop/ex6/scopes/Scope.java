@@ -3,6 +3,8 @@ package oop.ex6.scopes;
 import oop.ex6.variables.VARIABLE_TYPES;
 import oop.ex6.variables.Variable;
 
+import java.util.Hashtable;
+
 /**
  * a class representing a logic scope in the java-s examined program
  */
@@ -13,6 +15,7 @@ public class Scope {
     //this will be the parent scope of this scope, (we need it for outer scope variables.
     private Scope parent;
 
+    private Hashtable<String, Variable> variables;
     //TODO some kind of collection that holds Variable instances of this scope.
     //TODO some kind of collection that holds Scope instances of inner scopes.
 
@@ -95,8 +98,15 @@ public class Scope {
      * @param variableName the variable name to find.
      * @return the wanted variable if found, null otherwise.
      */
-    public Variable searchVarialbeUpwards(String variableName) {
-        return null;
+    public Variable searchVariableUpwards(String variableName) {
+        Variable found = variables.get(variableName);
+        if (found!=null) {
+            return found;
+        } else if (parent!=null) {
+            return parent.searchVariableUpwards(variableName);
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -105,6 +115,14 @@ public class Scope {
      * @return the wanted variable if found, null otherwise.
      */
     public Variable searchVariableLocally(String variableName) {
+        Variable found = variables.get(variableName);
+        if (found != null) {
+            return found;
+        }
+        found = searchVariableUpwards(variableName);
+        if (found != null) {
+
+        }
         return null;
     }
 
