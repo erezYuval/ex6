@@ -46,7 +46,13 @@ public abstract class Variable {
      * initalize the variable with a value.
      * @param value the new value as a string.
      */
-    abstract public void initialize(String value);
+    public void initialize(String value){
+        if (isValueLegel(value)) {
+            isInitialized = true;
+        } else {
+            // TODO throw exception
+        }
+    };
 
     /**
      * determines whether a string is legal as the value of the specific variable type.
