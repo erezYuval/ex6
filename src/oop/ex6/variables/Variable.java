@@ -6,7 +6,7 @@ package oop.ex6.variables;
  */
 public abstract class Variable {
 
-    protected VARIABLE_TYPES type;
+    protected static VARIABLE_TYPES type;
     protected boolean initialized;
 
     public Variable() {
@@ -76,5 +76,7 @@ public abstract class Variable {
      * check which type of variable is a specific instance.
      * @return the type of this Variable instance.
      */
-    abstract protected VARIABLE_TYPES getVariableType();
+    public VARIABLE_TYPES getVariableType() {
+        return type;
+    };
 }
