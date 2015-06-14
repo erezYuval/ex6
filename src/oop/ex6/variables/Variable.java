@@ -36,7 +36,7 @@ public abstract class Variable {
     }
 
     /**
-     * check rather the variable has been initialized with a value yet (in the constructor or
+     * check whether the variable has been initialized with a value yet (in the constructor or
      * by initialize method)
      * @return true if the variable was initialized, false otherwise.
      */
@@ -49,7 +49,7 @@ public abstract class Variable {
     abstract public void initialize(String value);
 
     /**
-     * determines rather a string is legal as the value of the specific variable type.
+     * determines whether a string is legal as the value of the specific variable type.
      * @param value
      */
     abstract protected boolean isValueLegel(String value);
