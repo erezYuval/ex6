@@ -17,7 +17,7 @@ public class Scope {
     //TODO some kind of collection that holds Scope instances of inner scopes.
 
     /**
-     * create a new scope object, defaultley it will have no parent scope and the first line will be 0.
+     * create a new scope object, defaultly it will have no parent scope and the first line will be 0.
      */
     public Scope(){
         //TODO write this constructor
