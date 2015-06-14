@@ -1,13 +1,13 @@
 package oop.ex6.variables;
 
-
 /**
  * Created by yuvalavrami on 6/14/15.
  */
-public class VariableChar extends Variable {
+public class VariableBoolean extends Variable {
 
-    final static String LEGAL_VAL = "'.'";
-    private final static VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.CHAR};
+    final static String LEGAL_BOOLEAN =
+    private final static VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.BOOLEAN,
+            VARIABLE_TYPES.INTEGER, VARIABLE_TYPES.DOUBLE};
 
     /**
      * determines whether a string is legal as the value of the specific variable type.
@@ -16,7 +16,7 @@ public class VariableChar extends Variable {
      */
     @Override
     protected boolean isValueLegal(String value) {
-        return value.matches(LEGAL_VAL);
+        return false;
     }
 
     /**
@@ -41,15 +41,6 @@ public class VariableChar extends Variable {
      */
     @Override
     public VARIABLE_TYPES getVariableType() {
-        return VARIABLE_TYPES.CHAR;
+        return VARIABLE_TYPES.BOOLEAN;
     }
-
-//    public static void main(String[] args) {
-//        String[] array;
-//        array = new String[]{"'.'"};
-//        for (String a: array){
-//            System.out.println(a.matches(LEGAL_CHAR));
-//        }
-//    }
 }
-

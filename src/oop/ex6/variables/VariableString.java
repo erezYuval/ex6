@@ -5,7 +5,7 @@ package oop.ex6.variables;
  */
 public class VariableString extends Variable {
 
-    private final static String LEGAL_STRING = "\".*\"";
+    final static String LEGAL_VAL = "\".*\"";
     private final static VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.STRING};
 
     /**
@@ -15,7 +15,7 @@ public class VariableString extends Variable {
      */
     @Override
     protected boolean isValueLegal(String value) {
-        return value.matches(LEGAL_STRING);
+        return value.matches(LEGAL_VAL);
     }
 
     /**
