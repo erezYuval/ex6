@@ -26,7 +26,7 @@ public class Scope {
      * @param firstLine the line in the java-s file where this scope strats.
      */
     public Scope(int firstLine) {
-        initializeArrays();
+        initializeCollections();
     }
 
     /**
@@ -35,7 +35,7 @@ public class Scope {
      * @param parent
      */
     public Scope(int firstLine, Scope parent) {
-        initializeArrays();
+        initializeCollections();
         this.firstLine = firstLine;
         this.parent = parent;
     }
@@ -133,7 +133,10 @@ public class Scope {
         return null;
     }
 
-    private void initializeArrays(){
+    /*
+    initialize the collection data members.
+     */
+    private void initializeCollections(){
         variables = new Hashtable<>();
         innerScopes = new ArrayList<>();
     }
