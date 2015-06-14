@@ -9,6 +9,9 @@ public abstract class Variable {
     protected VARIABLE_TYPES type;
     protected boolean initialized;
 
+    public Variable() {
+    }
+
     /**
      * create a new variable, initialize with the value of an old one to initialize.
      * @param variable the value to be used
