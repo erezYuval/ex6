@@ -7,6 +7,7 @@ package oop.ex6.variables;
 public abstract class Variable {
 
     private boolean initialized;
+    private String varName;
 
     public Variable() {
     }
@@ -17,7 +18,13 @@ public abstract class Variable {
      * @param variableName the name of the variable
      */
     public Variable(String variableName, Variable variable) {
-        // TODO write this constructor
+        if (!VariableUtils.isNameLegal(variableName)) {
+            // TODO throw illegal variable name
+        } else if(!canGetVariable(variable)) {
+            // TODO throw type mismatch
+        }
+        initialized = true;
+        varName = variableName;
     }
 
     /**
@@ -26,7 +33,13 @@ public abstract class Variable {
      * @param variableName the name of the variable
      */
     public Variable(String variableName, String value){
-        // TODO write this constructor
+        if (!VariableUtils.isNameLegal(variableName)) {
+            // TODO throw illegal variable name
+        } else if(!isValueLegal(value)) {
+            // TODO throw type mismatch
+        }
+        initialized = true;
+        varName = variableName;
     }
 
     /**
@@ -34,7 +47,12 @@ public abstract class Variable {
      * @param variableName
      */
     public Variable(String variableName){
-        // TODO write this constructor
+        if (!VariableUtils.isNameLegal(variableName)) {
+            // TODO throw illegal variable name
+        }
+        initialized = false;
+        varName = variableName;
+
     }
 
     /**
@@ -64,6 +82,11 @@ public abstract class Variable {
         } else {
             // TODO throw exception
         }
+    }
+
+    @Override
+    public String toString() {
+        return varName;
     }
 
     /**
