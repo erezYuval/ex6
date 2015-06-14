@@ -5,6 +5,7 @@ package oop.ex6.variables;
  */
 public class VariableFactory {
 
+
     /**
      * produces a variable instance with the given arguments, with setting a value
      * @param type the wanted variable type
@@ -12,7 +13,7 @@ public class VariableFactory {
      * @param value the wanted value
      * @return
      */
-    public Variable produceVariable(VARIABLE_TYPES type, String name, String value){
+    public static Variable produceVariable(VARIABLE_TYPES type, String name, String value){
         return null;
     }
 
@@ -22,7 +23,7 @@ public class VariableFactory {
      * @param name the variable name
      * @return
      */
-    public Variable produceVariable(VARIABLE_TYPES type, String name){
+    public static Variable produceVariable(VARIABLE_TYPES type, String name){
         return null;
     }
 }

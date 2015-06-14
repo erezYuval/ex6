@@ -14,4 +14,12 @@ class VariableUtils {
         //TODO write this method.
         return false;
     }
+
+    static Variable deepCopyVariable(Variable variable){
+        Variable variableCopy = VariableFactory.produceVariable(variable.getVariableType(),variable.toString());
+        if(variable.isInitialized()){
+            variableCopy.setInitialized();
+        }
+        return variableCopy;
+    }
 }
