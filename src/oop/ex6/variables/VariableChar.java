@@ -9,6 +9,8 @@ public class VariableChar extends Variable {
     final static String LEGAL_VAL = "'.'";
     private final static VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.CHAR};
 
+
+
     /**
      * determines whether a string is legal as the value of the specific variable type.
      *
@@ -44,12 +46,12 @@ public class VariableChar extends Variable {
         return VARIABLE_TYPES.CHAR;
     }
 
-    public static void main(String[] args) {
-        String[] array;
-        array = new String[]{"'7'"};
-        for (String a: array){
-            System.out.println(a.matches(LEGAL_VAL));
-        }
-    }
+//    public static void main(String[] args) {
+//        String[] array;
+//        array = new String[]{"'7'"};
+//        for (String a: array){
+//            System.out.println(a.matches(LEGAL_VAL));
+//        }
+//    }
 }
 
