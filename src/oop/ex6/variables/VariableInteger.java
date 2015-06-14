@@ -6,7 +6,7 @@ package oop.ex6.variables;
  */
 public class VariableInteger extends Variable {
 
-    private final static VARIABLE_TYPES[] canGetVars = new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER};
+    private final static VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER};
     private final static String LEGAL_VAL = "\\d\\d*";
 
     /**
@@ -28,7 +28,7 @@ public class VariableInteger extends Variable {
     @Override
     protected boolean canGetVariable(Variable otherVariable) {
         VARIABLE_TYPES otherType = otherVariable.getVariableType();
-        for (VARIABLE_TYPES type : canGetVars) {
+        for (VARIABLE_TYPES type : LEGAL_TYPES) {
             if (type == otherType) {
                 return true;
             }
