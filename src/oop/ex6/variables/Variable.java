@@ -10,6 +10,7 @@ public abstract class Variable {
     private String varName;
 
     public Variable() {
+        // TODO throw SHIT AT IT
     }
 
     /**
@@ -22,6 +23,8 @@ public abstract class Variable {
             // TODO throw illegal variable name
         } else if(!canGetVariable(variable)) {
             // TODO throw type mismatch
+        } else if (!variable.isInitialized()) {
+            // TODO throw illegal shit exception
         }
         initialized = true;
         varName = variableName;
