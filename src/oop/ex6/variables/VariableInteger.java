@@ -5,6 +5,8 @@ package oop.ex6.variables;
  */
 public class VariableInteger extends Variable {
 
+    type
+
     /**
      * determines whether a string is legal as the value of the specific variable type.
      *
