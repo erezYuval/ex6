@@ -5,8 +5,7 @@ package oop.ex6.variables;
  */
 public class VariableString extends Variable {
 
-    type = VARIABLE_TYPES.
-
+    private final static String LEGAL_STRING = ".*";
 
     /**
      * determines whether a string is legal as the value of the specific variable type.
@@ -15,7 +14,7 @@ public class VariableString extends Variable {
      */
     @Override
     protected boolean isValueLegal(String value) {
-        return false;
+        return value.matches(LEGAL_STRING);
     }
 
     /**
@@ -35,7 +34,7 @@ public class VariableString extends Variable {
      * @return the type of this Variable instance.
      */
     @Override
-    protected VARIABLE_TYPES getVariableType() {
-        return null;
+    public VARIABLE_TYPES getVariableType() {
+        return VARIABLE_TYPES.STRING;
     }
 }
