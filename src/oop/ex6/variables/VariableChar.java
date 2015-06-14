@@ -7,6 +7,7 @@ package oop.ex6.variables;
 public class VariableChar extends Variable {
 
     private final static String LEGAL_CHAR = "'.'";
+    private final static VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.CHAR};
 
     /**
      * determines whether a string is legal as the value of the specific variable type.
@@ -26,6 +27,10 @@ public class VariableChar extends Variable {
      */
     @Override
     protected boolean canGetVariable(Variable otherVariable) {
+        for(VARIABLE_TYPES type: LEGAL_TYPES){
+            if(otherVariable.getVariableType() == type){
+                return true;}
+        }
         return false;
     }
 
