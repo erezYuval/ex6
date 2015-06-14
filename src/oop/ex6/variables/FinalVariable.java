@@ -3,20 +3,28 @@ package oop.ex6.variables;
 /**
  * Created by Erez Levanon on 14/06/2015.
  */
-public class VariableDouble extends Variable{
+public class FinalVariable extends Variable {
 
-    private final static VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER,
-                                                                                    VARIABLE_TYPES.DOUBLE};
-    final static String LEGAL_VAL = "\\-?\\d+\\.?\\d+";
+
+    private Variable insideVar;
+
+    public FinalVariable(Variable variable) {
+        if (!variable.isInitialized()) {
+            //TODO throw final exception
+        }
+    }
+
+    public FinalVariable() {
+        // TODO throw
+    }
 
     /**
      * determines whether a string is legal as the value of the specific variable type.
-     *
      * @param value
      */
     @Override
     protected boolean isValueLegal(String value) {
-        return value.matches(LEGAL_VAL);
+        return insideVar.isValueLegal(value);
     }
 
     /**
@@ -27,7 +35,12 @@ public class VariableDouble extends Variable{
      */
     @Override
     protected boolean canGetVariable(Variable otherVariable) {
-        return false;
+        return insideVar.canGetVariable(otherVariable);
+    }
+
+    @Override
+    public void initialize(String value){
+        //TODO throw final variable exception
     }
 
     /**
@@ -37,6 +50,6 @@ public class VariableDouble extends Variable{
      */
     @Override
     public VARIABLE_TYPES getVariableType() {
-        return null;
+        return insideVar.getVariableType();
     }
 }

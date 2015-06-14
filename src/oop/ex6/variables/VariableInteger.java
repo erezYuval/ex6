@@ -7,7 +7,7 @@ package oop.ex6.variables;
 public class VariableInteger extends Variable {
 
     private final static VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER};
-    private final static String LEGAL_VAL = "\\-?\\d+";
+    final static String LEGAL_VAL = "\\-?\\d+";
 
     /**
      * determines whether a string is legal as the value of the specific variable type.

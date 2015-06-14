@@ -56,7 +56,15 @@ public abstract class Variable {
         } else {
             // TODO throw exception
         }
-    };
+    }
+
+    public void initialize(Variable variable){
+        if (canGetVariable(variable)) {
+            initialized = true;
+        } else {
+            // TODO throw exception
+        }
+    }
 
     /**
      * determines whether a string is legal as the value of the specific variable type.
