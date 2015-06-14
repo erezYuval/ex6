@@ -4,6 +4,7 @@ import oop.ex6.variables.VARIABLE_TYPES;
 import oop.ex6.variables.Variable;
 import oop.ex6.variables.VariableUtils;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 /**
@@ -17,22 +18,15 @@ public class Scope {
     private Scope parent;
 
     private Hashtable<String, Variable> variables;
-    //TODO some kind of collection that holds Variable instances of this scope.
-    //TODO some kind of collection that holds Scope instances of inner scopes.
+    private ArrayList<Scope> innerScopes;
 
-    /**
-     * create a new scope object, defaultly it will have no parent scope and the first line will be 0.
-     */
-    public Scope(){
-        //TODO write this constructor
-    }
 
     /**
      * create a new scope object, and set it first line to be the given int.
      * @param firstLine the line in the java-s file where this scope strats.
      */
     public Scope(int firstLine) {
-        //TODO write this constructor
+        initializeArrays();
     }
 
     /**
@@ -41,7 +35,9 @@ public class Scope {
      * @param parent
      */
     public Scope(int firstLine, Scope parent) {
-        //TODO write this constructor.
+        initializeArrays();
+        this.firstLine = firstLine;
+        this.parent = parent;
     }
 
     /**
@@ -59,6 +55,16 @@ public class Scope {
      * @param variableName the name of the new variable as a String.
      */
     public void addVariable(VARIABLE_TYPES type, String variableName){
+    }
+
+    /**
+     * adds an array of variables to this scope's collection of variables.
+     * @param variablesToAdd the array of Variables to add.
+     */
+    public void addVariables(Variable[] variablesToAdd) {
+        for (Variable variable : variablesToAdd) {
+            variables.put(variable.toString(),variable);
+        }
     }
 
     /**
@@ -125,5 +131,10 @@ public class Scope {
             return VariableUtils.deepCopyVariable(found);
         }
         return null;
+    }
+
+    private void initializeArrays(){
+        variables = new Hashtable<>();
+        innerScopes = new ArrayList<>();
     }
 }
