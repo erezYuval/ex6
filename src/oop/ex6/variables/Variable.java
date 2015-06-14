@@ -67,6 +67,10 @@ public abstract class Variable {
         return initialized;
     };
 
+    public void setInitialized(){
+        initialized = true;
+    }
+
     /**
      * initalize the variable with a value.
      * @param value the new value as a string.

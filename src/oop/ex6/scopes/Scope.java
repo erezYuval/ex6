@@ -2,6 +2,7 @@ package oop.ex6.scopes;
 
 import oop.ex6.variables.VARIABLE_TYPES;
 import oop.ex6.variables.Variable;
+import oop.ex6.variables.VariableUtils;
 
 import java.util.Hashtable;
 
@@ -121,9 +122,8 @@ public class Scope {
         }
         found = searchVariableUpwards(variableName);
         if (found != null) {
-
+            return deepCopyVariable(found);
         }
         return null;
     }
-
 }
