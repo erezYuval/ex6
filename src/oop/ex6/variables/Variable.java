@@ -47,7 +47,7 @@ public abstract class Variable {
      * @param value the new value as a string.
      */
     public void initialize(String value){
-        if (isValueLegel(value)) {
+        if (isValueLegal(value)) {
             isInitialized = true;
         } else {
             // TODO throw exception
