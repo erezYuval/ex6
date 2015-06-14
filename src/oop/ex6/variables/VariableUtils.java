@@ -6,7 +6,7 @@ package oop.ex6.variables;
 class VariableUtils {
 
     /**
-     * determines rather a string is legal as a variable name.
+     * determines whether a string is legal as a variable name.
      * @param name the string to be determined
      * @return true if the string is a legal variable name, false otherwise.
      */

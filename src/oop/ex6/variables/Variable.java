@@ -1,7 +1,7 @@
 package oop.ex6.variables;
 
 /**
- * classes implementig this interface will represent variables of different types in
+ * classes implementing this interface will represent variables of different types in
  * java-s.
  */
 public abstract class Variable {
@@ -20,7 +20,7 @@ public abstract class Variable {
 
     /**
      * create a new variable, initialized with a value given as a string.
-     * @param value string representaion of the new value.
+     * @param value string representation of the new value.
      * @param variableName the name of the variable
      */
     public Variable(String variableName, String value){
@@ -55,8 +55,8 @@ public abstract class Variable {
     abstract protected boolean isValueLegel(String value);
 
     /**
-     * determines rather this variable can get another variable as a value.
-     * @param otherVariable the variable to determine rather it can be used as a value.
+     * determines whether this variable can get another variable as a value.
+     * @param otherVariable the variable to determine whether it can be used as a value.
      * @return
      */
     abstract protected boolean canGetVariable(Variable otherVariable);
