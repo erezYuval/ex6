@@ -15,7 +15,24 @@ public class FinalVariable extends Variable {
     }
 
     public FinalVariable() {
-        // TODO throw
+        // TODO throw final exception
+    }
+
+    public FinalVariable(String variableName, Variable variable){
+        // TODO throw unsupported functionallity
+    }
+
+    public FinalVariable(String variableName){
+        // TODO throw unsupported constructor
+    }
+
+    public boolean isInitialized() {
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return insideVar.toString();
     }
 
     /**
