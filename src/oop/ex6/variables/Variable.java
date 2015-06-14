@@ -58,7 +58,7 @@ public abstract class Variable {
      * determines whether a string is legal as the value of the specific variable type.
      * @param value
      */
-    abstract protected boolean isValueLegel(String value);
+    abstract protected boolean isValueLegal(String value);
 
     /**
      * determines whether this variable can get another variable as a value.
