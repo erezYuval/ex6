@@ -12,9 +12,9 @@ import java.util.Hashtable;
  */
 public class Scope {
 
-    //this will be the line in the code were this scope starts
+    //this will be the line in the code where this scope starts
     private int firstLine;
-    //this will be the parent scope of this scope, (we need it for outer scope variables.
+    //this will be the parent scope of this scope, (we need it for outer scope variables.)
     private Scope parent;
 
     private Hashtable<String, Variable> variables;
@@ -23,8 +23,8 @@ public class Scope {
 
 
     /**
-     * create a new scope object, and set it first line to be the given int.
-     * @param firstLine the line in the java-s file where this scope strats.
+     * create a new scope object, and set its first line to be the given int.
+     * @param firstLine the line in the java-s file where this scope starts.
      */
     public Scope(int firstLine) {
         initializeCollections();
@@ -69,7 +69,7 @@ public class Scope {
     }
 
     /**
-     * get the line where this scope strats in the java-s file.
+     * get the line where this scope starts in the java-s file.
      * @return the first line as an int.
      */
     public int getFirstLine() {
