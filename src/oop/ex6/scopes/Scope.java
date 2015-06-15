@@ -1,5 +1,6 @@
 package oop.ex6.scopes;
 
+import oop.ex6.methods.Method;
 import oop.ex6.variables.VARIABLE_TYPES;
 import oop.ex6.variables.Variable;
 import oop.ex6.variables.VariableUtils;
@@ -19,6 +20,7 @@ public class Scope {
 
     private Hashtable<String, Variable> variables;
     private ArrayList<Scope> innerScopes;
+    protected static Hashtable<String, Method> methods;
 
 
     /**
