@@ -73,9 +73,10 @@ public class VariableChar extends Variable {
         return VARIABLE_TYPES.CHAR;
     }
 
+
 //    public static void main(String[] args) {
 //        String[] array;
-//        array = new String[]{"'7'"};
+//        array = new String[]{"  //        "};
 //        for (String a: array){
 //            System.out.println(a.matches(LEGAL_VAL));
 //        }
