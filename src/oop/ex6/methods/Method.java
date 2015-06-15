@@ -61,4 +61,8 @@ public class Method{
     public String getName() {
         return name;
     }
+
+    public ArrayList<Variable> getVariables() {
+        return variables;
+    }
 }
