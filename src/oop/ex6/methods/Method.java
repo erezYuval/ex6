@@ -2,8 +2,6 @@ package oop.ex6.methods;
 
 import oop.ex6.variables.VARIABLE_TYPES;
 
-import java.util.Iterator;
-
 /**
  * Created by Erez Levanon on 13/06/2015.
  */

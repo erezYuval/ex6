@@ -9,7 +9,34 @@ public class VariableChar extends Variable {
     final static String LEGAL_VAL = "'.'";
     private final static VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.CHAR};
 
+    /**
+     * create a new variable, initialize with the value of an old one to initialize.
+     *
+     * @param variableName the name of the variable
+     * @param variable     the value to be used
+     */
+    public VariableChar(String variableName, Variable variable) {
+        super(variableName, variable);
+    }
 
+    /**
+     * create a new variable, initialized with a value given as a string.
+     *
+     * @param variableName the name of the variable
+     * @param value        string representation of the new value.
+     */
+    public VariableChar(String variableName, String value) {
+        super(variableName, value);
+    }
+
+    /**
+     * create a new variable, not initialized with a value.
+     *
+     * @param variableName
+     */
+    public VariableChar(String variableName) {
+        super(variableName);
+    }
 
     /**
      * determines whether a string is legal as the value of the specific variable type.

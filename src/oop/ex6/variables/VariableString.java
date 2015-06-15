@@ -9,6 +9,35 @@ public class VariableString extends Variable {
     private final static VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.STRING};
 
     /**
+     * create a new variable, initialize with the value of an old one to initialize.
+     *
+     * @param variableName the name of the variable
+     * @param variable     the value to be used
+     */
+    public VariableString(String variableName, Variable variable) {
+        super(variableName, variable);
+    }
+
+    /**
+     * create a new variable, initialized with a value given as a string.
+     *
+     * @param variableName the name of the variable
+     * @param value        string representation of the new value.
+     */
+    public VariableString(String variableName, String value) {
+        super(variableName, value);
+    }
+
+    /**
+     * create a new variable, not initialized with a value.
+     *
+     * @param variableName
+     */
+    public VariableString(String variableName) {
+        super(variableName);
+    }
+
+    /**
      * determines whether a string is legal as the value of the specific variable type.
      *
      * @param value

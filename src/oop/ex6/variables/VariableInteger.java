@@ -10,6 +10,35 @@ public class VariableInteger extends Variable {
     final static String LEGAL_VAL = "\\-?\\d+";
 
     /**
+     * create a new variable, initialize with the value of an old one to initialize.
+     *
+     * @param variableName the name of the variable
+     * @param variable     the value to be used
+     */
+    public VariableInteger(String variableName, Variable variable) {
+        super(variableName, variable);
+    }
+
+    /**
+     * create a new variable, initialized with a value given as a string.
+     *
+     * @param variableName the name of the variable
+     * @param value        string representation of the new value.
+     */
+    public VariableInteger(String variableName, String value) {
+        super(variableName, value);
+    }
+
+    /**
+     * create a new variable, not initialized with a value.
+     *
+     * @param variableName
+     */
+    public VariableInteger(String variableName) {
+        super(variableName);
+    }
+
+    /**
      * determines whether a string is legal as the value of the specific variable type.
      *
      * @param value
