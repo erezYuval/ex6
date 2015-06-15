@@ -14,7 +14,7 @@ public abstract class Variable {
     }
 
     /**
-     * create a new variable, initialize with the value of an old one to initialize.
+     * create a new variable, setValue with the value of an old one to setValue.
      * @param variable the value to be used
      * @param variableName the name of the variable
      */
@@ -60,7 +60,7 @@ public abstract class Variable {
 
     /**
      * check whether the variable has been initialized with a value yet (in the constructor or
-     * by initialize method)
+     * by setValue method)
      * @return true if the variable was initialized, false otherwise.
      */
     public boolean isInitialized() {
@@ -75,7 +75,7 @@ public abstract class Variable {
      * initalize the variable with a value.
      * @param value the new value as a string.
      */
-    public void initialize(String value){
+    public void setValue(String value){
         if (isValueLegal(value)) {
             initialized = true;
         } else {
@@ -83,7 +83,7 @@ public abstract class Variable {
         }
     }
 
-    public void initialize(Variable variable){
+    public void setValue(Variable variable){
         if (canGetVariable(variable)) {
             initialized = true;
         } else {

@@ -10,7 +10,7 @@ public class VariableBoolean extends Variable {
             VARIABLE_TYPES.INTEGER, VARIABLE_TYPES.DOUBLE};
 
     /**
-     * create a new variable, initialize with the value of an old one to initialize.
+     * create a new variable, setValue with the value of an old one to setValue.
      *
      * @param variableName the name of the variable
      * @param variable     the value to be used

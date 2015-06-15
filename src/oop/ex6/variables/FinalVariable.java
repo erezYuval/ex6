@@ -56,7 +56,7 @@ public class FinalVariable extends Variable {
     }
 
     @Override
-    public void initialize(String value){
+    public void setValue(String value){
         //TODO throw final variable exception
     }
 

@@ -1,7 +1,6 @@
 package oop.ex6.scopes;
 
 import oop.ex6.methods.Method;
-import oop.ex6.variables.VARIABLE_TYPES;
 import oop.ex6.variables.Variable;
 import oop.ex6.variables.VariableUtils;
 
@@ -43,30 +42,30 @@ public class Scope {
     }
 
     /**
-     * add a new variable to this scope's variables, and initialize it with a given value.
-     * @param type the variable type of the new variable.
-     * @param variableName the name of the new variable as a String.
-     * @param value the value to set for the new variable, in string form.
+     * add a variable to the variable collection of this scope, if not existing already.
+     * @param variable
      */
-    public void addVariable(VARIABLE_TYPES type, String variableName, String value){
-    }
-
-    /**
-     * add a new uninitialized variable to this scope's variables.
-     * @param type the variable type of the new variable.
-     * @param variableName the name of the new variable as a String.
-     */
-    public void addVariable(VARIABLE_TYPES type, String variableName){
-    }
-
-    /**
-     * adds an array of variables to this scope's collection of variables.
-     * @param variablesToAdd the array of Variables to add.
-     */
-    public void addVariables(Variable[] variablesToAdd) {
-        for (Variable variable : variablesToAdd) {
-            variables.put(variable.toString(),variable);
+    public void addVariable(Variable variable){
+        Variable found = searchVariableLocally(variable.toString());
+        if (found != null) {
+            // TODO throw same block exception
+        } else {
+            variables.put(found.toString(),found);
         }
+    }
+
+    public void updateVariable(String variableName, String value) {
+        Variable found = searchVariableLocally(variableName);
+        if (found != null) {
+            found.setValue(value);
+        } else if (parent != null) {
+            found = parent.searchVariableUpwards(variableName);
+            if (found != null) {
+                addVariable(VariableUtils.deepCopyVariable(found));
+                updateVariable(variableName,value);
+            }
+        }
+        // TODO throw non existing variable exception.
     }
 
     /**
@@ -127,16 +126,13 @@ public class Scope {
         Variable found = variables.get(variableName);
         if (found != null) {
             return found;
+        } else {
+            return null;
         }
-        found = searchVariableUpwards(variableName);
-        if (found != null) {
-            return VariableUtils.deepCopyVariable(found);
-        }
-        return null;
     }
 
     /*
-    initialize the collection data members.
+    setValue the collection data members.
      */
     private void initializeCollections(){
         variables = new Hashtable<>();
