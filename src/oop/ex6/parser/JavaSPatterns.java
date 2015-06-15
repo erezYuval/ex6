@@ -18,7 +18,7 @@ public class JavaSPatterns {
     public static void compilePatterns(){
         PREDECLERATION = generateOrString(PREDECLERATIONS.values());
         DECLERATION_VARIABLES = generateOrString(VARIABLE_TYPES.values());
-        VARIABLE_LINE = "(" + PREDECLERATION + "\\s+)?((" + DECLERATION_VARIABLES + ")\\s+)?" + VARIABLE_OR_ASSIGNMENT + "\\s*(,\\s*" + VARIABLE_OR_ASSIGNMENT + ")*\\s*;";
+        VARIABLE_LINE = "(" + PREDECLERATION + "\\s+)?((" + DECLERATION_VARIABLES + ")\\s+)?" + VARIABLE_OR_ASSIGNMENT + "(,\\s*" + VARIABLE_OR_ASSIGNMENT + ")*\\s*;";
 }
 
 
