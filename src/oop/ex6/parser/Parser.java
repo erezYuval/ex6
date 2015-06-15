@@ -14,6 +14,7 @@ public class Parser{
 
     final static String EMPTY_LINE = "\\s*";
     final static String COMMENT_LINE = "\\//.*";
+    final static String LEGAL_LINE = ""; //TODO add legal line regex here
 
 
     private static Scope currentScope;
@@ -31,7 +32,10 @@ public class Parser{
             if (currentLine == EMPTY_LINE || currentLine == COMMENT_LINE) {
                 continue;
             } // ignore empty and comment lines
-        }
+            if (currentLine == LEGAL_LINE){
+                //TODO send to legalLineParser
+            }
+        } //TODO throw parsing exception (line is illegal)
     }
 
     private static void createInnerScope(SCOPE_CLASSES type) {
