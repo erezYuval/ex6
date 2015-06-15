@@ -7,4 +7,8 @@ package oop.ex6.parser;
  * and extracts methods and variables from them
  */
 public class LegalLineParser {
+
+    static void parseLine(String line){
+        //TODO parse line
+    }
 }

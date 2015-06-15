@@ -33,7 +33,7 @@ public class Parser{
                 continue;
             } // ignore empty and comment lines
             if (currentLine == LEGAL_LINE){
-                //TODO send to legalLineParser
+                LegalLineParser.parseLine(currentLine);
             }
         } //TODO throw parsing exception (line is illegal)
     }
