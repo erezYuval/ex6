@@ -4,8 +4,6 @@ package oop.ex6.variables;
  */
 public class VariableFactory {
 
-
-
     /**
      * produces a variable instance with the given arguments, without setting a value
      * @param type the wanted variable type
