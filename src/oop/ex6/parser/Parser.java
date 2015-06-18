@@ -12,8 +12,6 @@ public class Parser{
 
     final static String EMPTY_LINE = "\\s*";
     final static String COMMENT_LINE = "\\//.*";
-    final static String LEGAL_LINE = ""; //TODO add legal line regex here
-
 
     private static Scope currentScope;
     //TODO some sort of a collection of the available methods
@@ -26,10 +24,11 @@ public class Parser{
     public static void parseFile(Scanner fileScanner){
         while (fileScanner.hasNext()) {
             String currentLine = fileScanner.nextLine();
-            if (currentLine == EMPTY_LINE || currentLine == COMMENT_LINE) {
+            if (currentLine == EMPTY_LINE || currentLine == COMMENT_LINE) { // ignore line
                 continue;
             } // ignore empty and comment lines
-            if (currentLine == LEGAL_LINE){
+            if (currentLine == JavaSPatterns.VARIABLE_LINE ||
+                    currentLine == JavaSPatterns.METHOD_SIGNATURE){ // i.e line is legal
                 LegalLineParser.parseLine(currentLine);
             }
         } //TODO throw parsing exception (line is illegal)
