@@ -11,10 +11,10 @@ public class JavaSPatterns {
     static String DECLARATION_VARIABLES;
     static String VARIABLE_LINE;
     static String METHOD_SIGNATURE;
-    static String VALUE = "((\\w+)|(\".*\")|(\\'.*\\'))";
-    static String VARIABLE_OR_ASSIGNMENT = "(\\w+\\s*(=\\s*"+ VALUE +")?\\s*)";
-    static String METHOD_CALL = "\\w+\\s*\\(\\s*"+VALUE+"(\\s*,\\s*"+VALUE+")*\\s*\\)\\s*;\\s*";
-    static String NESTED_SCOPES = "\\{([^\\{\\}]*(\\{[^\\{\\}]*})*[^\\{\\}]*)*\\}";
+    static String VALUE = "((-?\\w+)|(\".*\")|(\\'.*\\'))";
+    static String VARIABLE_OR_ASSIGNMENT = "((\\w+)\\s*(=\\s*"+ VALUE +")?\\s*)";
+    static String METHOD_CALL = "(\\w+)\\s*\\(\\s*"+VALUE+"(\\s*,\\s*"+VALUE+")*\\s*\\)\\s*;\\s*";
+//    static String NESTED_SCOPES = "\\{([^\\{\\}]*(\\{[^\\{\\}]*})*[^\\{\\}]*)*\\}";
 
 
     public static void compilePatterns(){
@@ -43,14 +43,10 @@ public class JavaSPatterns {
 
     public static void main (String[] args) {
         compilePatterns();
-        System.out.println(NESTED_SCOPES);
-        for (String string : new String[] {
-                "{ dsaf {F sda} fdas}",
-                "{{}}",
-                "{adsa {cas} {{}} sac}",
-                "{dsa{Dsa{dsa}DSA}"
-        }) {
-            System.out.println(string.matches(NESTED_SCOPES) + " " + string);
-        }
+        System.out.println("variable line\n\t"+VARIABLE_LINE);
+        System.out.println("method signature:\n\t"+METHOD_SIGNATURE);
+        System.out.println("method call:\n\t" + METHOD_CALL);
+        System.out.println("variable or assignment:\n\t"+VARIABLE_OR_ASSIGNMENT);
+
     }
 }
