@@ -12,6 +12,8 @@ import java.util.Scanner;
  */
 public class Parser{
 
+    //Hi erez!
+
     final static String EMPTY_LINE = "\\s*";
     final static String COMMENT_LINE = "\\//.*";
     final static String LEGAL_LINE = ""; //TODO add legal line regex here
