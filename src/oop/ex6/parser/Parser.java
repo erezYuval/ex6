@@ -1,5 +1,11 @@
 package oop.ex6.parser;
 
+
+//Hi erez!
+
+
+
+
 import oop.ex6.scopes.SCOPE_CLASSES;
 import oop.ex6.scopes.Scope;
 
@@ -11,8 +17,6 @@ import java.util.Scanner;
  * a parser class that parse a java-s file.
  */
 public class Parser{
-
-    //Hi erez!
 
     final static String EMPTY_LINE = "\\s*";
     final static String COMMENT_LINE = "\\//.*";
