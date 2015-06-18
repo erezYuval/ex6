@@ -1,7 +1,6 @@
 package oop.ex6.parser;
 
 
-//Hi erez!
 
 
 
