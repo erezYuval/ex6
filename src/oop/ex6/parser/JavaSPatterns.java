@@ -1,7 +1,7 @@
 package oop.ex6.parser;
 
 import oop.ex6.variables.VARIABLE_TYPES;
-import oop.ex6.variables.exceptions.PREDECLERATIONS;
+import oop.ex6.variables.PREDECLERATIONS;
 
 /**
  * Created by Erez Levanon on 15/06/2015.
@@ -13,7 +13,8 @@ public class JavaSPatterns {
     static String METHOD_SIGNATURE;
     static String VALUE = "((\\w+)|(\".*\")|(\\'.*\\'))";
     static String VARIABLE_OR_ASSIGNMENT = "(\\w+\\s*(=\\s*"+ VALUE +")?\\s*)";
-    static String NESTED_SCOPES = "{(.*{.*}.*)}.*";
+    static String METHOD_CALL = "\\w+\\s*\\(\\s*"+VALUE+"(\\s*,\\s*"+VALUE+")*\\s*\\)\\s*;\\s*";
+    static String NESTED_SCOPES = "\\{([^\\{\\}]*(\\{[^\\{\\}]*})*[^\\{\\}]*)*\\}";
 
 
     public static void compilePatterns(){
@@ -21,6 +22,7 @@ public class JavaSPatterns {
         DECLARATION_VARIABLES = generateOrString(VARIABLE_TYPES.values());
         VARIABLE_LINE = "(" + PREDECLERATION + "\\s+)?((" + DECLARATION_VARIABLES + ")\\s+)?" + VARIABLE_OR_ASSIGNMENT + "(,\\s*" + VARIABLE_OR_ASSIGNMENT + ")*\\s*;";
         METHOD_SIGNATURE = "(void)(\\s)+(\\w+)(\\s*)\\(\\s*"+ DECLARATION_VARIABLES +"(\\s+)(\\w+)(\\s*)(,(\\s)*"+ DECLARATION_VARIABLES +"(\\s+)(\\w+)(\\s*))*\\)(\\s*)\\{\\s*";
+
     }
 
 
@@ -41,13 +43,14 @@ public class JavaSPatterns {
 
     public static void main (String[] args) {
         compilePatterns();
-        System.out.println(METHOD_SIGNATURE);
+        System.out.println(NESTED_SCOPES);
         for (String string : new String[] {
-                "void ablsavsa(String a, int bfab) {",
-                "void ablsavsa ( String a , int bfab) {",
-                "void ablsavsa(String a,int bfab ) {"
+                "{ dsaf {F sda} fdas}",
+                "{{}}",
+                "{adsa {cas} {{}} sac}",
+                "{dsa{Dsa{dsa}DSA}"
         }) {
-            System.out.println(string.matches(METHOD_SIGNATURE) + " " + string);
+            System.out.println(string.matches(NESTED_SCOPES) + " " + string);
         }
     }
 }
