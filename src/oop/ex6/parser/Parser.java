@@ -3,8 +3,6 @@ package oop.ex6.parser;
 import oop.ex6.scopes.SCOPE_CLASSES;
 import oop.ex6.scopes.Scope;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
@@ -23,10 +21,9 @@ public class Parser{
     /**
      * a method that goes through each line of the java-s file, translates the lines to commands and executes
      * the wanted actions on Scopes.
-     * @param file
+     * @param fileScanner - a scanner that runs on a legal file
      */
-    public static void parseFile(File file) throws FileNotFoundException {
-        Scanner fileScanner = new Scanner(file);
+    public static void parseFile(Scanner fileScanner){
         while (fileScanner.hasNext()) {
             String currentLine = fileScanner.nextLine();
             if (currentLine == EMPTY_LINE || currentLine == COMMENT_LINE) {
