@@ -1,11 +1,5 @@
 package oop.ex6.parser;
 
-
-//Hi erez!
-
-
-
-
 import oop.ex6.scopes.SCOPE_CLASSES;
 import oop.ex6.scopes.Scope;
 
@@ -14,7 +8,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * a parser class that parse a java-s file.
+ * a parser class that parses a java-s file.
  */
 public class Parser{
 
