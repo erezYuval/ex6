@@ -25,7 +25,9 @@ public class Sjavac {
         }
         try {
             oop.ex6.parser.Parser.parseFile(fileScanner);
-        }catch(SjavaException e);
+        }catch(SjavaException e) {
+        System.err.println(e.getErrorMessage());
+        };
 
     }
 }
