@@ -1,4 +1,4 @@
-package oop.ex6.variables.exceptions;
+package oop.ex6.variables;
 
 /**
  * Created by Erez Levanon on 15/06/2015.

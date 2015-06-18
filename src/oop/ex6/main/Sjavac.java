@@ -1,5 +1,7 @@
 package oop.ex6.main;
 
+import oop.ex6.main.exceptions.SjavaException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -21,6 +23,9 @@ public class Sjavac {
         else{
             fileScanner = new Scanner(sourceFile);
         }
-        oop.ex6.parser.Parser.parseFile(fileScanner);
+        try {
+            oop.ex6.parser.Parser.parseFile(fileScanner);
+        }catch(SjavaException e);
+
     }
 }

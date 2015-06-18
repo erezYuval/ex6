@@ -1,9 +1,7 @@
 package oop.ex6.parser;
 
 import oop.ex6.variables.VARIABLE_TYPES;
-import oop.ex6.variables.exceptions.PREDECLERATIONS;
-
-import java.util.regex.Pattern;
+import oop.ex6.variables.PREDECLERATIONS;
 
 /**
  * Created by Erez Levanon on 15/06/2015.
