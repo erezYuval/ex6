@@ -12,14 +12,17 @@ public class JavaSPatterns {
     static String PREDECLERATION;
     static String DECLERATION_VARIABLES;
     static String VARIABLE_LINE;
+    static String METHOD_SIGNATURE;
     static String VARIABLE_OR_ASSIGNMENT = "\\w+\\s*(=\\s*((\\w+)|(\".*\")|('.*')))?\\s*";
+    static String NESTED_SCOPES = "{(.*{.*}.*)}.*";
 
 
     public static void compilePatterns(){
         PREDECLERATION = generateOrString(PREDECLERATIONS.values());
         DECLERATION_VARIABLES = generateOrString(VARIABLE_TYPES.values());
         VARIABLE_LINE = "(" + PREDECLERATION + "\\s+)?((" + DECLERATION_VARIABLES + ")\\s+)?" + VARIABLE_OR_ASSIGNMENT + "(,\\s*" + VARIABLE_OR_ASSIGNMENT + ")*\\s*;";
-}
+        METHOD_SIGNATURE = "(void)\s+(\w+)\s+";
+    }
 
 
     private static String generateOrString(Enum[] values) {
@@ -44,9 +47,9 @@ public class JavaSPatterns {
         for (String string : new String[] {
                 "int a = \'3 gfdjks gfd jk vbdfs k gre kgfd bmds\' ;",
                 "int a = 15, j = 3;",
-                "a = 3;",
-                "String asvd = 'fdsaf',a ;",
-                "int a, b = 5 , c = \"3\", d, e = 5;"
+                "a = 3 ;",
+                "String asvd = 'fdsaf' , a ;",
+                "int a , b = 5 , c = \"3\" , d , e = '5' ;"
         }) {
             System.out.println(string.matches(VARIABLE_LINE) + " " + string);
         }
