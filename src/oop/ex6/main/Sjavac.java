@@ -1,6 +1,8 @@
 package oop.ex6.main;
 
 import oop.ex6.main.exceptions.SjavaException;
+import oop.ex6.parser.JavaSPatterns;
+import oop.ex6.scopes.Scope;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,6 +18,10 @@ public class Sjavac {
     public static Scanner fileScanner;
 
     public static void Main(String[] Args) throws FileNotFoundException{
+
+        Scope global = new Scope(0); //create global scope
+        JavaSPatterns.compilePatterns();
+
         File sourceFile = new File(Args[1]);
         if (!sourceFile.exists()){
             throw new FileNotFoundException();

@@ -1,5 +1,8 @@
 package oop.ex6.parser;
 
+import oop.ex6.methods.Method;
+import oop.ex6.scopes.Scope;
+
 /**
  * Created by yuvalavrami on 6/15/15.
  *
@@ -8,7 +11,11 @@ package oop.ex6.parser;
  */
 public class LegalLineParser {
 
-    static void parseLine(String line){
-        //TODO parse line
+    static void parseLine(String line, Scope currentScope){
+        if(line == JavaSPatterns.METHOD_SIGNATURE){
+            Method method = new Method()
+
+        }
+
     }
 }

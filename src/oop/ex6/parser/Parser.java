@@ -2,7 +2,6 @@ package oop.ex6.parser;
 
 import oop.ex6.main.exceptions.parserExceptions.IllegalLineException;
 import oop.ex6.main.exceptions.parserExceptions.unbalancedScopeException;
-import oop.ex6.scopes.SCOPE_CLASSES;
 import oop.ex6.scopes.Scope;
 
 import java.util.Scanner;
@@ -51,12 +50,9 @@ public class Parser{
             } // line is not empty, comment or legal - i.e illegal line
             throw new IllegalLineException();
         }
-        if(balancedBracketCounter != 0){ // number of opening and closing brackets does not match
+        if(balancedBracketCounter != 0){ // reached end of file, number of opening and closing brackets does not match
             throw new unbalancedScopeException();
         }
-    }
-
-    private static void createInnerScope(SCOPE_CLASSES type) {
     }
 
 }

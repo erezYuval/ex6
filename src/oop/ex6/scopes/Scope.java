@@ -68,6 +68,10 @@ public class Scope {
         // TODO throw non existing variable exception.
     }
 
+    public void addMethod(Method method){
+        methods.put(method.getName(), method);
+    }
+
     /**
      * get the line where this scope starts in the java-s file.
      * @return the first line as an int.
