@@ -1,6 +1,5 @@
 package oop.ex6.parser;
 
-import oop.ex6.methods.Method;
 import oop.ex6.scopes.Scope;
 
 /**
@@ -12,10 +11,14 @@ import oop.ex6.scopes.Scope;
 public class LegalLineParser {
 
     static void parseLine(String line, Scope currentScope){
-        if(line == JavaSPatterns.METHOD_SIGNATURE){
-            Method method = new Method()
+        if(line.matches(JavaSPatterns.METHOD_SIGNATURE)){
 
         }
+
+    }
+
+    public static void main(String[] args) {
+        String line = "void shits (String asd, boolean true) {";
 
     }
 }

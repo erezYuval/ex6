@@ -30,7 +30,7 @@ public class Sjavac {
             fileScanner = new Scanner(sourceFile);
         }
         try {
-            oop.ex6.parser.Parser.parseFile(fileScanner);
+            oop.ex6.parser.Parser.parseFile(fileScanner, global);
         }catch(SjavaException e) {
         System.err.println(e.getErrorMessage());
         };

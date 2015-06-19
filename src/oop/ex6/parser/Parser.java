@@ -25,7 +25,7 @@ public class Parser{
      * the wanted actions on Scopes.
      * @param fileScanner - a scanner that runs on a legal file
      */
-    public static void parseFile(Scanner fileScanner) throws IllegalLineException, unbalancedScopeException {
+    public static void parseFile(Scanner fileScanner, Scope globalScope) throws IllegalLineException, unbalancedScopeException {
         while (fileScanner.hasNext()) {
 
             if(balancedBracketCounter < 0){ //there is a closing bracket in the file that does not correspond to a
@@ -45,7 +45,7 @@ public class Parser{
                 }
                 if (currentLine == JavaSPatterns.VARIABLE_LINE ||
                         currentLine == JavaSPatterns.METHOD_SIGNATURE) { // i.e line is legal
-                    LegalLineParser.parseLine(currentLine);
+                    LegalLineParser.parseLine(currentLine, globalScope);
                 }
             } // line is not empty, comment or legal - i.e illegal line
             throw new IllegalLineException();
