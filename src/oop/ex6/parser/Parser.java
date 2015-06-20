@@ -95,6 +95,7 @@ public class Parser{
                 while(variables.find()) {
                     String name = variables.group(2);
                     String value = variables.group(4);
+                    System.out.println(name + "\n" + value + "\n" + type);
                     Variable newVariable = VariableFactory.produceVariable(type,name,value);
                     if (isFinal) {
                         newVariable = new FinalVariable(newVariable);
@@ -119,7 +120,7 @@ public class Parser{
     public static void main(String[] args) {
         JavaSPatterns.compilePatterns();
         Scope s = new Scope(0);
-        String line = "a = 3, g , d = 5;";
+        String line = "int   a   =   3   ,   g    ,  d   =   5;";
         dealWithVariableLine(line, s);
     }
 }

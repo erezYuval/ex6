@@ -20,7 +20,6 @@ public class Scope {
     private Method parentMethod;
 
     private Hashtable<String, Variable> variables;
-//    private ArrayList<Scope> innerScopes;
     protected static Hashtable<String, Method> methods;
 
 
@@ -52,7 +51,7 @@ public class Scope {
         if (found != null) {
             // TODO throw same block exception
         } else {
-            variables.put(found.toString(),found);
+            variables.put(variable.toString(),variable);
         }
     }
 
@@ -142,7 +141,6 @@ public class Scope {
      */
     private void initializeCollections(){
         variables = new Hashtable<>();
-//        innerScopes = new ArrayList<>();
     }
 
     public Method getParentMethod() {
