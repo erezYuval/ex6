@@ -13,6 +13,9 @@ public class Method{
 
     private ArrayList<Variable> variables;
     private String name;
+    private int firstLine;
+    private int lastLine;
+    private boolean hasReturnStatement = false;
 
     /**
      * construct a new method using the given variable types and names.
@@ -20,7 +23,9 @@ public class Method{
      * @param argumentTypesInOrder
      * @param argumentNamesInOrder
      */
-    public Method(String methodName, VARIABLE_TYPES[] argumentTypesInOrder, String[] argumentNamesInOrder ) {
+    public Method(String methodName, VARIABLE_TYPES[] argumentTypesInOrder, String[] argumentNamesInOrder,
+                  int fitsrLine ) {
+        this.firstLine = firstLine;
         variables = new ArrayList<>();
         name = methodName;
         if (!(argumentNamesInOrder == null && argumentTypesInOrder == null)) {
@@ -64,5 +69,17 @@ public class Method{
 
     public ArrayList<Variable> getVariables() {
         return variables;
+    }
+
+    public void setLastLine(int lastLine) {
+        this.lastLine = lastLine;
+    }
+
+    public boolean isHasReturnStatement() {
+        return hasReturnStatement;
+    }
+
+    public void setHasReturnStatement(boolean hasReturnStatement) {
+        this.hasReturnStatement = hasReturnStatement;
     }
 }
