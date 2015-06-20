@@ -7,7 +7,7 @@ import oop.ex6.main.exceptions.variableExceptions.VariableException;
  */
 public class VariableUtils {
 
-    private final static String LEGAL_NAME = "_?[a-zA-z_]\\w+";
+    private final static String LEGAL_NAME = "_?[a-zA-z_]\\w*";
 
     /**
      * determines whether a string is legal as a variable name.
@@ -35,21 +35,23 @@ public class VariableUtils {
         return null;
     }
 
-//    public static void main(String[] args) {
-//        for (String string : new String[] {
-//                "cfsda",
-//                "__",
-//                "g2",
-//                "b_3",
-//                "FDSAvc_as ",
-//                "_",
-//                "_a",
-//                "1fsa",
-//                "fd3",
-//                "_1"
-//
-//        }) {
-//            System.out.println(string + "\t" + isNameLegal(string));
-//        }
-//    }
+    public static void main(String[] args) {
+        for (String string : new String[] {
+                "a",
+                "cfsda",
+                "__",
+                "g2",
+                "b_3",
+                "FDSAvc_as ",
+                "_",
+                "_a",
+                "1fsa",
+                "fd3",
+                "_1",
+                ""
+
+        }) {
+            System.out.println(string + "\t" + isNameLegal(string));
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package oop.ex6.parser;
 
 import oop.ex6.main.exceptions.SjavaException;
+import oop.ex6.main.exceptions.methodExceptions.WrongArgumentsNumberException;
 import oop.ex6.main.exceptions.parserExceptions.IllegalLineException;
 import oop.ex6.main.exceptions.parserExceptions.UnbalancedScopeException;
 import oop.ex6.main.exceptions.variableExceptions.VariableException;
@@ -145,10 +146,8 @@ public class Parser{
                 }
                 method.checkArgumentInIndex(valueIndex,value);
             }
-            System.out.println("AAA");
             if (valueIndex != method.getNumOfArguments() - 1) {
-                System.out.println("FDSAFDASF");
-                // TODO throw illegal number of arguments exception.
+                throw new WrongArgumentsNumberException();
             }
         }
 
@@ -163,9 +162,9 @@ public class Parser{
         try {
             JavaSPatterns.compilePatterns();
             Scope scope = new Scope(0);
-            Method method = new Method("shitsAndTits", new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER,VARIABLE_TYPES.STRING},new String[]{"a","b"},0);
+            Method method = new Method("shitsAndTits", new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER,VARIABLE_TYPES.STRING},new String[]{"as","b"},0);
             scope.addMethod(method);
-            String line = "shitsAndTits(3, \"fd\", 5);";
+            String line = "shitsAndTits(3);";
             dealWithMethodCall(line, scope);
         } catch (VariableException e) {
             System.out.println(e.getMessage());
