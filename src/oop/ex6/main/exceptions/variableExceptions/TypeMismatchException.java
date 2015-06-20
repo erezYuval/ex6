@@ -1,6 +1,5 @@
 package oop.ex6.main.exceptions.variableExceptions;
 
-import oop.ex6.main.exceptions.SjavaException;
 import oop.ex6.variables.Variable;
 
 
