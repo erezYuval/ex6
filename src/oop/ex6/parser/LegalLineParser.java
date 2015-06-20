@@ -10,25 +10,33 @@ import oop.ex6.scopes.Scope;
  */
 public class LegalLineParser {
 
-    static void parseLine(String line, Scope currentScope){
-        if(line.matches(JavaSPatterns.METHOD_SIGNATURE)){
-//            String[] splitLine = line.split("(");
-//            Method newMethod = new Method(splitLine[1], )
-        }
+    static void parseLine(String line, int lineNumber, Scope currentScope){
+//        if(line.matches(JavaSPatterns.METHOD_SIGNATURE)){
+//            String[] methodNameHelper = line.split("\\(")[0].split(" ");
+//            String methodName = methodNameHelper[methodNameHelper.length - 1];
+//
+//
+//            Method newMethod = new Method(methodName, --vartypes--, --argtypes--, lineNumber);
+//        }
 
     }
 
     public static void main(String[] args) {
-        String line = "void shits     (String asd, boolean true) {";
+        String line = "void shits     (String asd, boolean true, int a) {";
 
-        String[] splitLine = line.split("\\(");
-        for (int i = 0; i < splitLine.length; i++){
-            System.out.println(splitLine[i].split(",")[0]);
-            System.out.println(splitLine[i].split(",")[1]);
-            System.out.println("------");
+        String[] arguments = line.split("\\(")[1].split(",");
+        for(String arg: arguments){
+            String argtype = arg.split(" ")[0];
+            System.out.println("type=" + argtype);
+            String argName = arg.split(" ")[1];
+            System.out.println("name=" + argName);
+        }
+
+
+
         }
 
 
 
     }
-}
+
