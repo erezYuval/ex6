@@ -1,5 +1,6 @@
 package oop.ex6.parser;
 
+import oop.ex6.main.exceptions.SjavaException;
 import oop.ex6.main.exceptions.parserExceptions.UnexpectedExpressionAfterReturnException;
 import oop.ex6.methods.Method;
 import oop.ex6.scopes.Scope;
@@ -17,7 +18,7 @@ import java.util.Scanner;
  */
 public class LegalLineParser {
 
-    static void parseLine(String line, int lineNumber, Scope currentScope){
+    static void parseLine(String line, int lineNumber, Scope currentScope) throws SjavaException{
         if(line.matches(JavaSPatterns.METHOD_SIGNATURE)){ //current line is method declaration
 
             //find method name
@@ -65,7 +66,6 @@ public class LegalLineParser {
     private static void dealWithReturnStatement(String line, Scope scope, Scanner fileScanner)
             throws UnexpectedExpressionAfterReturnException {
 
-//        int lastLine = scope.getParentMethod().getLastLine();
         boolean exceptionNeeded = false;
         while (!line.matches("\\s*}\\s*")){ //haven't reached end of scope
             if(!line.matches(JavaSPatterns.EMPTY_LINE)){ //line contains an expression other than empty line
@@ -74,6 +74,7 @@ public class LegalLineParser {
             if(line.matches("\\s*return\\s*//;\\s*")){
                 exceptionNeeded = false;
             }
+            line = fileScanner.nextLine();
         } //reached end of scope
         if(exceptionNeeded == true){
             throw new UnexpectedExpressionAfterReturnException();
