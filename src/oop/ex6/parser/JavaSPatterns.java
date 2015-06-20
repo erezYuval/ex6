@@ -13,7 +13,7 @@ public class JavaSPatterns {
     static String DECLARATION_VARIABLES;
     static String VARIABLE_LINE;
     static String METHOD_SIGNATURE;
-    static String VALUE = "((-?\\w+)|(\"[^\"]*\")|(\\'[^']*\\'))";
+    static String VALUE = "((-?\\w+(.\\d)?)|(\"[^\"]*\")|(\\'[^']*\\'))";
     static String VARIABLE_OR_ASSIGNMENT = "((\\w+)\\s*(=\\s*"+ VALUE +")?\\s*)";
     static String METHOD_CALL = "(\\w+)\\s*(\\(\\s*("+VALUE+"(\\s*,\\s*"+VALUE+")*)*\\s*\\))\\s*;\\s*";
     static String LOGICAL_OPERATORS = "((\\|\\|)|(&&))";
@@ -27,7 +27,7 @@ public class JavaSPatterns {
         PREDECLARATION = generateOrString(PREDECLERATIONS.values());
         DECLARATION_VARIABLES = generateOrString(VARIABLE_TYPES.values());
         VARIABLE_TYPE_NAME = "(\\s*" + DECLARATION_VARIABLES + "\\s+)(\\w+)";
-        VARIABLE_LINE = "((" + PREDECLARATION + "\\s+)?((" + DECLARATION_VARIABLES + ")\\s+))?(" + VARIABLE_OR_ASSIGNMENT + "(,\\s*" + VARIABLE_OR_ASSIGNMENT + ")*)\\s*;";
+        VARIABLE_LINE = "((" + PREDECLARATION + "\\s+)?((" + DECLARATION_VARIABLES + ")\\s+))?(" + VARIABLE_OR_ASSIGNMENT + "(,\\s*" + VARIABLE_OR_ASSIGNMENT + ")*)\\s*;\\s*";
         METHOD_SIGNATURE = "(void)(\\s)+(\\w+)(\\s*)\\(\\s*("+ DECLARATION_VARIABLES +"(\\s+)(\\w+)(\\s*)(,(\\s)*"+ DECLARATION_VARIABLES +"(\\s+)(\\w+)(\\s*))*)\\)(\\s*)\\{\\s*";
 
     }

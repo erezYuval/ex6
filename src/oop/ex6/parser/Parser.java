@@ -70,6 +70,8 @@ public class Parser{
                     throw new ReturnStatementInGlobalScopeException();
                     // line is not empty, comment or legal - i.e illegal line
                 }else {
+                    System.out.println(currentLine); //TODO delete
+                    System.out.println("matches " + currentLine.matches(JavaSPatterns.VARIABLE_LINE)); // TODO delte
                     throw new IllegalLineException();
                 }
             }
@@ -242,8 +244,15 @@ public class Parser{
 //            System.err.println(e.getMessage());
 //        }
         Scope scope = new Scope(0);
-        String line = "double a = \"hello\";";
-        dealWithVariableLine(line ,scope);
-        System.out.println("AFSD");
+        String line = null;
+        try {
+            line = "boolean a = 5.2;";
+            dealWithVariableLine(line, scope);
+        } catch (SjavaException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+
+        System.out.println(line.matches(JavaSPatterns.VARIABLE_LINE));
     }
 }

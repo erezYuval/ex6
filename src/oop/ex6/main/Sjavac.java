@@ -2,6 +2,7 @@ package oop.ex6.main;
 
 import oop.ex6.main.exceptions.SjavaException;
 import oop.ex6.parser.JavaSPatterns;
+import oop.ex6.parser.LegalLineParser;
 import oop.ex6.scopes.Scope;
 
 import java.io.File;
@@ -16,17 +17,19 @@ import java.util.Scanner;
  */
 public class Sjavac {
 
-    private static boolean TESTING = false;
+    private static boolean TESTING = true;
 
     public static void main(String[] args) throws FileNotFoundException {
-
+        JavaSPatterns.compilePatterns();
         if (TESTING) {
             File testDirectory = new File("C:/ex6try2/tests");
             File[] testFiles = testDirectory.listFiles();
 
             for (File file : testFiles) {
-                System.out.println("TEST NUMBER " + file.getName());
-                testOneFile(file);
+                if (file.getName().equals("test015.sjava")) {
+                    System.out.println("TEST NUMBER " + file.getName());
+                    testOneFile(file);
+                }
 //            break;
             }
         }
@@ -49,8 +52,8 @@ public class Sjavac {
                 oop.ex6.parser.Parser.parseDeep(fileScanner, global);
             }catch(SjavaException e) {
                 System.out.println(1);
-//                System.err.println(e.getErrorMessage());
-//                e.printStackTrace();
+                System.err.println(e.getErrorMessage());
+                e.printStackTrace();
                 return;
             }
         } catch (IOException e) {
