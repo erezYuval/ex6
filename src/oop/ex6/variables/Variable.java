@@ -12,7 +12,6 @@ public abstract class Variable {
     private String varName;
 
     public Variable() {
-        throw new UnsupportedOperationException();
     }
 
     /**

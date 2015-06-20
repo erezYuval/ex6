@@ -11,6 +11,7 @@ import oop.ex6.methods.Method;
 import oop.ex6.scopes.Scope;
 import oop.ex6.variables.*;
 
+import javax.sound.midi.Soundbank;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -138,9 +139,11 @@ public class Parser{
                     String value = variablesMatcher.group(VALUE_SUBGROUP);
                     Variable newVariable = VariableFactory.produceVariable(type,name,value);
                     if (isFinal) {
-                        newVariable = new FinalVariable(newVariable);
+                        FinalVariable newFinalVariable = new FinalVariable(newVariable);
+                        scope.addVariable(newFinalVariable);
+                    } else {
+                        scope.addVariable(newVariable);
                     }
-                    scope.addVariable(newVariable);
                 }
             } else {
                 if (variablesMatcher.matches()) {
@@ -241,7 +244,7 @@ public class Parser{
 //            System.err.println(e.getMessage());
 //        }
         Scope scope = new Scope(0);
-        String line = "int a;";
+        String line = "final int a;";
         dealWithVariableLine(line ,scope);
     }
 }

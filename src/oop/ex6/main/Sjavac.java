@@ -21,7 +21,10 @@ public class Sjavac {
         File testDirectory = new File("C:/ex6try2/tests");
         File[] testFiles = testDirectory.listFiles();
 
+        int i = 0;
         for (File file : testFiles) {
+            i++;
+            System.out.println("TEST NUMBER " + i);
             testOneFile(file);
         }
     }

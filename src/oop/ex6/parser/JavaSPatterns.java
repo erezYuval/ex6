@@ -50,13 +50,6 @@ public class JavaSPatterns {
 
     public static void main (String[] args) {
         compilePatterns();
-//        for (String s : new String[]{
-//                "while(cdas && cdasc || acxv) {",
-//                "if (fdsan){",
-//                "while ( a && b && c || d ) {"
-//        }) {
-//            System.out.println(s.matches(BOOLEAN_IN_PARENTHESIS) +" " + s);
-//        }
         System.out.println(VARIABLE_OR_ASSIGNMENT);
     }
 }
