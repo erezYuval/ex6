@@ -1,5 +1,8 @@
 package oop.ex6.methods;
 
+import oop.ex6.main.exceptions.SjavaException;
+import oop.ex6.main.exceptions.methodExceptions.MethodException;
+import oop.ex6.main.exceptions.methodExceptions.WrongArgumentsNumberException;
 import oop.ex6.main.exceptions.variableExceptions.VariableException;
 import oop.ex6.variables.VARIABLE_TYPES;
 import oop.ex6.variables.Variable;
@@ -44,8 +47,12 @@ public class Method{
      * @param index the location in the method call, starting with 0
      * @param value the value to be used.
      */
-    public void checkArgumentInIndex(int index, String value) throws VariableException{
-        variables.get(index).setValue(value);
+    public void checkArgumentInIndex(int index, String value) throws VariableException, MethodException{
+        try {
+            variables.get(index).setValue(value);
+        } catch (IndexOutOfBoundsException e) {
+            throw new WrongArgumentsNumberException(this, index+1);
+        }
     }
 
     /**
@@ -54,9 +61,12 @@ public class Method{
      * @param index the location in the method call, starting with 0
      * @param variable the variable to be used.
      */
-    public void checkArgumentInIndex(int index, Variable variable) throws VariableException {
-        // TODO catch illegal value
-        variables.get(index).setValue(variable);
+    public void checkArgumentInIndex(int index, Variable variable) throws VariableException, MethodException {
+        try {
+            variables.get(index).setValue(variable);
+        } catch (IndexOutOfBoundsException e) {
+            throw new WrongArgumentsNumberException(this, index+1);
+        }
     }
 
     /**
