@@ -43,6 +43,15 @@ public class Scope {
         this.parent = parent;
     }
 
+    public Scope(int firstLine, Scope parent, ArrayList<Variable> methodVariables) {
+        initializeCollections();
+        this.firstLine = firstLine;
+        this.parent = parent;
+        for (Variable variable : methodVariables) {
+            variables.put(variable.toString(), variable);
+        }
+    }
+
     /**
      * add a variable to the variable collection of this scope, if not existing already.
      * @param variable

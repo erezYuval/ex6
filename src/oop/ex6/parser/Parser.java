@@ -1,10 +1,7 @@
 package oop.ex6.parser;
 
 import oop.ex6.main.exceptions.SjavaException;
-import oop.ex6.main.exceptions.methodExceptions.IllegalArgumentTypeException;
-import oop.ex6.main.exceptions.methodExceptions.IllegalArgumentValueException;
-import oop.ex6.main.exceptions.methodExceptions.MethodException;
-import oop.ex6.main.exceptions.methodExceptions.WrongArgumentsNumberException;
+import oop.ex6.main.exceptions.methodExceptions.*;
 import oop.ex6.main.exceptions.parserExceptions.IllegalLineException;
 import oop.ex6.main.exceptions.parserExceptions.ReturnStatementInGlobalScopeException;
 import oop.ex6.main.exceptions.parserExceptions.UnbalancedScopeException;
@@ -14,7 +11,6 @@ import oop.ex6.methods.Method;
 import oop.ex6.scopes.Scope;
 import oop.ex6.variables.*;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -93,7 +89,7 @@ public class Parser{
         }
     }
 
-    public static void ParseBlock(Scanner fileScanner, Scope scope, int lineNumber) throws SjavaException{
+    public static void parseBlock(Scanner fileScanner, Scope scope, int lineNumber) throws SjavaException{
         String line;
         while (fileScanner.hasNext()) {
             lineNumber++;
@@ -108,7 +104,7 @@ public class Parser{
                     dealWithMethodCall(line, scope);
                 } else if (line.matches(JavaSPatterns.CONDITION_BLOCK_STARTERS)) {
                     Scope innerScope = new Scope(lineNumber, scope);
-                    ParseBlock(fileScanner, innerScope, lineNumber);
+                    parseBlock(fileScanner, innerScope, lineNumber);
                 } else if (line.matches(JavaSPatterns.END_BLOCK)) {
                     return;
                 }
@@ -192,22 +188,35 @@ public class Parser{
 
 
     public static boolean parseDeep(Scanner fileScanner, Scope globalscope) throws SjavaException{
+        int lineIndex = 0;
         while (fileScanner.hasNext()) {
-
+            lineIndex++;
+            String line = fileScanner.nextLine();
+            if(line.matches(JavaSPatterns.METHOD_SIGNATURE)) {
+                Method newMethod = parseMethodSignature(line, lineIndex);
+                Scope scope = new Scope(lineIndex, globalscope, newMethod.getVariables());
+                parseBlock(fileScanner, scope, lineIndex);
+            }
         }
         return false;
     }
 
-    protected static Method parseMethodSignature(String methodSignature, int lineNumber) {
-        final int ARGUMENTS_GROUP = 5, TYPE_SUB_GROUP = 2, NAME_SUB_GROUP = 3;
+    protected static Method parseMethodSignature(String methodSignature, int lineNumber) throws MethodException {
+        final int NAME_GROUP = 3, ARGUMENTS_GROUP = 5, TYPE_SUB_GROUP = 2, NAME_SUB_GROUP = 3;
         Matcher methodMatcher = Pattern.compile(JavaSPatterns.METHOD_SIGNATURE).matcher(methodSignature);
         if (methodMatcher.matches()) {
-            System.out.println(methodMatcher.group(5));
+            String methodName = methodMatcher.group(NAME_GROUP);
             Matcher variableMatcher = Pattern.compile(JavaSPatterns.VARIABLE_TYPE_NAME).matcher(methodMatcher.group(ARGUMENTS_GROUP));
             while (variableMatcher.find()) {
+                Method newMethod = new Method(methodName);
                 String name = variableMatcher.group(NAME_SUB_GROUP);
                 VARIABLE_TYPES type = VariableUtils.stringToType(variableMatcher.group(TYPE_SUB_GROUP));
-
+                try {
+                    Variable newVariable = VariableFactory.produceVariable(type, name);
+                    newMethod.addVariable(newVariable);
+                } catch (VariableException e) {
+                    throw new IllegalArgumentNameException(name);
+                }
             }
         }
         return null;
@@ -227,6 +236,5 @@ public class Parser{
         Scope scope = new Scope(0);
         String line = "void shitAndTits ( String fdsa, boolean j , int ffdsankl ) {";
         parseMethodSignature(line, 0);
-
     }
 }

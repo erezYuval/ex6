@@ -31,6 +31,11 @@ public class Method{
         name = methodName;
     }
 
+    public Method(String methodName) {
+        variablesInOrder = new ArrayList<>();
+        setName(methodName);
+    }
+
     /**
      * this is used while calling a method on the java-s file. this function check whether a value
      * is legal in the location it was given in the call.
@@ -43,6 +48,11 @@ public class Method{
         } catch (IndexOutOfBoundsException e) {
             throw new WrongArgumentsNumberException(this, index+1);
         }
+    }
+
+    public void addVariable(Variable variable) {
+        variable.setInitialized();
+        variablesInOrder.add(variable);
     }
 
     /**
@@ -85,6 +95,11 @@ public class Method{
 
     public int getNumOfArguments() {
         return variablesInOrder.size();
+    }
+
+    private void setName(String name) {
+        //TODO check name validity
+        this.name = name;
     }
 
     public void setHasReturnStatement(boolean hasReturnStatement) {
