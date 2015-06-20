@@ -12,13 +12,23 @@ public class LegalLineParser {
 
     static void parseLine(String line, Scope currentScope){
         if(line.matches(JavaSPatterns.METHOD_SIGNATURE)){
-
+//            String[] splitLine = line.split("(");
+//            Method newMethod = new Method(splitLine[1], )
         }
 
     }
 
     public static void main(String[] args) {
-        String line = "void shits (String asd, boolean true) {";
+        String line = "void shits     (String asd, boolean true) {";
+
+        String[] splitLine = line.split("\\(");
+        for (int i = 0; i < splitLine.length; i++){
+            System.out.println(splitLine[i].split(",")[0]);
+            System.out.println(splitLine[i].split(",")[1]);
+            System.out.println("------");
+        }
+
+
 
     }
 }
