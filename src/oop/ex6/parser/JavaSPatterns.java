@@ -28,7 +28,7 @@ public class JavaSPatterns {
         DECLARATION_VARIABLES = generateOrString(VARIABLE_TYPES.values());
         VARIABLE_TYPE_NAME = "(\\s*" + DECLARATION_VARIABLES + "\\s+)(\\w+)";
         VARIABLE_LINE = "((" + PREDECLARATION + "\\s+)?((" + DECLARATION_VARIABLES + ")\\s+))?(" + VARIABLE_OR_ASSIGNMENT + "(,\\s*" + VARIABLE_OR_ASSIGNMENT + ")*)\\s*;";
-        METHOD_SIGNATURE = "(void)(\\s)+(\\w+)(\\s*)\\((\\s*"+ DECLARATION_VARIABLES +"(\\s+)(\\w+)(\\s*)(,(\\s)*"+ DECLARATION_VARIABLES +"(\\s+)(\\w+)(\\s*))*)\\)(\\s*)\\{\\s*";
+        METHOD_SIGNATURE = "(void)(\\s)+(\\w+)(\\s*)\\(\\s*("+ DECLARATION_VARIABLES +"(\\s+)(\\w+)(\\s*)(,(\\s)*"+ DECLARATION_VARIABLES +"(\\s+)(\\w+)(\\s*))*)\\)(\\s*)\\{\\s*";
 
     }
 
