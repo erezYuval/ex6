@@ -61,7 +61,7 @@ public abstract class Variable {
      * initalize the variable with a value.
      * @param value the new value as a string.
      */
-    public void setValue(String value) throws TypeMismatchException{
+    public void setValue(String value) throws VariableException{
         if (isValueLegal(value)) {
             initialized = true;
         } else {
@@ -69,7 +69,7 @@ public abstract class Variable {
         }
     }
 
-    public void setValue(Variable variable) throws TypeMismatchException{
+    public void setValue(Variable variable) throws VariableException{
         if (canGetVariable(variable)) {
             initialized = true;
         } else {

@@ -5,4 +5,8 @@ package oop.ex6.main.exceptions.variableExceptions;
  */
 public class AttemptedChangeFinalVarException extends FinalVariableException{
     protected final static String ERROR_MESSAGE = "cannot assign a value to final variable";
+
+    public AttemptedChangeFinalVarException(String variableName) {
+        uniqueMessage = "cannot change final variable " + variableName;
+    }
 }

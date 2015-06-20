@@ -1,5 +1,9 @@
 package oop.ex6.variables;
 
+import oop.ex6.main.exceptions.variableExceptions.AttemptedChangeFinalVarException;
+import oop.ex6.main.exceptions.variableExceptions.DeclaredFinalIntWithoutInitializationException;
+import oop.ex6.main.exceptions.variableExceptions.VariableException;
+
 /**
  * Created by Erez Levanon on 14/06/2015.
  */
@@ -8,19 +12,19 @@ public class FinalVariable extends Variable {
 
     private Variable insideVar;
 
-    public FinalVariable(Variable variable) {
+    public FinalVariable(Variable variable) throws DeclaredFinalIntWithoutInitializationException{
         if (!variable.isInitialized()) {
-            //
+            throw new DeclaredFinalIntWithoutInitializationException(variable.toString());
         }
         insideVar = variable;
     }
 
     public FinalVariable(String variableName, Variable variable){
-        // TODO throw unsupported functionallity
+        throw new UnsupportedOperationException();
     }
 
-    public FinalVariable(String variableName){
-        // TODO throw unsupported constructor
+    public FinalVariable(String variableName) throws DeclaredFinalIntWithoutInitializationException{
+        throw new DeclaredFinalIntWithoutInitializationException(variableName);
     }
 
     public boolean isInitialized() {
@@ -53,8 +57,13 @@ public class FinalVariable extends Variable {
     }
 
     @Override
-    public void setValue(String value){
-        //TODO throw final variable exception
+    public void setValue(String value) throws VariableException{
+        throw new AttemptedChangeFinalVarException(this.toString());
+    }
+
+    @Override
+    public void setValue(Variable variable) throws VariableException{
+        throw new AttemptedChangeFinalVarException(this.toString());
     }
 
     /**
