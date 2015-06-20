@@ -4,10 +4,7 @@ import oop.ex6.main.exceptions.parserExceptions.IllegalLineException;
 import oop.ex6.main.exceptions.parserExceptions.unbalancedScopeException;
 import oop.ex6.scopes.Scope;
 import oop.ex6.parser.JavaSPatterns;
-import oop.ex6.variables.FinalVariable;
-import oop.ex6.variables.PREDECLERATIONS;
-import oop.ex6.variables.Variable;
-import oop.ex6.variables.VariableFactory;
+import oop.ex6.variables.*;
 import sun.security.krb5.KdcComm;
 
 import java.lang.reflect.Type;
@@ -88,18 +85,22 @@ public class Parser{
         Matcher lineMatcher = Pattern.compile(JavaSPatterns.VARIABLE_LINE).matcher(line);
         boolean isFinal;
         boolean isDeclaration;
-        String type = "";
+        VARIABLE_TYPES type = null;
         if (lineMatcher.matches()) {
             isFinal = lineMatcher.group(3) != null;
             isDeclaration = lineMatcher.group(5) != null;
             if (isDeclaration) {
-                type = lineMatcher.group(5);
+                type = VariableFactory.stringToType(lineMatcher.group(5));
                 Matcher variables = Pattern.compile(JavaSPatterns.VARIABLE_OR_ASSIGNMENT).matcher(lineMatcher.group(7));
                 while(variables.find()) {
-                    Variable newVariable = VariableFactory(type,variables.group(2).toString(),variables.group(5).toString());
+                    String name = variables.group(2);
+                    String value = variables.group(4);
+                    System.out.println(name + "\n" + value + "\n" + type);
+                    Variable newVariable = VariableFactory.produceVariable(type,name,value);
                     if (isFinal) {
                         newVariable = new FinalVariable(newVariable);
                     }
+                    scope.addVariable(newVariable);
                 }
 
             }
@@ -119,7 +120,7 @@ public class Parser{
     public static void main(String[] args) {
         JavaSPatterns.compilePatterns();
         Scope s = new Scope(0);
-        String line = "a = 3, g , d = 5;";
+        String line = "int   a   =   3   ,   g    ,  d   =   5;";
         dealWithVariableLine(line, s);
     }
 }
