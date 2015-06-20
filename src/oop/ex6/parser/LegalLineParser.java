@@ -63,8 +63,8 @@ public class LegalLineParser {
 
     private static void dealWithReturnStatement(String line, Scope scope, Scanner fileScanner) {
 
-//        int lastLine = scope.getParentMethod().getLastLine();
-//        Scanner fileScannerCopy = fileScanner.
+        int lastLine = scope.getParentMethod().getLastLine();
+        Scanner fileScannerCopy = fileScanner.
 //        scope.getParentMethod().setHasReturnStatement(true);
     }
 
