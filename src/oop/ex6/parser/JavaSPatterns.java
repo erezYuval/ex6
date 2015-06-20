@@ -47,9 +47,4 @@ public class JavaSPatterns {
         }
         return returnString;
     }
-
-    public static void main (String[] args) {
-        compilePatterns();
-        System.out.println(VARIABLE_OR_ASSIGNMENT);
-    }
 }

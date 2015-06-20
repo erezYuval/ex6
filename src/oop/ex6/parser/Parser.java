@@ -12,7 +12,6 @@ import oop.ex6.methods.Method;
 import oop.ex6.scopes.Scope;
 import oop.ex6.variables.*;
 
-import javax.sound.midi.Soundbank;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -234,12 +233,14 @@ public class Parser{
                         String name = variableMatcher.group(NAME_SUB_GROUP);
                         VARIABLE_TYPES type = VariableUtils.stringToType(variableMatcher.group(TYPE_SUB_GROUP));
                         try {
+                            System.out.println(type + " " + name);
                             Variable newVariable = VariableFactory.produceVariable(type, name);
                             newMethod.addVariable(newVariable);
                         } catch (VariableException e) {
                             throw new IllegalArgumentNameException(name);
                         }
                     }
+                    System.out.println();
                     return newMethod;
             }
             return new Method(methodName);

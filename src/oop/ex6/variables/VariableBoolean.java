@@ -7,8 +7,8 @@ import oop.ex6.main.exceptions.variableExceptions.VariableException;
  */
 public class VariableBoolean extends Variable {
 
-    final static String LEGAL_VAL = VariableInteger.LEGAL_VAL + "|" + VariableDouble.LEGAL_VAL + "|" + "true|false";
-    private final static VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.BOOLEAN,
+    final String LEGAL_VAL = VariableInteger.LEGAL_VAL + "|" + VariableDouble.LEGAL_VAL + "|" + "true|false";
+    private final VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.BOOLEAN,
             VARIABLE_TYPES.INTEGER, VARIABLE_TYPES.DOUBLE};
 
     /**

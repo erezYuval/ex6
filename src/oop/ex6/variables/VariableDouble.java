@@ -7,7 +7,7 @@ import oop.ex6.main.exceptions.variableExceptions.VariableException;
  */
 public class VariableDouble extends Variable{
 
-    private final static VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER,
+    private final VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER,
                                                                                     VARIABLE_TYPES.DOUBLE};
     final static String LEGAL_VAL = "\\-?\\d+(\\.\\d+)?";
 

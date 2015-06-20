@@ -21,31 +21,31 @@ public class Sjavac {
 
     public static void main(String[] args) {
         JavaSPatterns.compilePatterns();
-//        Scope global = new Scope(0); //create global scope
-//        Scanner fileScanner;
-//        try {
-//            File sourceFile = new File(args[PATH]);
-//            fileScanner = new Scanner(sourceFile);
-//            try {
-//                oop.ex6.parser.Parser.parseFile(fileScanner, global);
-//                fileScanner.reset();
-//                oop.ex6.parser.Parser.parseDeep(fileScanner, global);
-//            }catch(SjavaException e) {
-//                System.out.println(1);
-//                System.err.println(e.getErrorMessage());
-////                e.printStackTrace();
-//                return;
-//            }
-//        } catch (IOException e) {
-//            System.out.println(2);
-//            return;
-//        }
-//        System.out.println(0);
-//        return;
-        for (int test : new int[]{114}) {
-            String path = "C:\\ex6try2\\tests\\test" + test + ".sjava";
-            runOneTest(path);
+        Scope global = new Scope(0); //create global scope
+        Scanner fileScanner;
+        try {
+            File sourceFile = new File(args[PATH]);
+            fileScanner = new Scanner(sourceFile);
+            try {
+                oop.ex6.parser.Parser.parseFile(fileScanner, global);
+                fileScanner.reset();
+                oop.ex6.parser.Parser.parseDeep(fileScanner, global);
+            }catch(SjavaException e) {
+                System.out.println(1);
+                System.err.println(e.getErrorMessage());
+//                e.printStackTrace();
+                return;
+            }
+        } catch (IOException e) {
+            System.out.println(2);
+            return;
         }
+        System.out.println(0);
+        return;
+//        for (int test : new int[]{114,205,216}) {
+//            String path = "C:\\ex6try2\\tests\\test" + test + ".sjava";
+//            runOneTest(path);
+//        }
     }
 
     static void runOneTest(String filePath){
