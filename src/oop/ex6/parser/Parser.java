@@ -2,6 +2,7 @@ package oop.ex6.parser;
 
 import oop.ex6.main.exceptions.parserExceptions.IllegalLineException;
 import oop.ex6.main.exceptions.parserExceptions.unbalancedScopeException;
+import oop.ex6.methods.Method;
 import oop.ex6.scopes.Scope;
 import oop.ex6.parser.JavaSPatterns;
 import oop.ex6.variables.*;
@@ -113,7 +114,21 @@ public class Parser{
     }
 
     private static void dealWithMethodCall(String line, Scope scope) {
+        Matcher lineMatcher = Pattern.compile(JavaSPatterns.METHOD_CALL).matcher(line);
+        if(lineMatcher.matches()) {
+            System.out.println("AA");
+            for (int i = 0; i < 20; i++) {
+                try {
+                    System.out.println(i + "\t" + lineMatcher.group(i));
+                } catch (Exception e) {
 
+                }
+            }
+        }
+//        Method method = scope.searchMethod(methodName);
+//        if (method == null) {
+//            // TODO throw nonexistent method call;
+//        }
     }
 
     private static void dealWithReturnStatement(String line, Scope scope) {
@@ -122,12 +137,8 @@ public class Parser{
 
     public static void main(String[] args) {
         JavaSPatterns.compilePatterns();
-        Scope s = new Scope(0);
-        String line = "String ddsaa,  dddsa   =   \"5\";";
-        String line2 = "ddsaa = \"14214\";";
-        dealWithVariableLine(line, s);
-        dealWithVariableLine(line2, s);
-        Variable var = s.searchVariableLocally("ddsaa");
-        System.out.println(var.getVariableType().toString()+ "\t" + var.toString()+ "\t" + var.isInitialized());
+        Scope scope = new Scope(0);
+        String line = "shitsAndTits ( );";
+        dealWithMethodCall(line, scope);
     }
 }
