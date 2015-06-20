@@ -5,4 +5,8 @@ package oop.ex6.main.exceptions.variableExceptions;
  */
 public class DeclaredFinalIntWithoutInitializationException extends FinalVariableException{
     public final static String ERROR_MESSAGE = "cannot declare final variable without initialization";
+
+    public DeclaredFinalIntWithoutInitializationException(String variableName) {
+        uniqueMessage = "the final variable " + variableName + " is initialized without a value";
+    }
 }

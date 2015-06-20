@@ -1,5 +1,7 @@
 package oop.ex6.variables;
 
+import oop.ex6.main.exceptions.variableExceptions.VariableException;
+
 /**
  * a collection of static utility methods to Variable class.
  */
@@ -16,7 +18,7 @@ public class VariableUtils {
         return name.matches(LEGAL_NAME);
     }
 
-    public static Variable deepCopyVariable(Variable variable){
+    public static Variable deepCopyVariable(Variable variable)throws VariableException {
         Variable variableCopy = VariableFactory.produceVariable(variable.getVariableType(),variable.toString());
         if(variable.isInitialized()){
             variableCopy.setInitialized();

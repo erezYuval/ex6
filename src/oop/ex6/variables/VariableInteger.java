@@ -1,6 +1,8 @@
 package oop.ex6.variables;
 
 
+import oop.ex6.main.exceptions.variableExceptions.VariableException;
+
 /**
  * Created by Erez Levanon on 14/06/2015.
  */
@@ -15,7 +17,7 @@ public class VariableInteger extends Variable {
      * @param variableName the name of the variable
      * @param variable     the value to be used
      */
-    public VariableInteger(String variableName, Variable variable) {
+    public VariableInteger(String variableName, Variable variable) throws VariableException {
         super(variableName, variable);
     }
 
@@ -25,7 +27,7 @@ public class VariableInteger extends Variable {
      * @param variableName the name of the variable
      * @param value        string representation of the new value.
      */
-    public VariableInteger(String variableName, String value) {
+    public VariableInteger(String variableName, String value)throws VariableException {
         super(variableName, value);
     }
 
@@ -34,7 +36,7 @@ public class VariableInteger extends Variable {
      *
      * @param variableName
      */
-    public VariableInteger(String variableName) {
+    public VariableInteger(String variableName) throws VariableException{
         super(variableName);
     }
 

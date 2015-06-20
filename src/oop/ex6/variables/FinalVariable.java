@@ -10,13 +10,9 @@ public class FinalVariable extends Variable {
 
     public FinalVariable(Variable variable) {
         if (!variable.isInitialized()) {
-            //TODO throw final exception
+            //
         }
         insideVar = variable;
-    }
-
-    public FinalVariable() {
-        // TODO throw final exception
     }
 
     public FinalVariable(String variableName, Variable variable){

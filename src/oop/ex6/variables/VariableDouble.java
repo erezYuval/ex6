@@ -1,5 +1,7 @@
 package oop.ex6.variables;
 
+import oop.ex6.main.exceptions.variableExceptions.VariableException;
+
 /**
  * Created by Erez Levanon on 14/06/2015.
  */
@@ -15,7 +17,7 @@ public class VariableDouble extends Variable{
      * @param variableName the name of the variable
      * @param variable     the value to be used
      */
-    public VariableDouble(String variableName, Variable variable) {
+    public VariableDouble(String variableName, Variable variable)throws VariableException {
         super(variableName, variable);
     }
 
@@ -25,7 +27,7 @@ public class VariableDouble extends Variable{
      * @param variableName the name of the variable
      * @param value        string representation of the new value.
      */
-    public VariableDouble(String variableName, String value) {
+    public VariableDouble(String variableName, String value) throws VariableException{
         super(variableName, value);
     }
 
@@ -34,7 +36,7 @@ public class VariableDouble extends Variable{
      *
      * @param variableName
      */
-    public VariableDouble(String variableName) {
+    public VariableDouble(String variableName)throws VariableException {
         super(variableName);
     }
 

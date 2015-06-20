@@ -1,5 +1,7 @@
 package oop.ex6.variables;
 
+import oop.ex6.main.exceptions.variableExceptions.VariableException;
+
 /**
  * Created by yuvalavrami on 6/14/15.
  */
@@ -15,7 +17,7 @@ public class VariableBoolean extends Variable {
      * @param variableName the name of the variable
      * @param variable     the value to be used
      */
-    public VariableBoolean(String variableName, Variable variable) {
+    public VariableBoolean(String variableName, Variable variable) throws VariableException{
         super(variableName, variable);
     }
 
@@ -25,7 +27,7 @@ public class VariableBoolean extends Variable {
      * @param variableName the name of the variable
      * @param value        string representation of the new value.
      */
-    public VariableBoolean(String variableName, String value) {
+    public VariableBoolean(String variableName, String value) throws VariableException {
         super(variableName, value);
     }
 
@@ -34,7 +36,7 @@ public class VariableBoolean extends Variable {
      *
      * @param variableName
      */
-    public VariableBoolean(String variableName) {
+    public VariableBoolean(String variableName)throws VariableException {
         super(variableName);
     }
 
@@ -73,11 +75,4 @@ public class VariableBoolean extends Variable {
         return VARIABLE_TYPES.BOOLEAN;
     }
 
-//        public static void main(String[] args) {
-//        String[] array;
-//        array = new String[]{"\"false\""}; // shouldn't work with this example
-//        for (String a: array){
-//            System.out.println(a.matches(LEGAL_VAL));
-//        }
-//    }
 }

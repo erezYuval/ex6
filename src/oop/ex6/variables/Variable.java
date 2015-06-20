@@ -12,7 +12,7 @@ public abstract class Variable {
     private String varName;
 
     public Variable() {
-        // TODO throw SHIT AT IT
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -20,16 +20,9 @@ public abstract class Variable {
      * @param variable the value to be used
      * @param variableName the name of the variable
      */
-    public Variable(String variableName, Variable variable) throws {
-        if (!VariableUtils.isNameLegal(variableName)) {
-            throw new IllegalNameException(variableName);
-        } else if(!canGetVariable(variable)) {
-            // TODO throw type mismatch
-        } else if (!variable.isInitialized()) {
-            // TODO throw illegal shit exception
-        }
-        initialized = true;
-        varName = variableName;
+    public Variable(String variableName, Variable variable) throws VariableException{
+        setVarName(variableName);
+        setValue(variable);
     }
 
     /**
@@ -37,14 +30,9 @@ public abstract class Variable {
      * @param value string representation of the new value.
      * @param variableName the name of the variable
      */
-    public Variable(String variableName, String value){
-        if (!VariableUtils.isNameLegal(variableName)) {
-            // TODO throw illegal variable name
-        } else if(!isValueLegal(value)) {
-            // TODO throw type mismatch
-        }
-        initialized = true;
-        varName = variableName;
+    public Variable(String variableName, String value) throws VariableException{
+        setVarName(variableName);
+        setValue(value);
     }
 
     /**
@@ -52,12 +40,8 @@ public abstract class Variable {
      * @param variableName
      */
     public Variable(String variableName) throws IllegalNameException{
-        if (!VariableUtils.isNameLegal(variableName)) {
-           throw new IllegalNameException(variableName);
-        }
+        setVarName(variableName);
         initialized = false;
-        varName = variableName;
-
     }
 
     /**
@@ -116,4 +100,11 @@ public abstract class Variable {
      * @return the type of this Variable instance.
      */
     abstract public VARIABLE_TYPES getVariableType();
+
+    private void setVarName(String name) throws IllegalNameException {
+        if (!VariableUtils.isNameLegal(name)) {
+            throw new IllegalNameException(name);
+        }
+    }
+
 }
