@@ -161,17 +161,41 @@ public class Parser{
         }
     }
 
-    public static void main(String[] args) throws SjavaException{
-        try {
-            JavaSPatterns.compilePatterns();
-            Scope scope = new Scope(0);
-            Method method = new Method("shitsAndTits", new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER,VARIABLE_TYPES.STRING},new String[]{"as","b"},0);
-            scope.addMethod(method);
-            String line = "shitsAndTits(3, \"dsad\", 5);";
-            dealWithMethodCall(line, scope);
-        } catch (SjavaException e) {
-            System.err.println(e.getMessage());
+
+
+    public static void parseDeep(Scanner fileScanner, Scope globalscope) throws SjavaException{
+        while (fileScanner.hasNext()) {
+
         }
-        System.out.println();
+    }
+
+    private static Scope parseMethodSignature(String methodSignature) {
+        Matcher methodMatcher = Pattern.compile(JavaSPatterns.METHOD_SIGNATURE).matcher(methodSignature);
+        if (methodMatcher.matches()) {
+            for (int i = 0; i < 20; i++) {
+                try {
+                    System.out.println(i + "\t" + methodMatcher.group(i));
+                } catch (Exception e) {
+
+                }
+            }
+        }
+        return null;
+    }
+
+    public static void main(String[] args) throws SjavaException{
+        JavaSPatterns.compilePatterns();
+//        try {
+//            Scope scope = new Scope(0);
+//            Method method = new Method("shitsAndTits", new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER,VARIABLE_TYPES.STRING},new String[]{"as","b"},0);
+//            scope.addMethod(method);
+//            String line = "shitsAndTits(3, \"dsad\", 5);";
+//            dealWithMethodCall(line, scope);
+//        } catch (SjavaException e) {
+//            System.err.println(e.getMessage());
+//        }
+        String line = "void shitAndTits ( String fdsa, boolean j , int ffdsankl ) {";
+        parseMethodSignature(line);
+
     }
 }
