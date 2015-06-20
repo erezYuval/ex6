@@ -114,21 +114,17 @@ public class Parser{
     }
 
     private static void dealWithMethodCall(String line, Scope scope) {
+        final int NAME_GROUP = 1;
         Matcher lineMatcher = Pattern.compile(JavaSPatterns.METHOD_CALL).matcher(line);
         if(lineMatcher.matches()) {
-            System.out.println("AA");
-            for (int i = 0; i < 20; i++) {
-                try {
-                    System.out.println(i + "\t" + lineMatcher.group(i));
-                } catch (Exception e) {
-
-                }
+            String methodName = lineMatcher.group(NAME_GROUP);
+            Method method = scope.searchMethod(methodName);
+            if (method == null) {
+                // TODO throw nonexistent method call;
             }
         }
-//        Method method = scope.searchMethod(methodName);
-//        if (method == null) {
-//            // TODO throw nonexistent method call;
-//        }
+
+
     }
 
     private static void dealWithReturnStatement(String line, Scope scope) {
@@ -138,7 +134,9 @@ public class Parser{
     public static void main(String[] args) {
         JavaSPatterns.compilePatterns();
         Scope scope = new Scope(0);
-        String line = "shitsAndTits ( );";
+        Method method = new Method("shitsAndTits", new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER,VARIABLE_TYPES.STRING},new String[]{"a","b"},0);
+        scope.addMethod(method);
+        String line = "shitsAndTits();";
         dealWithMethodCall(line, scope);
     }
 }

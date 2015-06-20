@@ -141,6 +141,7 @@ public class Scope {
      */
     private void initializeCollections(){
         variables = new Hashtable<>();
+        methods = new Hashtable<>();
     }
 
     public Method getParentMethod() {
