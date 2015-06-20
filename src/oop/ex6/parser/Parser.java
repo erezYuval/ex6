@@ -244,5 +244,6 @@ public class Parser{
         Scope scope = new Scope(0);
         String line = "double a = \"hello\";";
         dealWithVariableLine(line ,scope);
+        System.out.println("AFSD");
     }
 }

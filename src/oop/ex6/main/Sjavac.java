@@ -16,15 +16,22 @@ import java.util.Scanner;
  */
 public class Sjavac {
 
-    public static void main(String[] Args) throws FileNotFoundException {
+    private static boolean TESTING = false;
 
-        File testDirectory = new File("C:/ex6try2/tests");
-        File[] testFiles = testDirectory.listFiles();
+    public static void main(String[] args) throws FileNotFoundException {
 
-        for (File file : testFiles) {
-            System.out.println("TEST NUMBER " + file.getName());
-            testOneFile(file);
+        if (TESTING) {
+            File testDirectory = new File("C:/ex6try2/tests");
+            File[] testFiles = testDirectory.listFiles();
+
+            for (File file : testFiles) {
+                System.out.println("TEST NUMBER " + file.getName());
+                testOneFile(file);
 //            break;
+            }
+        }
+        else {
+            testOneFile(args[0]);
         }
     }
 
@@ -35,6 +42,30 @@ public class Sjavac {
         try {
 //            File sourceFile = new File(Args[0]);
             File sourceFile = file;
+            fileScanner = new Scanner(sourceFile);
+            try {
+                oop.ex6.parser.Parser.parseFile(fileScanner, global);
+                fileScanner.reset();
+                oop.ex6.parser.Parser.parseDeep(fileScanner, global);
+            }catch(SjavaException e) {
+                System.out.println(1);
+//                System.err.println(e.getErrorMessage());
+//                e.printStackTrace();
+                return;
+            }
+        } catch (IOException e) {
+            System.out.println(2);
+            return;
+        }
+        System.out.println(0);
+    }
+
+    private static void testOneFile(String filePath){
+        Scope global = new Scope(0); //create global scope
+        JavaSPatterns.compilePatterns();
+        Scanner fileScanner;
+        try {
+            File sourceFile = new File(filePath);
             fileScanner = new Scanner(sourceFile);
             try {
                 oop.ex6.parser.Parser.parseFile(fileScanner, global);

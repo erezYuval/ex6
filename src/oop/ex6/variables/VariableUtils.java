@@ -51,7 +51,6 @@ public class VariableUtils {
                 ""
 
         }) {
-            System.out.println(string + "\t" + isNameLegal(string));
         }
     }
 }
