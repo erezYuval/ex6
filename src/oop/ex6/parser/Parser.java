@@ -81,8 +81,6 @@ public class Parser{
                 } else if (line.matches(JavaSPatterns.CONDITION_BLOCK_STARTERS)) {
                     Scope innerScope = new Scope(lineNumber, scope);
                     ParseBlock(fileScanner, innerScope, lineNumber);
-                } else if (line.matches(JavaSPatterns.RETURN)) {
-                    dealWithReturnStatement(line, scope);
                 } else if (line.matches(JavaSPatterns.END_BLOCK)) {
                     return;
                 }
@@ -161,12 +159,6 @@ public class Parser{
                 throw new WrongArgumentsNumberException(method, valueIndex + 1);
             }
         }
-
-
-    }
-
-    private static void dealWithReturnStatement(String line, Scope scope) {
-
     }
 
     public static void main(String[] args) throws SjavaException{
