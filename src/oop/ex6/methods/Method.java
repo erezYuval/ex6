@@ -26,9 +26,7 @@ public class Method{
      * @param argumentTypesInOrder
      * @param argumentNamesInOrder
      */
-    public Method(String methodName, ArrayList<Variable> variablesInOrder,
-                  int firstLine, Scope scope ) throws VariableException {
-        this.firstLine = firstLine;
+    public Method(String methodName, ArrayList<Variable> variablesInOrder) {
         this.variablesInOrder = variablesInOrder;
         name = methodName;
     }

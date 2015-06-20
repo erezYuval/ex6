@@ -206,6 +206,7 @@ public class Parser{
             Matcher variableMatcher = Pattern.compile(JavaSPatterns.VARIABLE_TYPE_NAME).matcher(methodMatcher.group(ARGUMENTS_GROUP));
             while (variableMatcher.find()) {
                 String name = variableMatcher.group(NAME_SUB_GROUP);
+                VARIABLE_TYPES type = VariableUtils.stringToType(variableMatcher.group(TYPE_SUB_GROUP));
 
             }
         }
