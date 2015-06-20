@@ -102,15 +102,14 @@ public class Parser{
                 }
             } else {
                 if (variablesMatcher.matches()) {
-                    System.out.println("AAAA");
+                    String name = variablesMatcher.group(NAME_SUBGROUP);
+                    String value = variablesMatcher.group(VALUE_SUBGROUP);
+                    scope.updateVariable(name, value);
                 } else {
                     // TODO throw illegal variable assignment exception;
-                    System.out.println("BBBBs");
                 }
             }
             }
-
-
     }
 
     private static void dealWithMethodCall(String line) {
@@ -124,9 +123,11 @@ public class Parser{
     public static void main(String[] args) {
         JavaSPatterns.compilePatterns();
         Scope s = new Scope(0);
-        String line = "final int a  =  3   ,  d   =   5;";
+        String line = "String a,  d   =   \"5\";";
         String line2 = "a = \"14214\";";
         dealWithVariableLine(line, s);
         dealWithVariableLine(line2, s);
+        Variable var = s.searchVariableLocally("a");
+        System.out.println(var.getVariableType().toString()+ "\t" + var.toString()+ "\t" + var.isInitialized());
     }
 }
