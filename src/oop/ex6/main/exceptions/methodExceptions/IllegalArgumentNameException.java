@@ -1,4 +1,4 @@
-package oop.ex6.methods.exceptions;
+package oop.ex6.main.exceptions.methodExceptions;
 
 /**
  * Created by yuvalavrami on 6/14/15.
