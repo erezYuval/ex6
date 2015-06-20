@@ -69,10 +69,10 @@ public abstract class Variable {
     }
 
     public void setValue(Variable variable) throws VariableException{
-        if (canGetVariable(variable)) {
-            initialized = true;
-        } else if (!variable.isInitialized()) {
+        if (!variable.isInitialized()) {
             throw new AssignUnintializedVariableException(variable);
+        }else if (canGetVariable(variable)) {
+            initialized = true;
         } else {
             throw new TypeMismatchException(this, variable);
         }

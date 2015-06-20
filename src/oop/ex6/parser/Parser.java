@@ -123,7 +123,7 @@ public class Parser{
         }
     }
 
-    static void dealWithVariableLine(String line, Scope scope) throws VariableException{
+    static void dealWithVariableLine(String line, Scope scope) throws SjavaException{
         final int FINAL_GROUP = 3, TYPE_GROUP = 5, NAME_AND_VALUES_GROUP = 7, NAME_SUBGROUP = 2, VALUE_SUBGROUP = 4;
         Matcher lineMatcher = Pattern.compile(JavaSPatterns.VARIABLE_LINE).matcher(line);
         if (lineMatcher.matches()) {
@@ -137,8 +137,10 @@ public class Parser{
                     String name = variablesMatcher.group(NAME_SUBGROUP);
                     String value = variablesMatcher.group(VALUE_SUBGROUP);
                     if (VariableUtils.isNameLegal(value) && scope.searchVariableUpwards(value)!=null) {
-                        newVariable = scope.searchVariableUpwards(value);
-                        newVariable = VariableUtils.deepCopyVariable(newVariable);
+                        newVariable = VariableFactory.produceVariable(type,name);
+                        Variable oldVariable = scope.searchVariableUpwards(value);
+                        oldVariable = VariableUtils.deepCopyVariable(oldVariable);
+                        newVariable.setValue(oldVariable);
                     } else {
                         newVariable = VariableFactory.produceVariable(type, name, value);
                     } if (isFinal) {
@@ -237,15 +239,6 @@ public class Parser{
 
     public static void main(String[] args) throws SjavaException{
         JavaSPatterns.compilePatterns();
-//        try {
-//            Scope scope = new Scope(0);
-//            Method method = new Method("shitsAndTits", new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER,VARIABLE_TYPES.STRING},new String[]{"as","b"},0);
-//            scope.addMethod(method);
-//            String line = "shitsAndTits(3, \"dsad\", 5);";
-//            dealWithMethodCall(line, scope);
-//        } catch (SjavaException e) {
-//            System.err.println(e.getMessage());
-//        }
         Scope scope = new Scope(0);
         String line = null;
         try {

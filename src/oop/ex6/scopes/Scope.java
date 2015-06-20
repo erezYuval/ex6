@@ -1,5 +1,8 @@
 package oop.ex6.scopes;
 
+import oop.ex6.main.exceptions.scopeExceptions.NonexistingVariableException;
+import oop.ex6.main.exceptions.scopeExceptions.ScopeException;
+import oop.ex6.main.exceptions.scopeExceptions.VarNameExistsInBlockException;
 import oop.ex6.main.exceptions.variableExceptions.VariableException;
 import oop.ex6.methods.Method;
 import oop.ex6.variables.Variable;
@@ -54,17 +57,18 @@ public class Scope {
      * add a variable to the variable collection of this scope, if not existing already.
      * @param variable
      */
-    public void addVariable(Variable variable){
+    public void addVariable(Variable variable) throws ScopeException{
         Variable found = searchVariableLocally(variable.toString());
         if (found != null) {
-            // TODO throw same block exception
+            throw new VarNameExistsInBlockException(variable.toString());
         } else {
             variables.put(variable.toString(),variable);
         }
     }
 
-    public void updateVariable(String variableName, String value) throws VariableException{
+    public void updateVariable(String variableName, String value) throws VariableException, ScopeException{
         Variable found = searchVariableLocally(variableName);
+        System.out.println("FOUND " + found); //TODO delr
         if (found != null) {
             found.setValue(value);
         } else if (parent != null) {
@@ -74,7 +78,7 @@ public class Scope {
                 updateVariable(variableName,value);
             }
         }
-        // TODO throw non existing variable exception.
+        throw new NonexistingVariableException(variableName);
     }
 
     public void addMethod(Method method){
