@@ -17,8 +17,10 @@ public class Scope {
     //this will be the parent scope of this scope, (we need it for outer scope variables.)
     private Scope parent;
 
+    private Method parentMethod;
+
     private Hashtable<String, Variable> variables;
-    private ArrayList<Scope> innerScopes;
+//    private ArrayList<Scope> innerScopes;
     protected static Hashtable<String, Method> methods;
 
 
@@ -140,6 +142,14 @@ public class Scope {
      */
     private void initializeCollections(){
         variables = new Hashtable<>();
-        innerScopes = new ArrayList<>();
+//        innerScopes = new ArrayList<>();
+    }
+
+    public Method getParentMethod() {
+        return parentMethod;
+    }
+
+    public void setParentMethod(Method parentMethod) {
+        this.parentMethod = parentMethod;
     }
 }
