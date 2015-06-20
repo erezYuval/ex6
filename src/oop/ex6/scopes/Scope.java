@@ -44,12 +44,12 @@ public class Scope {
         this.parent = parent;
     }
 
-    public Scope(int firstLine, Scope parent, ArrayList<Variable> methodVariables) {
+    public Scope(int firstLine, Scope parent, ArrayList<Variable> methodVariables) throws ScopeException {
         initializeCollections();
         this.firstLine = firstLine;
         this.parent = parent;
         for (Variable variable : methodVariables) {
-            variables.put(variable.toString(), variable);
+            addVariable(variable);
         }
     }
 

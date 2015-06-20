@@ -35,22 +35,4 @@ public class VariableUtils {
         return null;
     }
 
-    public static void main(String[] args) {
-        for (String string : new String[] {
-                "a",
-                "cfsda",
-                "__",
-                "g2",
-                "b_3",
-                "FDSAvc_as ",
-                "_",
-                "_a",
-                "1fsa",
-                "fd3",
-                "_1",
-                ""
-
-        }) {
-        }
-    }
 }

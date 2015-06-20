@@ -8,7 +8,7 @@ import oop.ex6.main.exceptions.variableExceptions.VariableException;
  */
 public class VariableChar extends Variable {
 
-    final static String LEGAL_VAL = "'.'";
+    final static String LEGAL_VAL = "'[^']?'";
     private final static VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.CHAR};
 
     /**
@@ -75,13 +75,5 @@ public class VariableChar extends Variable {
         return VARIABLE_TYPES.CHAR;
     }
 
-
-//    public static void main(String[] args) {
-//        String[] array;
-//        array = new String[]{"  //        "};
-//        for (String a: array){
-//            System.out.println(a.matches(LEGAL_VAL));
-//        }
-//    }
 }
 

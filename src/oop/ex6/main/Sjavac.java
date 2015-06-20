@@ -26,7 +26,8 @@ public class Sjavac {
             File[] testFiles = testDirectory.listFiles();
 
             for (File file : testFiles) {
-                if (file.getName().equals("test106.sjava")) {
+                int test = 205;
+                if (file.getName().equals("test" + test + ".sjava")) {
 //                if(true){
                     System.out.println("TEST NUMBER " + file.getName());
                     testOneFile(file);
@@ -50,11 +51,12 @@ public class Sjavac {
             try {
                 oop.ex6.parser.Parser.parseFile(fileScanner, global);
                 fileScanner.reset();
+                fileScanner = new Scanner(sourceFile);
                 oop.ex6.parser.Parser.parseDeep(fileScanner, global);
             }catch(SjavaException e) {
                 System.out.println(1);
-                System.err.println(e.getErrorMessage());
-                e.printStackTrace();
+//                System.err.println(e.getErrorMessage());
+//                e.printStackTrace();
                 return;
             }
         } catch (IOException e) {

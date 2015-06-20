@@ -21,10 +21,7 @@ import java.util.regex.Pattern;
  * a parser class that parses a java-s file.
  */
 public class Parser{
-
-
-    //TODO some sort of a collection of the available methods
-
+    
     /**
      * a method that goes through each line of the java-s file, translates the lines to commands and executes
      * the wanted actions on Scopes.
@@ -205,14 +202,14 @@ public class Parser{
 
 
 
-    public static boolean parseDeep(Scanner fileScanner, Scope globalscope) throws SjavaException{
+    public static boolean parseDeep(Scanner fileScanner, Scope globalScope) throws SjavaException{
         int lineIndex = 0;
         while (fileScanner.hasNext()) {
             lineIndex++;
             String line = fileScanner.nextLine();
             if(line.matches(JavaSPatterns.METHOD_SIGNATURE)) {
                 Method newMethod = parseMethodSignature(line, lineIndex);
-                Scope scope = new Scope(lineIndex, globalscope, newMethod.getVariables());
+                Scope scope = new Scope(lineIndex, globalScope, newMethod.getVariables());
                 parseBlock(fileScanner, scope, lineIndex);
             }
         }
@@ -227,18 +224,18 @@ public class Parser{
             String arguments = methodMatcher.group(ARGUMENTS_GROUP);
                 if (arguments!=null) {
                 Matcher variableMatcher = Pattern.compile(JavaSPatterns.VARIABLE_TYPE_NAME).matcher(arguments);
-                while (variableMatcher.find()) {
                     Method newMethod = new Method(methodName);
-                    String name = variableMatcher.group(NAME_SUB_GROUP);
-                    VARIABLE_TYPES type = VariableUtils.stringToType(variableMatcher.group(TYPE_SUB_GROUP));
-                    try {
-                        Variable newVariable = VariableFactory.produceVariable(type, name);
-                        newMethod.addVariable(newVariable);
-                        return newMethod;
-                    } catch (VariableException e) {
-                        throw new IllegalArgumentNameException(name);
+                    while (variableMatcher.find()) {
+                        String name = variableMatcher.group(NAME_SUB_GROUP);
+                        VARIABLE_TYPES type = VariableUtils.stringToType(variableMatcher.group(TYPE_SUB_GROUP));
+                        try {
+                            Variable newVariable = VariableFactory.produceVariable(type, name);
+                            newMethod.addVariable(newVariable);
+                        } catch (VariableException e) {
+                            throw new IllegalArgumentNameException(name);
+                        }
                     }
-                }
+                    return newMethod;
             }
             return new Method(methodName);
         }
@@ -250,6 +247,6 @@ public class Parser{
         Scope scope = new Scope(0);
         String line = "void foo() {";
         Method method = parseMethodSignature(line, 0);
-        System.out.println(method.getName());
+        System.out.println("String b".matches(JavaSPatterns.VARIABLE_TYPE_NAME));
     }
 }
