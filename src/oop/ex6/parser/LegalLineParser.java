@@ -1,15 +1,8 @@
 package oop.ex6.parser;
 
 import oop.ex6.main.exceptions.SjavaException;
-import oop.ex6.main.exceptions.variableExceptions.VariableException;
 import oop.ex6.methods.Method;
 import oop.ex6.scopes.Scope;
-import oop.ex6.variables.VARIABLE_TYPES;
-import oop.ex6.variables.Variable;
-
-import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by yuvalavrami on 6/15/15.
@@ -21,17 +14,12 @@ public class LegalLineParser {
 
     static void parseLine(String line, int lineNumber, Scope currentScope) throws SjavaException {
         if(line.matches(JavaSPatterns.METHOD_SIGNATURE)) {
-            Parser.parseMethodSignature(line, lineNumber, currentScope, true);
+            Method newMethod = Parser.parseMethodSignature(line, lineNumber);
+            currentScope.addMethod(newMethod);
         }
+        if(line.matches(JavaSPatterns.VARIABLE_LINE)){
+            Parser.dealWithVariableLine(line, currentScope);
     }
-
-    static void createMethod(String methodName, ArrayList<Variable> variableArray,
-                             int lineNumber, Scope currentScope) throws VariableException {
-        Method newMethod = new Method(methodName, variableArray, lineNumber, currentScope);
-        currentScope.addMethod(newMethod);
-    }
-
-
 
 
     }
