@@ -92,7 +92,7 @@ public class Parser{
 
     static void parseLine(String line, int lineNumber, Scope currentScope) throws SjavaException {
         if(line.matches(JavaSPatterns.METHOD_SIGNATURE)) {
-            Method newMethod = Parser.parseMethodSignature(line, lineNumber);
+            Method newMethod = Parser.parseMethodSignature(line);
             currentScope.addMethod(newMethod);}
         if(line.matches(JavaSPatterns.VARIABLE_LINE)){
             Parser.dealWithVariableLine(line, currentScope);}
@@ -213,7 +213,7 @@ public class Parser{
             lineIndex++;
             String line = fileScanner.nextLine();
             if(line.matches(JavaSPatterns.METHOD_SIGNATURE)) {
-                Method newMethod = parseMethodSignature(line, lineIndex);
+                Method newMethod = parseMethodSignature(line);
                 Scope scope = new Scope(lineIndex, globalScope, newMethod.getVariables());
                 parseBlock(fileScanner, scope, lineIndex);
             }
@@ -221,7 +221,7 @@ public class Parser{
         return false;
     }
 
-    protected static Method parseMethodSignature(String methodSignature, int lineNumber) throws MethodException {
+    static Method parseMethodSignature(String methodSignature) throws MethodException {
         final int NAME_GROUP = 3, ARGUMENTS_GROUP = 5, TYPE_SUB_GROUP = 2, NAME_SUB_GROUP = 3;
         Matcher methodMatcher = Pattern.compile(JavaSPatterns.METHOD_SIGNATURE).matcher(methodSignature);
         if (methodMatcher.matches()) {
