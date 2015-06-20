@@ -21,7 +21,7 @@ public class Scope {
     private Method parentMethod;
 
     private Hashtable<String, Variable> variables;
-    protected static Hashtable<String, Method> methods;
+    protected Hashtable<String, Method> methods;
 
 
     /**
