@@ -1,5 +1,6 @@
 package oop.ex6.methods;
 
+import oop.ex6.main.exceptions.methodExceptions.IllegalMethodNameException;
 import oop.ex6.main.exceptions.methodExceptions.MethodException;
 import oop.ex6.main.exceptions.methodExceptions.WrongArgumentsNumberException;
 import oop.ex6.main.exceptions.variableExceptions.VariableException;
@@ -19,6 +20,7 @@ public class Method{
     private int firstLine;
     private int lastLine;
     private boolean hasReturnStatement = false;
+    private static final String LEGAL_NAME = "[a-zA-Z]\\w*";
 
     /**
      * construct a new method using the given variable types and names.
@@ -26,12 +28,12 @@ public class Method{
      * @param argumentTypesInOrder
      * @param argumentNamesInOrder
      */
-    public Method(String methodName, ArrayList<Variable> variablesInOrder) {
+    public Method(String methodName, ArrayList<Variable> variablesInOrder) throws IllegalMethodNameException {
         this.variablesInOrder = variablesInOrder;
-        name = methodName;
+        setName(methodName);
     }
 
-    public Method(String methodName) {
+    public Method(String methodName) throws MethodException{
         variablesInOrder = new ArrayList<>();
         setName(methodName);
     }
@@ -97,8 +99,10 @@ public class Method{
         return variablesInOrder.size();
     }
 
-    private void setName(String name) {
-        //TODO check name validity
+    private void setName(String name) throws IllegalMethodNameException{
+        if(!name.matches(LEGAL_NAME)) {
+            throw new IllegalMethodNameException(name);
+        }
         this.name = name;
     }
 

@@ -24,8 +24,8 @@ public class Sjavac {
         if (TESTING) {
             File testDirectory = new File("C:/ex6try2/tests");
             File[] testFiles = testDirectory.listFiles();
-            int[] tests = new int[]{463,467,470,471};
-            tests = new int[]{463};
+            int[] tests = new int[]{114,205,206,207,208,216,217,217,223,224,225,226,236,238,244,245,252,254,257,262,264,270,306,307,308,309,310,314,316,402,406,407,408,409,429,430,431,434,435,439,440,441,452,453,454,456,467,468,474,503,504};
+//            tests = new int[]{473};
             for (int test : tests){
 
         for (File file : testFiles) {
@@ -58,8 +58,8 @@ public class Sjavac {
                 oop.ex6.parser.Parser.parseDeep(fileScanner, global);
             }catch(SjavaException e) {
                 System.out.println(1);
-                System.err.println(e.getErrorMessage());
-                e.printStackTrace();
+//                System.err.println(e.getErrorMessage());
+//                e.printStackTrace();
                 return;
             }
         } catch (IOException e) {
