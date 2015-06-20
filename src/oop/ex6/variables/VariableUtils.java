@@ -7,7 +7,7 @@ import oop.ex6.main.exceptions.variableExceptions.VariableException;
  */
 public class VariableUtils {
 
-    private final static String LEGAL_NAME = "_?[a-zA-z_]\\w*";
+    private final static String LEGAL_NAME = "((_\\w+)|([a-zA-Z]\\w*))";
 
     /**
      * determines whether a string is legal as a variable name.

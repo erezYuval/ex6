@@ -116,6 +116,8 @@ public class Parser{
                     parseBlock(fileScanner, innerScope, lineNumber);
                 } else if (line.matches(JavaSPatterns.END_BLOCK)) {
                     return;
+                } else {
+                    throw new IllegalLineException();
                 }
             } catch (SjavaException e) {
                 e.addLineNumber(lineNumber);
@@ -248,8 +250,8 @@ public class Parser{
     public static void main(String[] args) throws SjavaException{
         JavaSPatterns.compilePatterns();
         Scope scope = new Scope(0);
-        String line = "\t\t\tvoid \t\t\t\t\tfoo                   (    int a      ,      String  \t b              )               {                 ";
-        System.out.println(line.matches(JavaSPatterns.METHOD_SIGNATURE));
+        String line = "int b = goo();";
+        System.out.println(VariableUtils.isNameLegal("_"));
 
     }
 }

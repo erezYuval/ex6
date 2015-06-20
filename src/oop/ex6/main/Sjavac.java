@@ -17,23 +17,26 @@ import java.util.Scanner;
  */
 public class Sjavac {
 
-    private static boolean TESTING = false;
+    private static boolean TESTING = true;
 
     public static void main(String[] args) throws FileNotFoundException {
         JavaSPatterns.compilePatterns();
         if (TESTING) {
             File testDirectory = new File("C:/ex6try2/tests");
             File[] testFiles = testDirectory.listFiles();
+            int[] tests = new int[]{463,467,470,471};
+            tests = new int[]{463};
+            for (int test : tests){
 
-            for (File file : testFiles) {
-                int test = 411;
-                if (file.getName().equals("test" + test + ".sjava")) {
+        for (File file : testFiles) {
+            int a = test;
+            if (file.getName().equals("test" + a + ".sjava")) {
 //                if(true){
-                    System.out.println("TEST NUMBER " + file.getName());
-                    testOneFile(file);
-                }
-//            break;
+                System.out.println("TEST NUMBER " + file.getName());
+                testOneFile(file);
             }
+        }
+    }
         }
         else {
             testOneFile(args[0]);
