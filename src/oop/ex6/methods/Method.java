@@ -1,10 +1,9 @@
 package oop.ex6.methods;
 
-import oop.ex6.main.exceptions.SjavaException;
 import oop.ex6.main.exceptions.methodExceptions.MethodException;
 import oop.ex6.main.exceptions.methodExceptions.WrongArgumentsNumberException;
 import oop.ex6.main.exceptions.variableExceptions.VariableException;
-import oop.ex6.variables.VARIABLE_TYPES;
+import oop.ex6.scopes.Scope;
 import oop.ex6.variables.Variable;
 import oop.ex6.variables.VariableFactory;
 
@@ -15,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Method{
 
-    private ArrayList<Variable> variables;
+    private ArrayList<Variable> variablesInOrder;
     private String name;
     private int firstLine;
     private int lastLine;
@@ -27,18 +26,11 @@ public class Method{
      * @param argumentTypesInOrder
      * @param argumentNamesInOrder
      */
-    public Method(String methodName, VARIABLE_TYPES[] argumentTypesInOrder, String[] argumentNamesInOrder,
-                  int fitsrLine ) throws VariableException{
+    public Method(String methodName, ArrayList<Variable> variablesInOrder,
+                  int firstLine, Scope scope ) throws VariableException {
         this.firstLine = firstLine;
-        variables = new ArrayList<>();
+        this.variablesInOrder = variablesInOrder;
         name = methodName;
-        if (!(argumentNamesInOrder == null && argumentTypesInOrder == null)) {
-            for (int i = 0; i < argumentTypesInOrder.length; i++) {
-                Variable variable = VariableFactory.produceVariable(argumentTypesInOrder[i], argumentNamesInOrder[i]);
-                variable.setInitialized();
-                variables.add(variable);
-            }
-        }
     }
 
     /**
@@ -49,7 +41,7 @@ public class Method{
      */
     public void checkArgumentInIndex(int index, String value) throws VariableException, MethodException{
         try {
-            variables.get(index).setValue(value);
+            variablesInOrder.get(index).setValue(value);
         } catch (IndexOutOfBoundsException e) {
             throw new WrongArgumentsNumberException(this, index+1);
         }
@@ -63,7 +55,7 @@ public class Method{
      */
     public void checkArgumentInIndex(int index, Variable variable) throws VariableException, MethodException {
         try {
-            variables.get(index).setValue(variable);
+            variablesInOrder.get(index).setValue(variable);
         } catch (IndexOutOfBoundsException e) {
             throw new WrongArgumentsNumberException(this, index+1);
         }
@@ -78,7 +70,7 @@ public class Method{
     }
 
     public ArrayList<Variable> getVariables() {
-        return variables;
+        return variablesInOrder;
     }
 
     public int getLastLine() {
@@ -94,7 +86,7 @@ public class Method{
     }
 
     public int getNumOfArguments() {
-        return variables.size();
+        return variablesInOrder.size();
     }
 
     public void setHasReturnStatement(boolean hasReturnStatement) {
