@@ -82,18 +82,19 @@ public class Parser{
     }
 
     private static void dealWithVariableLine(String line, Scope scope) {
+        final int FINAL_GROUP = 3, TYPE_GROUP = 5, NAME_AND_VALUES_GROUP = 7, NAME_SUBGROUP = 2, VALUE_SUBGROUP = 4;
         Matcher lineMatcher = Pattern.compile(JavaSPatterns.VARIABLE_LINE).matcher(line);
         boolean isFinal;
         boolean isDeclaration;
         if (lineMatcher.matches()) {
-            isFinal = lineMatcher.group(3) != null;
-            isDeclaration = lineMatcher.group(5) != null;
+            isFinal = lineMatcher.group(FINAL_GROUP) != null;
+            isDeclaration = lineMatcher.group(TYPE_GROUP) != null;
             if (isDeclaration) {
-                VARIABLE_TYPES type = VariableFactory.stringToType(lineMatcher.group(5));
-                Matcher variables = Pattern.compile(JavaSPatterns.VARIABLE_OR_ASSIGNMENT).matcher(lineMatcher.group(7));
+                VARIABLE_TYPES type = VariableUtils.stringToType(lineMatcher.group(TYPE_GROUP));
+                Matcher variables = Pattern.compile(JavaSPatterns.VARIABLE_OR_ASSIGNMENT).matcher(lineMatcher.group(NAME_AND_VALUES_GROUP));
                 while(variables.find()) {
-                    String name = variables.group(2);
-                    String value = variables.group(4);
+                    String name = variables.group(NAME_SUBGROUP);
+                    String value = variables.group(VALUE_SUBGROUP);
                     Variable newVariable = VariableFactory.produceVariable(type,name,value);
                     if (isFinal) {
                         newVariable = new FinalVariable(newVariable);
