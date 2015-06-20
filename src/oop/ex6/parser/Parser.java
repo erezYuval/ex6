@@ -85,21 +85,20 @@ public class Parser{
         Matcher lineMatcher = Pattern.compile(JavaSPatterns.VARIABLE_LINE).matcher(line);
         boolean isFinal;
         boolean isDeclaration;
-        VARIABLE_TYPES type = null;
         if (lineMatcher.matches()) {
             isFinal = lineMatcher.group(3) != null;
             isDeclaration = lineMatcher.group(5) != null;
             if (isDeclaration) {
-                type = VariableFactory.stringToType(lineMatcher.group(5));
+                VARIABLE_TYPES type = VariableFactory.stringToType(lineMatcher.group(5));
                 Matcher variables = Pattern.compile(JavaSPatterns.VARIABLE_OR_ASSIGNMENT).matcher(lineMatcher.group(7));
                 while(variables.find()) {
                     String name = variables.group(2);
                     String value = variables.group(4);
-                    System.out.println(name + "\n" + value + "\n" + type);
                     Variable newVariable = VariableFactory.produceVariable(type,name,value);
                     if (isFinal) {
                         newVariable = new FinalVariable(newVariable);
                     }
+                    System.out.println(newVariable.getVariableType() + "\t" + newVariable.toString() + "\t" + newVariable.isInitialized());
                     scope.addVariable(newVariable);
                 }
 
@@ -121,6 +120,8 @@ public class Parser{
         JavaSPatterns.compilePatterns();
         Scope s = new Scope(0);
         String line = "int   a   =   3   ,   g    ,  d   =   5;";
+        String line2 = "String a = \"14214\", b, c = \"gfas fdsa fdsa\";";
         dealWithVariableLine(line, s);
+        dealWithVariableLine(line2, s);
     }
 }
