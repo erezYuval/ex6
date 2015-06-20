@@ -2,6 +2,7 @@ package oop.ex6.parser;
 
 import oop.ex6.main.exceptions.parserExceptions.IllegalLineException;
 import oop.ex6.main.exceptions.parserExceptions.unbalancedScopeException;
+import oop.ex6.methods.Method;
 import oop.ex6.scopes.Scope;
 import oop.ex6.parser.JavaSPatterns;
 import oop.ex6.variables.*;
@@ -68,7 +69,7 @@ public class Parser{
             } else if (line.matches(JavaSPatterns.VARIABLE_LINE)) {
                 dealWithVariableLine(line, scope);
             } else if (line.matches(JavaSPatterns.METHOD_CALL)) {
-                dealWithMethodCall(line);
+                dealWithMethodCall(line, scope);
             } else if (line.matches(JavaSPatterns.CONDITION_BLOCK_STARTERS)) {
                 Scope innerScope = new Scope(lineNumber, scope);
                 ParseBlock(fileScanner, innerScope, lineNumber);
@@ -84,17 +85,15 @@ public class Parser{
     private static void dealWithVariableLine(String line, Scope scope) {
         final int FINAL_GROUP = 3, TYPE_GROUP = 5, NAME_AND_VALUES_GROUP = 7, NAME_SUBGROUP = 2, VALUE_SUBGROUP = 4;
         Matcher lineMatcher = Pattern.compile(JavaSPatterns.VARIABLE_LINE).matcher(line);
-        boolean isFinal;
-        boolean isDeclaration;
         if (lineMatcher.matches()) {
-            isFinal = lineMatcher.group(FINAL_GROUP) != null;
-            isDeclaration = lineMatcher.group(TYPE_GROUP) != null;
+            Matcher variablesMatcher = Pattern.compile(JavaSPatterns.VARIABLE_OR_ASSIGNMENT).matcher(lineMatcher.group(NAME_AND_VALUES_GROUP));
+            boolean isFinal = lineMatcher.group(FINAL_GROUP) != null;
+            boolean isDeclaration = lineMatcher.group(TYPE_GROUP) != null;
             if (isDeclaration) {
                 VARIABLE_TYPES type = VariableUtils.stringToType(lineMatcher.group(TYPE_GROUP));
-                Matcher variables = Pattern.compile(JavaSPatterns.VARIABLE_OR_ASSIGNMENT).matcher(lineMatcher.group(NAME_AND_VALUES_GROUP));
-                while(variables.find()) {
-                    String name = variables.group(NAME_SUBGROUP);
-                    String value = variables.group(VALUE_SUBGROUP);
+                while(variablesMatcher.find()) {
+                    String name = variablesMatcher.group(NAME_SUBGROUP);
+                    String value = variablesMatcher.group(VALUE_SUBGROUP);
                     Variable newVariable = VariableFactory.produceVariable(type,name,value);
                     if (isFinal) {
                         newVariable = new FinalVariable(newVariable);
@@ -102,14 +101,33 @@ public class Parser{
                     System.out.println(newVariable.getVariableType() + "\t" + newVariable.toString() + "\t" + newVariable.isInitialized());
                     scope.addVariable(newVariable);
                 }
-
+            } else {
+                if (variablesMatcher.matches()) {
+                    String name = variablesMatcher.group(NAME_SUBGROUP);
+                    String value = variablesMatcher.group(VALUE_SUBGROUP);
+                    scope.updateVariable(name, value);
+                } else {
+                    // TODO throw illegal variable assignment exception;
+                }
             }
             }
-
-
     }
 
-    private static void dealWithMethodCall(String line) {
+    private static void dealWithMethodCall(String line, Scope scope) {
+        final int NAME_GROUP = 1, VALUES_GROUP = 2;
+        Matcher lineMatcher = Pattern.compile(JavaSPatterns.METHOD_CALL).matcher(line);
+        if(lineMatcher.matches()) {
+            Matcher valuesMatcher = Pattern.compile(JavaSPatterns.VALUE).matcher(lineMatcher.group(VALUES_GROUP));
+            while (valuesMatcher.find()) {
+                String value = valuesMatcher.group();
+            }
+            String methodName = lineMatcher.group(NAME_GROUP);
+            Method method = scope.searchMethod(methodName);
+            if (method == null) {
+                // TODO throw nonexistent method call;
+            }
+        }
+
 
     }
 
@@ -119,10 +137,10 @@ public class Parser{
 
     public static void main(String[] args) {
         JavaSPatterns.compilePatterns();
-        Scope s = new Scope(0);
-        String line = "int   a   =   3   ,   g    ,  d   =   5;";
-        String line2 = "String a = \"14214\", b, c = \"gfas fdsa fdsa\";";
-        dealWithVariableLine(line, s);
-        dealWithVariableLine(line2, s);
+        Scope scope = new Scope(0);
+        Method method = new Method("shitsAndTits", new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER,VARIABLE_TYPES.STRING},new String[]{"a","b"},0);
+        scope.addMethod(method);
+        String line = "shitsAndTits(3, \"FDA\");";
+        dealWithMethodCall(line, scope);
     }
 }

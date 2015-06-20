@@ -12,6 +12,7 @@ public class FinalVariable extends Variable {
         if (!variable.isInitialized()) {
             //TODO throw final exception
         }
+        insideVar = variable;
     }
 
     public FinalVariable() {
@@ -68,5 +69,6 @@ public class FinalVariable extends Variable {
     @Override
     public VARIABLE_TYPES getVariableType() {
         return insideVar.getVariableType();
+
     }
 }

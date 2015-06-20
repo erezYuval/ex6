@@ -141,6 +141,7 @@ public class Scope {
      */
     private void initializeCollections(){
         variables = new Hashtable<>();
+        methods = new Hashtable<>();
     }
 
     public Method getParentMethod() {
@@ -149,5 +150,14 @@ public class Scope {
 
     public void setParentMethod(Method parentMethod) {
         this.parentMethod = parentMethod;
+    }
+
+    public Method searchMethod(String methodName) {
+        if (this.parent != null) {
+            return parent.searchMethod(methodName);
+        }
+        else {
+            return methods.get(methodName);
+        }
     }
 }
