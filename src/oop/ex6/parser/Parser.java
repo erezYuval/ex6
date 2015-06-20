@@ -114,9 +114,13 @@ public class Parser{
     }
 
     private static void dealWithMethodCall(String line, Scope scope) {
-        final int NAME_GROUP = 1;
+        final int NAME_GROUP = 1, VALUES_GROUP = 2;
         Matcher lineMatcher = Pattern.compile(JavaSPatterns.METHOD_CALL).matcher(line);
         if(lineMatcher.matches()) {
+            Matcher valuesMatcher = Pattern.compile(JavaSPatterns.VALUE).matcher(lineMatcher.group(VALUES_GROUP));
+            while (valuesMatcher.find()) {
+                String value = valuesMatcher.group();
+            }
             String methodName = lineMatcher.group(NAME_GROUP);
             Method method = scope.searchMethod(methodName);
             if (method == null) {
@@ -136,7 +140,7 @@ public class Parser{
         Scope scope = new Scope(0);
         Method method = new Method("shitsAndTits", new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER,VARIABLE_TYPES.STRING},new String[]{"a","b"},0);
         scope.addMethod(method);
-        String line = "shitsAndTits();";
+        String line = "shitsAndTits(3, \"FDA\");";
         dealWithMethodCall(line, scope);
     }
 }
