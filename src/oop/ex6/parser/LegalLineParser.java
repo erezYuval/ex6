@@ -26,7 +26,7 @@ public class LegalLineParser {
 
         String[] arguments = line.split("\\(")[1].split(",");
         for(String arg: arguments){
-            String[] splitArg = arg.split("\\s")
+            String[] splitArg = arg.split("\\s");
             String argtype = splitArg[0];
             System.out.println("type=" + argtype);
             String argName = splitArg[1];
