@@ -22,4 +22,13 @@ public class VariableUtils {
         }
         return variableCopy;
     }
+
+    public static VARIABLE_TYPES stringToType(String type) {
+        for (VARIABLE_TYPES variableTypes : VARIABLE_TYPES.values()) {
+            if (type.equals(variableTypes.toString())) {
+                return variableTypes;
+            }
+        }
+        return null;
+    }
 }
