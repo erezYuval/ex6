@@ -5,6 +5,12 @@ import oop.ex6.main.exceptions.SjavaException;
 /**
  * Created by yuvalavrami on 6/14/15.
  */
-public class IllegalNameException extends SjavaException {
+public class IllegalNameException extends VariableException {
     protected final String ERROR_MESSAGE = "cannot assign this name to variable: name is illegal";
+    protected String uniqueMessage;
+
+    public IllegalNameException(String name) {
+        uniqueMessage = "The name " + name + " is illegal";
+    }
+
 }

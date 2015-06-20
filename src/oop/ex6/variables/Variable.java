@@ -1,5 +1,7 @@
 package oop.ex6.variables;
 
+import oop.ex6.main.exceptions.variableExceptions.*;
+
 /**
  * classes implementing this interface will represent variables of different types in
  * java-s.
@@ -18,9 +20,9 @@ public abstract class Variable {
      * @param variable the value to be used
      * @param variableName the name of the variable
      */
-    public Variable(String variableName, Variable variable) {
+    public Variable(String variableName, Variable variable) throws {
         if (!VariableUtils.isNameLegal(variableName)) {
-            // TODO throw illegal variable name
+            throw new IllegalNameException(variableName);
         } else if(!canGetVariable(variable)) {
             // TODO throw type mismatch
         } else if (!variable.isInitialized()) {
@@ -49,9 +51,9 @@ public abstract class Variable {
      * create a new variable, not initialized with a value.
      * @param variableName
      */
-    public Variable(String variableName){
+    public Variable(String variableName) throws IllegalNameException{
         if (!VariableUtils.isNameLegal(variableName)) {
-            // TODO throw illegal variable name
+           throw new IllegalNameException(variableName);
         }
         initialized = false;
         varName = variableName;
@@ -75,19 +77,19 @@ public abstract class Variable {
      * initalize the variable with a value.
      * @param value the new value as a string.
      */
-    public void setValue(String value){
+    public void setValue(String value) throws TypeMismatchException{
         if (isValueLegal(value)) {
             initialized = true;
         } else {
-            // TODO throw exception
+            throw new TypeMismatchException(this, value);
         }
     }
 
-    public void setValue(Variable variable){
+    public void setValue(Variable variable) throws TypeMismatchException{
         if (canGetVariable(variable)) {
             initialized = true;
         } else {
-            // TODO throw exception
+            throw new TypeMismatchException(this, variable);
         }
     }
 

@@ -6,10 +6,15 @@ package oop.ex6.main.exceptions;
 public abstract class SjavaException extends Exception {
 
     protected String ERROR_MESSAGE;
+    protected String uniqueMessage;
     private int lineNumber;
 
     public String getErrorMessage(){
         return ERROR_MESSAGE;
+    }
+
+    public String getMessage() {
+        return ERROR_MESSAGE + "\n\t" + uniqueMessage;
     }
 
     public void addLineNumber(int lineNumber) {

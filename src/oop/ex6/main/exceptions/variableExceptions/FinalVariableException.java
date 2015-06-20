@@ -7,5 +7,5 @@ import oop.ex6.main.exceptions.SjavaException;
  *
  * parent class for methodExceptions dealing with variables declared as final
  */
-public class FinalVariableException extends SjavaException {
+public class FinalVariableException extends VariableException {
 }
