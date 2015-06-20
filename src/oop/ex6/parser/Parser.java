@@ -1,14 +1,11 @@
 package oop.ex6.parser;
 
 import oop.ex6.main.exceptions.parserExceptions.IllegalLineException;
-import oop.ex6.main.exceptions.parserExceptions.unbalancedScopeException;
+import oop.ex6.main.exceptions.parserExceptions.UnbalancedScopeException;
 import oop.ex6.methods.Method;
 import oop.ex6.scopes.Scope;
-import oop.ex6.parser.JavaSPatterns;
 import oop.ex6.variables.*;
-import sun.security.krb5.KdcComm;
 
-import java.lang.reflect.Type;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,14 +23,14 @@ public class Parser{
      * the wanted actions on Scopes.
      * @param fileScanner - a scanner that runs on a legal file
      */
-    public static void parseFile(Scanner fileScanner, Scope globalScope) throws IllegalLineException, unbalancedScopeException {
+    public static void parseFile(Scanner fileScanner, Scope globalScope) throws IllegalLineException, UnbalancedScopeException {
         int balancedBracketCounter = 0;
         int curLineNumber = 0;
         while (fileScanner.hasNext()) {
             curLineNumber++;
             if(balancedBracketCounter < 0){ //there is a closing bracket in the file that does not correspond to a
                 //valid opening bracket
-                throw new unbalancedScopeException();
+                throw new UnbalancedScopeException();
             }
             String currentLine = fileScanner.nextLine();
 
@@ -54,7 +51,7 @@ public class Parser{
             throw new IllegalLineException();
         }
         if(balancedBracketCounter != 0){ // reached end of file, number of opening and closing brackets does not match
-            throw new unbalancedScopeException();
+            throw new UnbalancedScopeException();
         }
     }
 
