@@ -21,11 +21,13 @@ public class JavaSPatterns {
     static String BOOLEAN_IN_PARENTHESIS = CONDITION_BLOCK_STARTERS + "(\\s*)(\\()(\\s*)(\\w+)(\\s*)("+LOGICAL_OPERATORS+"(\\s*)(\\w+)(\\s*))*(\\s*)(\\))(\\s*)(\\{)(\\s*)";
     static String END_BLOCK = "\\s*\\}\\s*";
     static String RETURN = "\\s*(return)\\s*;";
+    static String VARIABLE_TYPE_NAME;
 
     public static void compilePatterns(){
         PREDECLARATION = generateOrString(PREDECLERATIONS.values());
         DECLARATION_VARIABLES = generateOrString(VARIABLE_TYPES.values());
-        VARIABLE_LINE = "((" + PREDECLARATION + "\\s+)?((" + DECLARATION_VARIABLES + ")\\s+))?(" + VARIABLE_OR_ASSIGNMENT + "(,\\s*" + VARIABLE_OR_ASSIGNMENT + "))*\\s*;";
+        VARIABLE_TYPE_NAME = "(\\s*" + DECLARATION_VARIABLES + "\\s+)(\\w+)";
+        VARIABLE_LINE = "((" + PREDECLARATION + "\\s+)?((" + DECLARATION_VARIABLES + ")\\s+))?(" + VARIABLE_OR_ASSIGNMENT + "(,\\s*" + VARIABLE_OR_ASSIGNMENT + ")*)\\s*;";
         METHOD_SIGNATURE = "(void)(\\s)+(\\w+)(\\s*)\\(\\s*"+ DECLARATION_VARIABLES +"(\\s+)(\\w+)(\\s*)(,(\\s)*"+ DECLARATION_VARIABLES +"(\\s+)(\\w+)(\\s*))*\\)(\\s*)\\{\\s*";
 
     }
