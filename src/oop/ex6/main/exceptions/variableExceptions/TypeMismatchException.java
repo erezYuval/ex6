@@ -8,7 +8,6 @@ public class TypeMismatchException extends VariableException {
     private final String TYPE_ERROR_MESSAGE = "cannot assign to variable - assigned type does not match required type";
 
     public TypeMismatchException(Variable intoVariable, String value) {
-        System.out.println("AAAAAA");
         ERROR_MESSAGE = TYPE_ERROR_MESSAGE;
         String type = intoVariable.getVariableType().toString();
         String variableName = intoVariable.toString();

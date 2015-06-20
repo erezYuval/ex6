@@ -175,10 +175,11 @@ public class Parser{
             Scope scope = new Scope(0);
             Method method = new Method("shitsAndTits", new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER,VARIABLE_TYPES.STRING},new String[]{"as","b"},0);
             scope.addMethod(method);
-            String line = "shitsAndTits(3, 5);";
+            String line = "shitsAndTits(3, \"dsad\", 5);";
             dealWithMethodCall(line, scope);
         } catch (SjavaException e) {
             System.err.println(e.getMessage());
         }
+        System.out.println();
     }
 }

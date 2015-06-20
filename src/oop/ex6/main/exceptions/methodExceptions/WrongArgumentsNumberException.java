@@ -7,10 +7,11 @@ import oop.ex6.methods.Method;
  * Created by yuvalavrami on 6/14/15.
  */
 public class WrongArgumentsNumberException extends MethodException {
-    protected final static String ERROR_MESSAGE =
+    private final static String TYPE_ERROR_MESSAGE =
             "number of arguments received does not match number of arguments required by this method";
     public WrongArgumentsNumberException(Method method, int numOfArgs) {
+        ERROR_MESSAGE = TYPE_ERROR_MESSAGE;
         uniqueMessage = "the method -" + method.getName() + "- should get " + method.getNumOfArguments() + " argumetns"
-                + "but got " + numOfArgs + ".";
+                + " but got " + numOfArgs + ".";
     }
 }
