@@ -1,6 +1,9 @@
 package oop.ex6.parser;
 
 import oop.ex6.main.exceptions.SjavaException;
+import oop.ex6.main.exceptions.methodExceptions.IllegalArgumentTypeException;
+import oop.ex6.main.exceptions.methodExceptions.IllegalArgumentValueException;
+import oop.ex6.main.exceptions.methodExceptions.MethodException;
 import oop.ex6.main.exceptions.methodExceptions.WrongArgumentsNumberException;
 import oop.ex6.main.exceptions.parserExceptions.IllegalLineException;
 import oop.ex6.main.exceptions.parserExceptions.UnbalancedScopeException;
@@ -122,7 +125,7 @@ public class Parser{
             }
     }
 
-    private static void dealWithMethodCall(String line, Scope scope) throws VariableException{
+    private static void dealWithMethodCall(String line, Scope scope) throws MethodException{
         final int NAME_GROUP = 1, VALUES_GROUP = 2;
         Matcher lineMatcher = Pattern.compile(JavaSPatterns.METHOD_CALL).matcher(line);
         if(lineMatcher.matches()) {
@@ -140,14 +143,22 @@ public class Parser{
                 if (VariableUtils.isNameLegal(value)) {
                     variable = scope.searchVariableUpwards(value);
                     if (variable != null) {
-                        method.checkArgumentInIndex(valueIndex, variable);
+                        try {
+                            method.checkArgumentInIndex(valueIndex, variable);
+                        } catch (VariableException e) {
+                            throw new IllegalArgumentTypeException(method, valueIndex, variable);
+                        }
                         continue;
                     }
                 }
-                method.checkArgumentInIndex(valueIndex,value);
+                try {
+                    method.checkArgumentInIndex(valueIndex,value);
+                } catch (VariableException e) {
+                    throw new IllegalArgumentValueException(method, valueIndex, value);
+                }
             }
             if (valueIndex != method.getNumOfArguments() - 1) {
-                throw new WrongArgumentsNumberException();
+                throw new WrongArgumentsNumberException(method, valueIndex + 1);
             }
         }
 
@@ -164,10 +175,10 @@ public class Parser{
             Scope scope = new Scope(0);
             Method method = new Method("shitsAndTits", new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER,VARIABLE_TYPES.STRING},new String[]{"as","b"},0);
             scope.addMethod(method);
-            String line = "shitsAndTits(3);";
+            String line = "shitsAndTits(3, 5);";
             dealWithMethodCall(line, scope);
-        } catch (VariableException e) {
-            System.out.println(e.getMessage());
+        } catch (SjavaException e) {
+            System.err.println(e.getMessage());
         }
     }
 }
