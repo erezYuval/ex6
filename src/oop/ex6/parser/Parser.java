@@ -70,8 +70,6 @@ public class Parser{
                     throw new ReturnStatementInGlobalScopeException();
                     // line is not empty, comment or legal - i.e illegal line
                 }else {
-                    System.out.println(currentLine); //TODO delete
-                    System.out.println("matches " + currentLine.matches(JavaSPatterns.VARIABLE_LINE)); // TODO delte
                     throw new IllegalLineException();
                 }
             }

@@ -26,7 +26,7 @@ public class Sjavac {
             File[] testFiles = testDirectory.listFiles();
 
             for (File file : testFiles) {
-                if (file.getName().equals("test015.sjava")) {
+                if (file.getName().equals("test051.sjava")) {
                     System.out.println("TEST NUMBER " + file.getName());
                     testOneFile(file);
                 }

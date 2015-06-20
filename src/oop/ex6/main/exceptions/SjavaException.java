@@ -14,7 +14,7 @@ public abstract class SjavaException extends Exception {
     }
 
     public String getMessage() {
-        return ERROR_MESSAGE + "\n\t" + uniqueMessage;
+        return "Error in line " + lineNumber + "\n\t" + ERROR_MESSAGE + "\n" + uniqueMessage;
     }
 
     public void addLineNumber(int lineNumber) {

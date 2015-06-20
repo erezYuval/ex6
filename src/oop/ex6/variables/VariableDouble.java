@@ -9,7 +9,7 @@ public class VariableDouble extends Variable{
 
     private final static VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER,
                                                                                     VARIABLE_TYPES.DOUBLE};
-    final static String LEGAL_VAL = "\\-?\\d+\\.?\\d+";
+    final static String LEGAL_VAL = "\\-?\\d+(\\.\\d+)?";
 
     /**
      * create a new variable, setValue with the value of an old one to setValue.

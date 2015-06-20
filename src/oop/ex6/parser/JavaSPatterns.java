@@ -13,7 +13,7 @@ public class JavaSPatterns {
     static String DECLARATION_VARIABLES;
     static String VARIABLE_LINE;
     static String METHOD_SIGNATURE;
-    static String VALUE = "((-?\\w+(.\\d)?)|(\"[^\"]*\")|(\\'[^']*\\'))";
+    static String VALUE = "((-?\\w+(.\\d+)?)|(\"[^\"]*\")|(\\'[^']*\\'))";
     static String VARIABLE_OR_ASSIGNMENT = "((\\w+)\\s*(=\\s*"+ VALUE +")?\\s*)";
     static String METHOD_CALL = "(\\w+)\\s*(\\(\\s*("+VALUE+"(\\s*,\\s*"+VALUE+")*)*\\s*\\))\\s*;\\s*";
     static String LOGICAL_OPERATORS = "((\\|\\|)|(&&))";
