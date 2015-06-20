@@ -11,7 +11,7 @@ public class WrongArgumentsNumberException extends MethodException {
             "number of arguments received does not match number of arguments required by this method";
     public WrongArgumentsNumberException(Method method, int numOfArgs) {
         ERROR_MESSAGE = TYPE_ERROR_MESSAGE;
-        uniqueMessage = "the method -" + method.getName() + "- should get " + method.getNumOfArguments() + " argumetns"
+        uniqueMessage = "the method -" + method.getName() + "- should get " + method.getNumOfArguments() + " arguments"
                 + " but got " + numOfArgs + ".";
     }
 }
