@@ -12,13 +12,13 @@ import oop.ex6.scopes.Scope;
  */
 public class LegalLineParser {
 
-    static void parseLine(String line, int lineNumber, Scope currentScope) throws SjavaException {
-        if(line.matches(JavaSPatterns.METHOD_SIGNATURE)) {
-            Method newMethod = Parser.parseMethodSignature(line, lineNumber);
-            currentScope.addMethod(newMethod);}
-        if(line.matches(JavaSPatterns.VARIABLE_LINE)){
-            Parser.dealWithVariableLine(line, currentScope);}
-    }
+//    static void parseLine(String line, int lineNumber, Scope currentScope) throws SjavaException {
+//        if(line.matches(JavaSPatterns.METHOD_SIGNATURE)) {
+//            Method newMethod = Parser.parseMethodSignature(line, lineNumber);
+//            currentScope.addMethod(newMethod);}
+//        if(line.matches(JavaSPatterns.VARIABLE_LINE)){
+//            Parser.dealWithVariableLine(line, currentScope);}
+//    }
 
 
 /////// old style

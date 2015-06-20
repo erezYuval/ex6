@@ -61,7 +61,7 @@ public class Parser{
                 if (currentLine.matches(JavaSPatterns.VARIABLE_LINE) ||
                         currentLine.matches(JavaSPatterns.METHOD_SIGNATURE)) { // i.e line is legal
                     try {
-                        LegalLineParser.parseLine(currentLine, curLineNumber, globalScope);
+                        parseLine(currentLine, curLineNumber, globalScope);
                     } catch (SjavaException e) {
                         e.addLineNumber(curLineNumber);
                         throw e;
@@ -87,6 +87,14 @@ public class Parser{
                 throw new UnbalancedScopeException();
             }
         }
+    }
+
+    static void parseLine(String line, int lineNumber, Scope currentScope) throws SjavaException {
+        if(line.matches(JavaSPatterns.METHOD_SIGNATURE)) {
+            Method newMethod = Parser.parseMethodSignature(line, lineNumber);
+            currentScope.addMethod(newMethod);}
+        if(line.matches(JavaSPatterns.VARIABLE_LINE)){
+            Parser.dealWithVariableLine(line, currentScope);}
     }
 
     public static void parseBlock(Scanner fileScanner, Scope scope, int lineNumber) throws SjavaException{
