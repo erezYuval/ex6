@@ -1,5 +1,6 @@
 package oop.ex6.parser;
 
+import oop.ex6.main.exceptions.parserExceptions.UnexpectedExpressionAfterReturnException;
 import oop.ex6.methods.Method;
 import oop.ex6.scopes.Scope;
 import oop.ex6.variables.VARIABLE_TYPES;
@@ -61,24 +62,27 @@ public class LegalLineParser {
 
     }
 
-    private static void dealWithReturnStatement(String line, Scope scope, Scanner fileScanner) {
+    private static void dealWithReturnStatement(String line, Scope scope, Scanner fileScanner)
+            throws UnexpectedExpressionAfterReturnException {
 
 //        int lastLine = scope.getParentMethod().getLastLine();
-//        while (!line.matches("\\s*}\\s*"){
-//            if(!line.matches("\\s*")){
-//                throw new
-//            }
-//        }
-//        String curLine = fileScanner
-//       scope.getParentMethod().setHasReturnStatement(true);
-//    }
-//
-//
-//    public static void main(String[] args) {
-//    }
-//
-//    }
+        boolean exceptionNeeded = false;
+        while (!line.matches("\\s*}\\s*")){ //haven't reached end of scope
+            if(!line.matches(JavaSPatterns.EMPTY_LINE)){ //line contains an expression other than empty line
+                exceptionNeeded = true;
+            }
+            if(line.matches("\\s*return\\s*//;\\s*")){
+                exceptionNeeded = false;
+            }
+        } //reached end of scope
+        if(exceptionNeeded == true){
+            throw new UnexpectedExpressionAfterReturnException();
+        }
+    }
 
 
-    }}
+
+
+
+    }
 
