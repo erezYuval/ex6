@@ -47,7 +47,7 @@ public class Parser{
                 }
                 if (currentLine == JavaSPatterns.VARIABLE_LINE ||
                         currentLine == JavaSPatterns.METHOD_SIGNATURE) { // i.e line is legal
-                    LegalLineParser.parseLine(currentLine, globalScope);
+                    LegalLineParser.parseLine(currentLine, curLineNumber ,globalScope);
                 }
             } // line is not empty, comment or legal - i.e illegal line
             throw new IllegalLineException();
