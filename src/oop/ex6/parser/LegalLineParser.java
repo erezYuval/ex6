@@ -1,6 +1,8 @@
 package oop.ex6.parser;
 
 import oop.ex6.main.exceptions.SjavaException;
+import oop.ex6.main.exceptions.parserExceptions.IllegalLineException;
+import oop.ex6.main.exceptions.parserExceptions.UnbalancedScopeException;
 import oop.ex6.main.exceptions.parserExceptions.UnexpectedExpressionAfterReturnException;
 import oop.ex6.methods.Method;
 import oop.ex6.scopes.Scope;
@@ -63,20 +65,66 @@ public class LegalLineParser {
 
     }
 
+
+    public static void parseFile(Scanner fileScanner, Scope globalScope) throws SjavaException {
+        int balancedBracketCounter = 0;
+        int curLineNumber = 0;
+        boolean lastRowIsReturn = false;
+        while (fileScanner.hasNext()) {
+            curLineNumber++;
+            if(balancedBracketCounter < 0){ //there is a closing bracket in the file that does not correspond to a
+                //valid opening bracket
+                throw new UnbalancedScopeException();
+            }
+            String currentLine = fileScanner.nextLine();
+
+            //find opening and closing brackets, and update their counter accordingly
+            if (currentLine.contains("{")){balancedBracketCounter++;}
+            if (currentLine.contains("}")){balancedBracketCounter--;}
+
+
+
+            if (balancedBracketCounter == 0) { //i.e in global scope: read lines
+
+                if (currentLine == JavaSPatterns.EMPTY_LINE || currentLine == JavaSPatterns.COMMENT_LINE) {
+                    continue; // ignore empty and comment lines
+                }
+                if (currentLine == JavaSPatterns.VARIABLE_LINE ||
+                        currentLine == JavaSPatterns.METHOD_SIGNATURE) { // i.e line is legal
+                    try {
+                        LegalLineParser.parseLine(currentLine, curLineNumber ,globalScope);
+                    } catch (SjavaException e){
+                        e.addLineNumber(curLineNumber);
+                        throw e;
+                    }
+                }
+                if(currentLine.matches("\\s*return\\s*//;\\s*")){ //no return statements expected in global scope
+                    throw new ReturnStatementInGlobalScopeException();
+            } // line is not empty, comment or legal - i.e illegal line
+            throw new IllegalLineException();
+        }
+        if(balancedBracketCounter != 0){ // reached end of file, number of opening and closing brackets does not match
+            throw new UnbalancedScopeException();
+        }
+    }
+
+
+
+
     private static void dealWithReturnStatement(String line, Scope scope, Scanner fileScanner)
             throws UnexpectedExpressionAfterReturnException {
 
-        boolean exceptionNeeded = false;
+        boolean returnExceptionNeeded = false;
         while (!line.matches("\\s*}\\s*")){ //haven't reached end of scope
             if(!line.matches(JavaSPatterns.EMPTY_LINE)){ //line contains an expression other than empty line
-                exceptionNeeded = true;
+                returnExceptionNeeded = true;
             }
             if(line.matches("\\s*return\\s*//;\\s*")){
-                exceptionNeeded = false;
+                returnExceptionNeeded = false;
             }
             line = fileScanner.nextLine();
         } //reached end of scope
-        if(exceptionNeeded == true){
+        if(returnExceptionNeeded == true){
             throw new UnexpectedExpressionAfterReturnException();
         }
     }
