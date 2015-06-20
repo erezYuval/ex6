@@ -23,7 +23,7 @@ public class Sjavac {
         JavaSPatterns.compilePatterns();
         Scanner fileScanner;
 
-        File sourceFile = new File(Args[1]);
+        File sourceFile = new File(Args[0]);
         if (!sourceFile.exists()){
             throw new FileNotFoundException();
         }
