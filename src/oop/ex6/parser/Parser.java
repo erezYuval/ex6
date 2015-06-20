@@ -120,7 +120,7 @@ public class Parser{
         }
     }
 
-    private static void dealWithVariableLine(String line, Scope scope) throws VariableException{
+    static void dealWithVariableLine(String line, Scope scope) throws VariableException{
         final int FINAL_GROUP = 3, TYPE_GROUP = 5, NAME_AND_VALUES_GROUP = 7, NAME_SUBGROUP = 2, VALUE_SUBGROUP = 4;
         Matcher lineMatcher = Pattern.compile(JavaSPatterns.VARIABLE_LINE).matcher(line);
         if (lineMatcher.matches()) {
@@ -151,7 +151,7 @@ public class Parser{
             }
     }
 
-    private static void dealWithMethodCall(String line, Scope scope) throws MethodException{
+    static void dealWithMethodCall(String line, Scope scope) throws MethodException{
         final int NAME_GROUP = 1, VALUES_GROUP = 2;
         Matcher lineMatcher = Pattern.compile(JavaSPatterns.METHOD_CALL).matcher(line);
         if(lineMatcher.matches()) {
@@ -198,34 +198,18 @@ public class Parser{
         return false;
     }
 
-    protected static Scope parseMethodSignature(String methodSignature, int lineNumber,Scope scope, boolean createMethod) {
+    protected static Method parseMethodSignature(String methodSignature, int lineNumber) {
         final int ARGUMENTS_GROUP = 5, TYPE_SUB_GROUP = 2, NAME_SUB_GROUP = 3;
         Matcher methodMatcher = Pattern.compile(JavaSPatterns.METHOD_SIGNATURE).matcher(methodSignature);
         if (methodMatcher.matches()) {
             System.out.println(methodMatcher.group(5));
             Matcher variableMatcher = Pattern.compile(JavaSPatterns.VARIABLE_TYPE_NAME).matcher(methodMatcher.group(ARGUMENTS_GROUP));
-            ArrayList<VARIABLE_TYPES> types = new ArrayList<>();
-            ArrayList<String> names = new ArrayList<>();
             while (variableMatcher.find()) {
-                names.add(variableMatcher.group(NAME_SUB_GROUP));
-                types.add(VariableUtils.stringToType(variableMatcher.group(TYPE_SUB_GROUP)));
+                String name = variableMatcher.group(NAME_SUB_GROUP);
+
             }
         }
         return null;
-    }
-
-    private static ArrayList<Variable> createIntitializedVariables(ArrayList<VARIABLE_TYPES> types, ArrayList<String> names)
-    throws VariableException{
-        if (types.size() != names.size()){
-            return null;
-        }
-        ArrayList<Variable> newVariables = new ArrayList<>();
-        for (int i = 0; i < types.size() ; i++) {
-            Variable newVariable = VariableFactory.produceVariable(types.get(i), names.get(i));
-            newVariable.setInitialized();
-            newVariables.add(newVariable);
-        }
-        return newVariables;
     }
 
     public static void main(String[] args) throws SjavaException{
@@ -241,7 +225,7 @@ public class Parser{
 //        }
         Scope scope = new Scope(0);
         String line = "void shitAndTits ( String fdsa, boolean j , int ffdsankl ) {";
-        parseMethodSignature(line, 0, scope, false);
+        parseMethodSignature(line, 0);
 
     }
 }
