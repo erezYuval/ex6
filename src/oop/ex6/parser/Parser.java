@@ -42,24 +42,16 @@ public class Parser{
             }
             String currentLine = fileScanner.nextLine();
 
-            //find opening and closing brackets, and update their counter accordingly
-            if (currentLine.contains("{")) {
-                balancedBracketCounter++;
-            }
-            if (currentLine.contains("}")) {
-                balancedBracketCounter--;
-            }
-
 
             if (balancedBracketCounter == 0) { //i.e in global scope: read lines
 
-                if (lastRowIsReturn == false){ // there was an unexpected expression after a return statement
+                if (lastRowIsReturn == false) { // there was an unexpected expression after a return statement
                     throw new UnexpectedExpressionAfterReturnException();
                 }
 
                 if (currentLine.matches(JavaSPatterns.EMPTY_LINE) || currentLine.matches(JavaSPatterns.COMMENT_LINE)) {
                     continue; // ignore empty and comment lines
-                }else if (currentLine.matches(JavaSPatterns.VARIABLE_LINE) ||
+                } else if (currentLine.matches(JavaSPatterns.VARIABLE_LINE) ||
                         currentLine.matches(JavaSPatterns.METHOD_SIGNATURE)) { // i.e line is legal
                     try {
                         parseLine(currentLine, curLineNumber, globalScope);
@@ -70,7 +62,7 @@ public class Parser{
                 } else if (currentLine.matches("\\s*return\\s*//;\\s*")) { //no return statements expected in global scope
                     throw new ReturnStatementInGlobalScopeException();
                     // line is not empty, comment or legal - i.e illegal line
-                }else {
+                } else {
                     throw new IllegalLineException();
                 }
             }
@@ -82,12 +74,21 @@ public class Parser{
                     lastRowIsReturn = true;
                 }
 
+                //find opening and closing brackets, and update their counter accordingly
+                if (currentLine.contains("{")) {
+                    balancedBracketCounter++;
+                }
+                if (currentLine.contains("}")) {
+                    balancedBracketCounter--;
+                }
+
             }
+        }
             if (balancedBracketCounter != 0) { // reached end of file, number of opening and closing brackets does not match
                 throw new UnbalancedScopeException();
             }
-        }
     }
+
 
     static void parseLine(String line, int lineNumber, Scope currentScope) throws SjavaException {
         if(line.matches(JavaSPatterns.METHOD_SIGNATURE)) {
