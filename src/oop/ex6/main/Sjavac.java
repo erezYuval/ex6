@@ -17,7 +17,7 @@ import java.util.Scanner;
  */
 public class Sjavac {
 
-    private static boolean TESTING = false;
+    private static boolean TESTING = true;
 
     public static void main(String[] args) throws FileNotFoundException {
         JavaSPatterns.compilePatterns();
@@ -26,7 +26,7 @@ public class Sjavac {
             File[] testFiles = testDirectory.listFiles();
 
             for (File file : testFiles) {
-                if (file.getName().equals("test067.sjava")) {
+                if (file.getName().equals("test106.sjava")) {
 //                if(true){
                     System.out.println("TEST NUMBER " + file.getName());
                     testOneFile(file);
