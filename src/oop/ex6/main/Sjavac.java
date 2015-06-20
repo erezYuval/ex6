@@ -21,6 +21,7 @@ public class Sjavac {
 
         Scope global = new Scope(0); //create global scope
         JavaSPatterns.compilePatterns();
+        Scanner fileScanner;
 
         File sourceFile = new File(Args[1]);
         if (!sourceFile.exists()){
@@ -31,9 +32,11 @@ public class Sjavac {
         }
         try {
             oop.ex6.parser.Parser.parseFile(fileScanner, global);
+            fileScanner.reset();
+            oop.ex6.parser.Parser.parseDeep(fileScanner, global);
         }catch(SjavaException e) {
         System.err.println(e.getErrorMessage());
-        };
+        }
 
     }
 }
