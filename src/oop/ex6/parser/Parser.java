@@ -68,7 +68,7 @@ public class Parser{
             } else if (line.matches(JavaSPatterns.VARIABLE_LINE)) {
                 dealWithVariableLine(line, scope);
             } else if (line.matches(JavaSPatterns.METHOD_CALL)) {
-                dealWithMethodCall(line);
+                dealWithMethodCall(line, scope);
             } else if (line.matches(JavaSPatterns.CONDITION_BLOCK_STARTERS)) {
                 Scope innerScope = new Scope(lineNumber, scope);
                 ParseBlock(fileScanner, innerScope, lineNumber);
@@ -112,7 +112,7 @@ public class Parser{
             }
     }
 
-    private static void dealWithMethodCall(String line) {
+    private static void dealWithMethodCall(String line, Scope scope) {
 
     }
 
@@ -123,11 +123,11 @@ public class Parser{
     public static void main(String[] args) {
         JavaSPatterns.compilePatterns();
         Scope s = new Scope(0);
-        String line = "String a,  d   =   \"5\";";
-        String line2 = "a = \"14214\";";
+        String line = "String ddsaa,  dddsa   =   \"5\";";
+        String line2 = "ddsaa = \"14214\";";
         dealWithVariableLine(line, s);
         dealWithVariableLine(line2, s);
-        Variable var = s.searchVariableLocally("a");
+        Variable var = s.searchVariableLocally("ddsaa");
         System.out.println(var.getVariableType().toString()+ "\t" + var.toString()+ "\t" + var.isInitialized());
     }
 }
