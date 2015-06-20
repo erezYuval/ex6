@@ -25,7 +25,7 @@ public class Parser{
      * the wanted actions on Scopes.
      * @param fileScanner - a scanner that runs on a legal file
      */
-    public static void parseFile(Scanner fileScanner, Scope globalScope) throws IllegalLineException, UnbalancedScopeException {
+    public static void parseFile(Scanner fileScanner, Scope globalScope) throws SjavaException {
         int balancedBracketCounter = 0;
         int curLineNumber = 0;
         while (fileScanner.hasNext()) {
@@ -39,7 +39,6 @@ public class Parser{
             //find opening and closing brackets, and update their counter accordingly
             if (currentLine.contains("{")){balancedBracketCounter++;}
             if (currentLine.contains("}")){balancedBracketCounter--;}
-
             if (balancedBracketCounter == 0) { //i.e in global scope: read lines
 
                 if (currentLine == JavaSPatterns.EMPTY_LINE || currentLine == JavaSPatterns.COMMENT_LINE) {
@@ -47,7 +46,12 @@ public class Parser{
                 }
                 if (currentLine == JavaSPatterns.VARIABLE_LINE ||
                         currentLine == JavaSPatterns.METHOD_SIGNATURE) { // i.e line is legal
-                    LegalLineParser.parseLine(currentLine, curLineNumber ,globalScope);
+                    try {
+                        LegalLineParser.parseLine(currentLine, curLineNumber ,globalScope);
+                    } catch (SjavaException e){
+                        e.addLineNumber(curLineNumber);
+                        throw e;
+                    }
                 }
             } // line is not empty, comment or legal - i.e illegal line
             throw new IllegalLineException();
@@ -117,7 +121,7 @@ public class Parser{
             }
     }
 
-    private static void dealWithMethodCall(String line, Scope scope) {
+    private static void dealWithMethodCall(String line, Scope scope) throws VariableException{
         final int NAME_GROUP = 1, VALUES_GROUP = 2;
         Matcher lineMatcher = Pattern.compile(JavaSPatterns.METHOD_CALL).matcher(line);
         if(lineMatcher.matches()) {
@@ -155,12 +159,16 @@ public class Parser{
 
     }
 
-    public static void main(String[] args) {
-        JavaSPatterns.compilePatterns();
-        Scope scope = new Scope(0);
-        Method method = new Method("shitsAndTits", new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER,VARIABLE_TYPES.STRING},new String[]{"a","b"},0);
-        scope.addMethod(method);
-        String line = "shitsAndTits(3, \"fd\", 5);";
-        dealWithMethodCall(line, scope);
+    public static void main(String[] args) throws SjavaException{
+        try {
+            JavaSPatterns.compilePatterns();
+            Scope scope = new Scope(0);
+            Method method = new Method("shitsAndTits", new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER,VARIABLE_TYPES.STRING},new String[]{"a","b"},0);
+            scope.addMethod(method);
+            String line = "shitsAndTits(3, \"fd\", 5);";
+            dealWithMethodCall(line, scope);
+        } catch (VariableException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

@@ -1,5 +1,6 @@
 package oop.ex6.scopes;
 
+import oop.ex6.main.exceptions.variableExceptions.VariableException;
 import oop.ex6.methods.Method;
 import oop.ex6.variables.Variable;
 import oop.ex6.variables.VariableUtils;
@@ -55,7 +56,7 @@ public class Scope {
         }
     }
 
-    public void updateVariable(String variableName, String value) {
+    public void updateVariable(String variableName, String value) throws VariableException{
         Variable found = searchVariableLocally(variableName);
         if (found != null) {
             found.setValue(value);
