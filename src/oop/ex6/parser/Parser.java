@@ -118,14 +118,26 @@ public class Parser{
         Matcher lineMatcher = Pattern.compile(JavaSPatterns.METHOD_CALL).matcher(line);
         if(lineMatcher.matches()) {
             Matcher valuesMatcher = Pattern.compile(JavaSPatterns.VALUE).matcher(lineMatcher.group(VALUES_GROUP));
-            while (valuesMatcher.find()) {
-                String value = valuesMatcher.group();
-            }
             String methodName = lineMatcher.group(NAME_GROUP);
             Method method = scope.searchMethod(methodName);
             if (method == null) {
                 // TODO throw nonexistent method call;
             }
+            int valueIndex = -1;
+            while (valuesMatcher.find()) {
+                valueIndex++;
+                String value = valuesMatcher.group();
+                Variable variable;
+                if (VariableUtils.isNameLegal(value)) {
+                    variable = scope.searchVariableUpwards(value);
+                    if (variable != null) {
+                        method.checkArgumentInIndex(valueIndex, variable);
+                        continue;
+                    }
+                }
+                method.checkArgumentInIndex(valueIndex,value);
+            }
+
         }
 
 
@@ -140,7 +152,7 @@ public class Parser{
         Scope scope = new Scope(0);
         Method method = new Method("shitsAndTits", new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER,VARIABLE_TYPES.STRING},new String[]{"a","b"},0);
         scope.addMethod(method);
-        String line = "shitsAndTits(3, \"FDA\");";
+        String line = "shitsAndTits(\"FSA\", 3);";
         dealWithMethodCall(line, scope);
     }
 }

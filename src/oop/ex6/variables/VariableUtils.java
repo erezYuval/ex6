@@ -12,7 +12,7 @@ public class VariableUtils {
      * @param name the string to be determined
      * @return true if the string is a legal variable name, false otherwise.
      */
-    static boolean isNameLegal(String name) {
+    public static boolean isNameLegal(String name) {
         return name.matches(LEGAL_NAME);
     }
 
