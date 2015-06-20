@@ -131,12 +131,17 @@ public class Parser{
             boolean isFinal = lineMatcher.group(FINAL_GROUP) != null;
             boolean isDeclaration = lineMatcher.group(TYPE_GROUP) != null;
             if (isDeclaration) {
+                Variable newVariable;
                 VARIABLE_TYPES type = VariableUtils.stringToType(lineMatcher.group(TYPE_GROUP));
                 while(variablesMatcher.find()) {
                     String name = variablesMatcher.group(NAME_SUBGROUP);
                     String value = variablesMatcher.group(VALUE_SUBGROUP);
-                    Variable newVariable = VariableFactory.produceVariable(type,name,value);
-                    if (isFinal) {
+                    if (VariableUtils.isNameLegal(value) && scope.searchVariableUpwards(value)!=null) {
+                        newVariable = scope.searchVariableUpwards(value);
+                        newVariable = VariableUtils.deepCopyVariable(newVariable);
+                    } else {
+                        newVariable = VariableFactory.produceVariable(type, name, value);
+                    } if (isFinal) {
                         FinalVariable newFinalVariable = new FinalVariable(newVariable);
                         scope.addVariable(newFinalVariable);
                     } else {

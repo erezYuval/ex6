@@ -15,7 +15,7 @@ public class VariableUtils {
      * @return true if the string is a legal variable name, false otherwise.
      */
     public static boolean isNameLegal(String name) {
-        return name.matches(LEGAL_NAME);
+        return name != null && name.matches(LEGAL_NAME);
     }
 
     public static Variable deepCopyVariable(Variable variable)throws VariableException {
