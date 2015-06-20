@@ -16,13 +16,23 @@ import java.util.Scanner;
  */
 public class Sjavac {
 
-    public static void main(String[] Args) throws FileNotFoundException{
+    public static void main(String[] Args) throws FileNotFoundException {
 
+        File testDirectory = new File("C:/ex6try2/tests");
+        File[] testFiles = testDirectory.listFiles();
+
+        for (File file : testFiles) {
+            testOneFile(file);
+        }
+    }
+
+    private static void testOneFile(File file){
         Scope global = new Scope(0); //create global scope
         JavaSPatterns.compilePatterns();
         Scanner fileScanner;
         try {
-            File sourceFile = new File(Args[0]);
+//            File sourceFile = new File(Args[0]);
+            File sourceFile = file;
             fileScanner = new Scanner(sourceFile);
             try {
                 oop.ex6.parser.Parser.parseFile(fileScanner, global);

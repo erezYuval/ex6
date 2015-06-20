@@ -18,8 +18,6 @@ public class Scope {
     //this will be the parent scope of this scope, (we need it for outer scope variables.)
     private Scope parent;
 
-    private Method parentMethod;
-
     private Hashtable<String, Variable> variables;
     protected Hashtable<String, Method> methods;
 

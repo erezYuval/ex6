@@ -105,6 +105,7 @@ public abstract class Variable {
         if (!VariableUtils.isNameLegal(name)) {
             throw new IllegalNameException(name);
         }
+        varName = name;
     }
 
 }

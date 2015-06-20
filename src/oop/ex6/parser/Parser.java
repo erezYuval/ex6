@@ -140,7 +140,6 @@ public class Parser{
                     if (isFinal) {
                         newVariable = new FinalVariable(newVariable);
                     }
-                    System.out.println(newVariable.getVariableType() + "\t" + newVariable.toString() + "\t" + newVariable.isInitialized());
                     scope.addVariable(newVariable);
                 }
             } else {
@@ -242,7 +241,7 @@ public class Parser{
 //            System.err.println(e.getMessage());
 //        }
         Scope scope = new Scope(0);
-        String line = "void shitAndTits ( String fdsa, boolean j , int ffdsankl ) {";
-        parseMethodSignature(line, 0);
+        String line = "int a;";
+        dealWithVariableLine(line ,scope);
     }
 }
