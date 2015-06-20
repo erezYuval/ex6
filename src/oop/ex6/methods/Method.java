@@ -1,5 +1,6 @@
 package oop.ex6.methods;
 
+import oop.ex6.main.exceptions.variableExceptions.VariableException;
 import oop.ex6.variables.VARIABLE_TYPES;
 import oop.ex6.variables.Variable;
 import oop.ex6.variables.VariableFactory;
@@ -24,7 +25,7 @@ public class Method{
      * @param argumentNamesInOrder
      */
     public Method(String methodName, VARIABLE_TYPES[] argumentTypesInOrder, String[] argumentNamesInOrder,
-                  int fitsrLine ) {
+                  int fitsrLine ) throws VariableException{
         this.firstLine = firstLine;
         variables = new ArrayList<>();
         name = methodName;
@@ -43,8 +44,7 @@ public class Method{
      * @param index the location in the method call, starting with 0
      * @param value the value to be used.
      */
-    public void checkArgumentInIndex(int index, String value) {
-        // TODO catch illegal value
+    public void checkArgumentInIndex(int index, String value) throws VariableException{
         variables.get(index).setValue(value);
     }
 
@@ -54,7 +54,7 @@ public class Method{
      * @param index the location in the method call, starting with 0
      * @param variable the variable to be used.
      */
-    public void checkArgumentInIndex(int index, Variable variable) {
+    public void checkArgumentInIndex(int index, Variable variable) throws VariableException {
         // TODO catch illegal value
         variables.get(index).setValue(variable);
     }

@@ -1,7 +1,9 @@
 package oop.ex6.parser;
 
+import oop.ex6.main.exceptions.SjavaException;
 import oop.ex6.main.exceptions.parserExceptions.IllegalLineException;
 import oop.ex6.main.exceptions.parserExceptions.UnbalancedScopeException;
+import oop.ex6.main.exceptions.variableExceptions.VariableException;
 import oop.ex6.methods.Method;
 import oop.ex6.scopes.Scope;
 import oop.ex6.variables.*;
@@ -55,31 +57,36 @@ public class Parser{
         }
     }
 
-    public static void ParseBlock(Scanner fileScanner, Scope scope, int lineNumber) {
+    public static void ParseBlock(Scanner fileScanner, Scope scope, int lineNumber) throws SjavaException{
         String line;
         while (fileScanner.hasNext()) {
             lineNumber++;
             line = fileScanner.nextLine();
 
-            if (line.matches(JavaSPatterns.COMMENT_LINE)||line.matches(JavaSPatterns.EMPTY_LINE)) {
-                continue;
-            } else if (line.matches(JavaSPatterns.VARIABLE_LINE)) {
-                dealWithVariableLine(line, scope);
-            } else if (line.matches(JavaSPatterns.METHOD_CALL)) {
-                dealWithMethodCall(line, scope);
-            } else if (line.matches(JavaSPatterns.CONDITION_BLOCK_STARTERS)) {
-                Scope innerScope = new Scope(lineNumber, scope);
-                ParseBlock(fileScanner, innerScope, lineNumber);
-            } else if (line.matches(JavaSPatterns.RETURN)) {
-                dealWithReturnStatement(line, scope);
-            } else if (line.matches(JavaSPatterns.END_BLOCK)) {
-                return;
+            try {
+                if (line.matches(JavaSPatterns.COMMENT_LINE)||line.matches(JavaSPatterns.EMPTY_LINE)) {
+                    continue;
+                } else if (line.matches(JavaSPatterns.VARIABLE_LINE)) {
+                    dealWithVariableLine(line, scope);
+                } else if (line.matches(JavaSPatterns.METHOD_CALL)) {
+                    dealWithMethodCall(line, scope);
+                } else if (line.matches(JavaSPatterns.CONDITION_BLOCK_STARTERS)) {
+                    Scope innerScope = new Scope(lineNumber, scope);
+                    ParseBlock(fileScanner, innerScope, lineNumber);
+                } else if (line.matches(JavaSPatterns.RETURN)) {
+                    dealWithReturnStatement(line, scope);
+                } else if (line.matches(JavaSPatterns.END_BLOCK)) {
+                    return;
+                }
+            } catch (SjavaException e) {
+                e.addLineNumber(lineNumber);
+                throw e;
             }
 
         }
     }
 
-    private static void dealWithVariableLine(String line, Scope scope) {
+    private static void dealWithVariableLine(String line, Scope scope) throws VariableException{
         final int FINAL_GROUP = 3, TYPE_GROUP = 5, NAME_AND_VALUES_GROUP = 7, NAME_SUBGROUP = 2, VALUE_SUBGROUP = 4;
         Matcher lineMatcher = Pattern.compile(JavaSPatterns.VARIABLE_LINE).matcher(line);
         if (lineMatcher.matches()) {
