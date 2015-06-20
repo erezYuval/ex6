@@ -71,6 +71,10 @@ public class Method{
         return variables;
     }
 
+    public int getLastLine() {
+        return lastLine;
+    }
+
     public void setLastLine(int lastLine) {
         this.lastLine = lastLine;
     }
