@@ -83,6 +83,10 @@ public class Method{
         return hasReturnStatement;
     }
 
+    public int getNumOfArguments() {
+        return variables.size();
+    }
+
     public void setHasReturnStatement(boolean hasReturnStatement) {
         this.hasReturnStatement = hasReturnStatement;
     }

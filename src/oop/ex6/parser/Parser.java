@@ -137,6 +137,10 @@ public class Parser{
                 }
                 method.checkArgumentInIndex(valueIndex,value);
             }
+            if (valueIndex != method.getNumOfArguments() - 1) {
+                System.out.println("FDSAFDASF");
+                // TODO throw illegal number of arguments exception.
+            }
 
         }
 
@@ -152,7 +156,7 @@ public class Parser{
         Scope scope = new Scope(0);
         Method method = new Method("shitsAndTits", new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER,VARIABLE_TYPES.STRING},new String[]{"a","b"},0);
         scope.addMethod(method);
-        String line = "shitsAndTits(\"FSA\", 3);";
+        String line = "shitsAndTits(3, \"fda\");";
         dealWithMethodCall(line, scope);
     }
 }
