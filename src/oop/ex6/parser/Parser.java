@@ -59,7 +59,7 @@ public class Parser{
                         e.addLineNumber(curLineNumber);
                         throw e;
                     }
-                } else if (currentLine.matches("\\s*return\\s*//;\\s*")) { //no return statements expected in global scope
+                } else if (currentLine.matches(JavaSPatterns.RETURN)) { //no return statements expected in global scope
                     throw new ReturnStatementInGlobalScopeException();
                     // line is not empty, comment or legal - i.e illegal line
                 } else {
@@ -73,16 +73,17 @@ public class Parser{
                 if (currentLine.matches("\\s*return\\s*//;\\s*")) {
                     lastRowIsReturn = true;
                 }
-
-                //find opening and closing brackets, and update their counter accordingly
-                if (currentLine.contains("{")) {
-                    balancedBracketCounter++;
-                }
-                if (currentLine.contains("}")) {
-                    balancedBracketCounter--;
-                }
-
             }
+
+            //find opening and closing brackets, and update their counter accordingly
+            if (currentLine.contains("{")) {
+                balancedBracketCounter++;
+            }
+            if (currentLine.contains("}")) {
+                balancedBracketCounter--;
+            }
+
+
         }
             if (balancedBracketCounter != 0) { // reached end of file, number of opening and closing brackets does not match
                 throw new UnbalancedScopeException();
@@ -223,18 +224,23 @@ public class Parser{
         Matcher methodMatcher = Pattern.compile(JavaSPatterns.METHOD_SIGNATURE).matcher(methodSignature);
         if (methodMatcher.matches()) {
             String methodName = methodMatcher.group(NAME_GROUP);
-            Matcher variableMatcher = Pattern.compile(JavaSPatterns.VARIABLE_TYPE_NAME).matcher(methodMatcher.group(ARGUMENTS_GROUP));
-            while (variableMatcher.find()) {
-                Method newMethod = new Method(methodName);
-                String name = variableMatcher.group(NAME_SUB_GROUP);
-                VARIABLE_TYPES type = VariableUtils.stringToType(variableMatcher.group(TYPE_SUB_GROUP));
-                try {
-                    Variable newVariable = VariableFactory.produceVariable(type, name);
-                    newMethod.addVariable(newVariable);
-                } catch (VariableException e) {
-                    throw new IllegalArgumentNameException(name);
+            String arguments = methodMatcher.group(ARGUMENTS_GROUP);
+                if (arguments!=null) {
+                Matcher variableMatcher = Pattern.compile(JavaSPatterns.VARIABLE_TYPE_NAME).matcher(arguments);
+                while (variableMatcher.find()) {
+                    Method newMethod = new Method(methodName);
+                    String name = variableMatcher.group(NAME_SUB_GROUP);
+                    VARIABLE_TYPES type = VariableUtils.stringToType(variableMatcher.group(TYPE_SUB_GROUP));
+                    try {
+                        Variable newVariable = VariableFactory.produceVariable(type, name);
+                        newMethod.addVariable(newVariable);
+                        return newMethod;
+                    } catch (VariableException e) {
+                        throw new IllegalArgumentNameException(name);
+                    }
                 }
             }
+            return new Method(methodName);
         }
         return null;
     }
@@ -242,15 +248,8 @@ public class Parser{
     public static void main(String[] args) throws SjavaException{
         JavaSPatterns.compilePatterns();
         Scope scope = new Scope(0);
-        String line = null;
-        try {
-            line = "boolean a = 5.2;";
-            dealWithVariableLine(line, scope);
-        } catch (SjavaException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
-
-        System.out.println(line.matches(JavaSPatterns.VARIABLE_LINE));
+        String line = "void foo() {";
+        Method method = parseMethodSignature(line, 0);
+        System.out.println(method.getName());
     }
 }
