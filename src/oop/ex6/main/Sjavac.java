@@ -17,7 +17,7 @@ import java.util.Scanner;
  */
 public class Sjavac {
 
-    private static boolean TESTING = true;
+    private static boolean TESTING = false;
 
     public static void main(String[] args) throws FileNotFoundException {
         JavaSPatterns.compilePatterns();
@@ -26,7 +26,7 @@ public class Sjavac {
             File[] testFiles = testDirectory.listFiles();
 
             for (File file : testFiles) {
-                int test = 205;
+                int test = 411;
                 if (file.getName().equals("test" + test + ".sjava")) {
 //                if(true){
                     System.out.println("TEST NUMBER " + file.getName());
@@ -55,8 +55,8 @@ public class Sjavac {
                 oop.ex6.parser.Parser.parseDeep(fileScanner, global);
             }catch(SjavaException e) {
                 System.out.println(1);
-//                System.err.println(e.getErrorMessage());
-//                e.printStackTrace();
+                System.err.println(e.getErrorMessage());
+                e.printStackTrace();
                 return;
             }
         } catch (IOException e) {
@@ -64,6 +64,7 @@ public class Sjavac {
             return;
         }
         System.out.println(0);
+        return;
     }
 
     private static void testOneFile(String filePath){
@@ -79,7 +80,7 @@ public class Sjavac {
                 oop.ex6.parser.Parser.parseDeep(fileScanner, global);
             }catch(SjavaException e) {
                 System.out.println(1);
-//                System.err.println(e.getErrorMessage());
+                System.err.println(e.getErrorMessage());
 //                e.printStackTrace();
                 return;
             }

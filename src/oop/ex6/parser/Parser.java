@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
  * a parser class that parses a java-s file.
  */
 public class Parser{
-    
+
     /**
      * a method that goes through each line of the java-s file, translates the lines to commands and executes
      * the wanted actions on Scopes.
@@ -42,10 +42,6 @@ public class Parser{
 
             if (balancedBracketCounter == 0) { //i.e in global scope: read lines
 
-                if (lastRowIsReturn == false) { // there was an unexpected expression after a return statement
-                    throw new UnexpectedExpressionAfterReturnException();
-                }
-
                 if (currentLine.matches(JavaSPatterns.EMPTY_LINE) || currentLine.matches(JavaSPatterns.COMMENT_LINE)) {
                     continue; // ignore empty and comment lines
                 } else if (currentLine.matches(JavaSPatterns.VARIABLE_LINE) ||
@@ -64,11 +60,11 @@ public class Parser{
                 }
             }
             if (balancedBracketCounter != 0) { //inside a method declaration
-                if (!currentLine.matches(JavaSPatterns.EMPTY_LINE)) { //line contains an expression other than empty line
-                    lastRowIsReturn = false;
-                }
-                if (currentLine.matches("\\s*return\\s*//;\\s*")) {
+                if (currentLine.matches(JavaSPatterns.RETURN)) {
                     lastRowIsReturn = true;
+                }
+                else if (currentLine.matches(JavaSPatterns.VARIABLE_LINE)||currentLine.matches(JavaSPatterns.METHOD_CALL)) { //line contains an expression other than empty line
+                    lastRowIsReturn = false;
                 }
             }
 
@@ -78,10 +74,16 @@ public class Parser{
             }
             if (currentLine.contains("}")) {
                 balancedBracketCounter--;
+                if(balancedBracketCounter == 0) {
+                    if (!lastRowIsReturn) {
+                        throw new UnexpectedExpressionAfterReturnException();
+                    }
+                }
             }
-
-
         }
+
+
+
             if (balancedBracketCounter != 0) { // reached end of file, number of opening and closing brackets does not match
                 throw new UnbalancedScopeException();
             }
@@ -124,6 +126,7 @@ public class Parser{
     }
 
     static void dealWithVariableLine(String line, Scope scope) throws SjavaException{
+        if(line.matches(JavaSPatterns.RETURN)) return;
         final int FINAL_GROUP = 3, TYPE_GROUP = 5, NAME_AND_VALUES_GROUP = 7, NAME_SUBGROUP = 2, VALUE_SUBGROUP = 4;
         Matcher lineMatcher = Pattern.compile(JavaSPatterns.VARIABLE_LINE).matcher(line);
         if (lineMatcher.matches()) {
@@ -245,8 +248,8 @@ public class Parser{
     public static void main(String[] args) throws SjavaException{
         JavaSPatterns.compilePatterns();
         Scope scope = new Scope(0);
-        String line = "void foo() {";
-        Method method = parseMethodSignature(line, 0);
-        System.out.println("String b".matches(JavaSPatterns.VARIABLE_TYPE_NAME));
+        String line = "\t\t\tvoid \t\t\t\t\tfoo                   (    int a      ,      String  \t b              )               {                 ";
+        System.out.println(line.matches(JavaSPatterns.METHOD_SIGNATURE));
+
     }
 }
