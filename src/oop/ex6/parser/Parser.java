@@ -84,17 +84,15 @@ public class Parser{
     private static void dealWithVariableLine(String line, Scope scope) {
         final int FINAL_GROUP = 3, TYPE_GROUP = 5, NAME_AND_VALUES_GROUP = 7, NAME_SUBGROUP = 2, VALUE_SUBGROUP = 4;
         Matcher lineMatcher = Pattern.compile(JavaSPatterns.VARIABLE_LINE).matcher(line);
-        boolean isFinal;
-        boolean isDeclaration;
         if (lineMatcher.matches()) {
-            isFinal = lineMatcher.group(FINAL_GROUP) != null;
-            isDeclaration = lineMatcher.group(TYPE_GROUP) != null;
+            Matcher variablesMatcher = Pattern.compile(JavaSPatterns.VARIABLE_OR_ASSIGNMENT).matcher(lineMatcher.group(NAME_AND_VALUES_GROUP));
+            boolean isFinal = lineMatcher.group(FINAL_GROUP) != null;
+            boolean isDeclaration = lineMatcher.group(TYPE_GROUP) != null;
             if (isDeclaration) {
                 VARIABLE_TYPES type = VariableUtils.stringToType(lineMatcher.group(TYPE_GROUP));
-                Matcher variables = Pattern.compile(JavaSPatterns.VARIABLE_OR_ASSIGNMENT).matcher(lineMatcher.group(NAME_AND_VALUES_GROUP));
-                while(variables.find()) {
-                    String name = variables.group(NAME_SUBGROUP);
-                    String value = variables.group(VALUE_SUBGROUP);
+                while(variablesMatcher.find()) {
+                    String name = variablesMatcher.group(NAME_SUBGROUP);
+                    String value = variablesMatcher.group(VALUE_SUBGROUP);
                     Variable newVariable = VariableFactory.produceVariable(type,name,value);
                     if (isFinal) {
                         newVariable = new FinalVariable(newVariable);
@@ -102,7 +100,13 @@ public class Parser{
                     System.out.println(newVariable.getVariableType() + "\t" + newVariable.toString() + "\t" + newVariable.isInitialized());
                     scope.addVariable(newVariable);
                 }
-
+            } else {
+                if (variablesMatcher.matches()) {
+                    System.out.println("AAAA");
+                } else {
+                    // TODO throw illegal variable assignment exception;
+                    System.out.println("BBBBs");
+                }
             }
             }
 
@@ -120,8 +124,8 @@ public class Parser{
     public static void main(String[] args) {
         JavaSPatterns.compilePatterns();
         Scope s = new Scope(0);
-        String line = "int   a   =   3   ,   g    ,  d   =   5;";
-        String line2 = "String a = \"14214\", b, c = \"gfas fdsa fdsa\";";
+        String line = "final int a  =  3   ,  d   =   5;";
+        String line2 = "a = \"14214\";";
         dealWithVariableLine(line, s);
         dealWithVariableLine(line2, s);
     }
