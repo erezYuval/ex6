@@ -3,6 +3,7 @@ package oop.ex6.parser;
 import oop.ex6.main.exceptions.parserExceptions.IllegalLineException;
 import oop.ex6.main.exceptions.parserExceptions.unbalancedScopeException;
 import oop.ex6.scopes.Scope;
+import oop.ex6.parser.JavaSPatterns;
 
 import java.util.Scanner;
 
@@ -13,11 +14,6 @@ public class Parser{
 
     final static String EMPTY_LINE = "\\s*";
     final static String COMMENT_LINE = "\\//.*";
-
-    static int balancedBracketCounter = 0;
-
-    private static Scope currentScope;
-
     //TODO some sort of a collection of the available methods
 
     /**
@@ -26,6 +22,7 @@ public class Parser{
      * @param fileScanner - a scanner that runs on a legal file
      */
     public static void parseFile(Scanner fileScanner, Scope globalScope) throws IllegalLineException, unbalancedScopeException {
+        int balancedBracketCounter = 0;
         while (fileScanner.hasNext()) {
 
             if(balancedBracketCounter < 0){ //there is a closing bracket in the file that does not correspond to a
@@ -55,4 +52,36 @@ public class Parser{
         }
     }
 
+    public static void ParseBlock(Scanner fileScanner, Scope scope, int lineNumber) {
+        String line;
+        while (fileScanner.hasNext()) {
+            lineNumber++;
+            line = fileScanner.nextLine();
+            if (line.matches(JavaSPatterns.VARIABLE_LINE)) {
+                dealWithVariableLine(line);
+            } else if (line.matches(JavaSPatterns.METHOD_CALL)) {
+                dealWithMethodCall(line);
+            } else if (line.matches(JavaSPatterns.CONDITION_BLOCK_STARTERS)) {
+                Scope innerScope = new Scope(lineNumber, scope);
+                ParseBlock(fileScanner, innerScope, lineNumber);
+            } else if (line.matches(JavaSPatterns.RETURN)) {
+                dealWithReturnStatement(line, scope);
+            } else if (line.matches(JavaSPatterns.END_BLOCK)) {
+                return;
+            }
+
+        }
+    }
+
+    private static void dealWithVariableLine(String line) {
+
+    }
+
+    private static void dealWithMethodCall(String line) {
+
+    }
+
+    private static void dealWithReturnStatement(String line, Scope scope) {
+
+    }
 }
