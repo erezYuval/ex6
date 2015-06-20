@@ -1,5 +1,6 @@
 package oop.ex6.parser;
 
+import oop.ex6.main.exceptions.parserExceptions.UnexpectedExpressionAfterReturnException;
 import oop.ex6.methods.Method;
 import oop.ex6.scopes.Scope;
 import oop.ex6.variables.VARIABLE_TYPES;
@@ -61,77 +62,27 @@ public class LegalLineParser {
 
     }
 
-    private static void dealWithReturnStatement(String line, Scope scope, Scanner fileScanner) {
+    private static void dealWithReturnStatement(String line, Scope scope, Scanner fileScanner)
+            throws UnexpectedExpressionAfterReturnException {
 
-        int lastLine = scope.getParentMethod().getLastLine();
-        Scanner fileScannerCopy = fileScanner.
-//        scope.getParentMethod().setHasReturnStatement(true);
-    }
-
-
-    public static void main(String[] args) {
-        int lineNumber = 1;
-        String line = "  void  shits     ( int a, boolean true, String aaa, char a) {";
-
-
-        String[] methodNameHelper = line.split("\\(")[0].split(" ");
-        String methodName = methodNameHelper[methodNameHelper.length - 1];
-
-        VARIABLE_TYPES[] varTypeArray = new VARIABLE_TYPES[0];
-        String[] namesArray = new String[0];
-
-        //if there are no arguments leave name and type arrays blank
-        if(line.matches(".*\\(\\s*\\).*")){
-            System.out.println("there are no arguments");
-        }
-
-        else { //there is at least one argument
-            //find methods arguments' types and names
-            ArrayList<String> typesInOrderAsStrings = new ArrayList<>();
-            ArrayList<VARIABLE_TYPES> typesInOrder = new ArrayList<>();
-
-            ArrayList<String> namesInOrder = new ArrayList<>();
-
-            String[] arguments = line.split("\\(")[1].split(",");
-            for (String arg : arguments) { //for each separate argument - separate between type and name
-                String argTrimmed = arg.trim();
-                String[] splitArg = argTrimmed.split("\\s+");
-                typesInOrderAsStrings.add(splitArg[0]); // add type to type array
-                namesInOrder.add(splitArg[1].split("\\)")[0]); // add name to name array
+//        int lastLine = scope.getParentMethod().getLastLine();
+        boolean exceptionNeeded = false;
+        while (!line.matches("\\s*}\\s*")){ //haven't reached end of scope
+            if(!line.matches(JavaSPatterns.EMPTY_LINE)){ //line contains an expression other than empty line
+                exceptionNeeded = true;
             }
-
-            for (String type : typesInOrderAsStrings) { // convert strings to variable type objects
-                typesInOrder.add(VariableUtils.stringToType(type));
+            if(line.matches("\\s*return\\s*//;\\s*")){
+                exceptionNeeded = false;
             }
-            varTypeArray = new VARIABLE_TYPES[typesInOrder.size()];
-            varTypeArray = typesInOrder.toArray(varTypeArray); //convert arraylist to array
-
-
-            namesArray = new String[namesInOrder.size()];
-            namesArray = namesInOrder.toArray(namesArray); //convert arraylist to array
+        } //reached end of scope
+        if(exceptionNeeded == true){
+            throw new UnexpectedExpressionAfterReturnException();
         }
-
-        System.out.println("methodname = " + methodName);
-        System.out.println("---");
-        System.out.println("types in order:");
-        for (VARIABLE_TYPES type: varTypeArray){
-            System.out.println(type);
-    }
-        System.out.println("---");
-        System.out.println("names in order:");
-        for (String name: namesArray){
-            System.out.println(name);
-        }
-        Method newMethod = new Method(methodName, varTypeArray, namesArray, lineNumber);
-
-        System.out.println("~~~~~");
-        System.out.println("methodname = " + newMethod.getName());
-        System.out.println(newMethod.getVariables());
-    }
-
-
     }
 
 
 
+
+
+    }
 
