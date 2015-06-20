@@ -14,6 +14,7 @@ import oop.ex6.methods.Method;
 import oop.ex6.scopes.Scope;
 import oop.ex6.variables.*;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -190,24 +191,41 @@ public class Parser{
 
 
 
-    public static void parseDeep(Scanner fileScanner, Scope globalscope) throws SjavaException{
+    public static boolean parseDeep(Scanner fileScanner, Scope globalscope) throws SjavaException{
         while (fileScanner.hasNext()) {
 
         }
+        return false;
     }
 
-    private static Scope parseMethodSignature(String methodSignature) {
+    protected static Scope parseMethodSignature(String methodSignature, int lineNumber,Scope scope, boolean createMethod) {
+        final int ARGUMENTS_GROUP = 5, TYPE_SUB_GROUP = 2, NAME_SUB_GROUP = 3;
         Matcher methodMatcher = Pattern.compile(JavaSPatterns.METHOD_SIGNATURE).matcher(methodSignature);
         if (methodMatcher.matches()) {
-            for (int i = 0; i < 20; i++) {
-                try {
-                    System.out.println(i + "\t" + methodMatcher.group(i));
-                } catch (Exception e) {
-
-                }
+            System.out.println(methodMatcher.group(5));
+            Matcher variableMatcher = Pattern.compile(JavaSPatterns.VARIABLE_TYPE_NAME).matcher(methodMatcher.group(ARGUMENTS_GROUP));
+            ArrayList<VARIABLE_TYPES> types = new ArrayList<>();
+            ArrayList<String> names = new ArrayList<>();
+            while (variableMatcher.find()) {
+                names.add(variableMatcher.group(NAME_SUB_GROUP));
+                types.add(VariableUtils.stringToType(variableMatcher.group(TYPE_SUB_GROUP)));
             }
         }
         return null;
+    }
+
+    private static ArrayList<Variable> createIntitializedVariables(ArrayList<VARIABLE_TYPES> types, ArrayList<String> names)
+    throws VariableException{
+        if (types.size() != names.size()){
+            return null;
+        }
+        ArrayList<Variable> newVariables = new ArrayList<>();
+        for (int i = 0; i < types.size() ; i++) {
+            Variable newVariable = VariableFactory.produceVariable(types.get(i), names.get(i));
+            newVariable.setInitialized();
+            newVariables.add(newVariable);
+        }
+        return newVariables;
     }
 
     public static void main(String[] args) throws SjavaException{
@@ -221,8 +239,9 @@ public class Parser{
 //        } catch (SjavaException e) {
 //            System.err.println(e.getMessage());
 //        }
+        Scope scope = new Scope(0);
         String line = "void shitAndTits ( String fdsa, boolean j , int ffdsankl ) {";
-        parseMethodSignature(line);
+        parseMethodSignature(line, 0, scope, false);
 
     }
 }
