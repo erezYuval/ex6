@@ -3,11 +3,7 @@ package oop.ex6.parser;
 import oop.ex6.main.exceptions.parserExceptions.IllegalLineException;
 import oop.ex6.main.exceptions.parserExceptions.unbalancedScopeException;
 import oop.ex6.scopes.Scope;
-import oop.ex6.parser.JavaSPatterns;
-import oop.ex6.variables.PREDECLERATIONS;
-import sun.security.krb5.KdcComm;
 
-import java.lang.reflect.Type;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -47,7 +43,7 @@ public class Parser{
                 }
                 if (currentLine == JavaSPatterns.VARIABLE_LINE ||
                         currentLine == JavaSPatterns.METHOD_SIGNATURE) { // i.e line is legal
-                    LegalLineParser.parseLine(currentLine, globalScope);
+                    LegalLineParser.parseLine(currentLine, curLineNumber, globalScope);
                 }
             } // line is not empty, comment or legal - i.e illegal line
             throw new IllegalLineException();
