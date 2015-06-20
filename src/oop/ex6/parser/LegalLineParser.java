@@ -6,6 +6,7 @@ import oop.ex6.variables.VARIABLE_TYPES;
 import oop.ex6.variables.VariableUtils;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Created by yuvalavrami on 6/15/15.
@@ -60,10 +61,12 @@ public class LegalLineParser {
 
     }
 
-    private static void dealWithReturnStatement(String line, Scope scope) {
+    private static void dealWithReturnStatement(String line, Scope scope, Scanner fileScanner) {
 
-        scope.getParentMethod()
-        scope.getParentMethod().setHasReturnStatement(true);
+//        int lastLine = scope.getParentMethod().getLastLine();
+//        Scanner fileScannerCopy = fileScanner.
+//        scope.getParentMethod().setHasReturnStatement(true);
+    }
 
 
     public static void main(String[] args) {
