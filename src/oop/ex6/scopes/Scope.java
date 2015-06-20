@@ -138,19 +138,11 @@ public class Scope {
     }
 
     /*
-    setValue the collection data members.
+    set the collection data members.
      */
     private void initializeCollections(){
         variables = new Hashtable<>();
         methods = new Hashtable<>();
-    }
-
-    public Method getParentMethod() {
-        return parentMethod;
-    }
-
-    public void setParentMethod(Method parentMethod) {
-        this.parentMethod = parentMethod;
     }
 
     public Method searchMethod(String methodName) {
