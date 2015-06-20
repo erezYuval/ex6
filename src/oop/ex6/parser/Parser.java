@@ -6,6 +6,7 @@ import oop.ex6.main.exceptions.parserExceptions.IllegalLineException;
 import oop.ex6.main.exceptions.parserExceptions.ReturnStatementInGlobalScopeException;
 import oop.ex6.main.exceptions.parserExceptions.UnbalancedScopeException;
 import oop.ex6.main.exceptions.parserExceptions.UnexpectedExpressionAfterReturnException;
+import oop.ex6.main.exceptions.variableExceptions.MultipleAssignmentWithoutDecleration;
 import oop.ex6.main.exceptions.variableExceptions.VariableException;
 import oop.ex6.methods.Method;
 import oop.ex6.scopes.Scope;
@@ -156,7 +157,7 @@ public class Parser{
                     String value = variablesMatcher.group(VALUE_SUBGROUP);
                     scope.updateVariable(name, value);
                 } else {
-                    // TODO throw illegal variable assignment exception;
+                    throw new MultipleAssignmentWithoutDecleration(line);
                 }
             }
             }
@@ -170,7 +171,7 @@ public class Parser{
             String methodName = lineMatcher.group(NAME_GROUP);
             Method method = scope.searchMethod(methodName);
             if (method == null) {
-                // TODO throw nonexistent method call;
+                throw new NonExistingMethodException(methodName);
             }
             int valueIndex = -1;
             while (valuesMatcher.find()) {

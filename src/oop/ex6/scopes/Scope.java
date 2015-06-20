@@ -68,7 +68,6 @@ public class Scope {
 
     public void updateVariable(String variableName, String value) throws VariableException, ScopeException{
         Variable found = searchVariableLocally(variableName);
-        System.out.println("FOUND " + found); //TODO delr
         if (found != null) {
             found.setValue(value);
         } else if (parent != null) {

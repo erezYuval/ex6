@@ -17,7 +17,7 @@ import java.util.Scanner;
  */
 public class Sjavac {
 
-    private static boolean TESTING = true;
+    private static boolean TESTING = false;
 
     public static void main(String[] args) throws FileNotFoundException {
         JavaSPatterns.compilePatterns();
