@@ -1,17 +1,12 @@
 package oop.ex6.parser;
 
 import oop.ex6.main.exceptions.SjavaException;
-import oop.ex6.main.exceptions.parserExceptions.IllegalLineException;
-import oop.ex6.main.exceptions.parserExceptions.ReturnStatementInGlobalScopeException;
-import oop.ex6.main.exceptions.parserExceptions.UnbalancedScopeException;
-import oop.ex6.main.exceptions.parserExceptions.UnexpectedExpressionAfterReturnException;
 import oop.ex6.methods.Method;
 import oop.ex6.scopes.Scope;
 import oop.ex6.variables.VARIABLE_TYPES;
 import oop.ex6.variables.VariableUtils;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Created by yuvalavrami on 6/15/15.
@@ -67,66 +62,7 @@ public class LegalLineParser {
     }
 
 
-    public static void parseFile(Scanner fileScanner, Scope globalScope) throws SjavaException {
-        int balancedBracketCounter = 0;
-        int curLineNumber = 0;
-        boolean lastRowIsReturn = true;
-        while (fileScanner.hasNext()) {
-            curLineNumber++;
-            if (balancedBracketCounter < 0) { //there is a closing bracket in the file that does not correspond to a
-                //valid opening bracket
-                throw new UnbalancedScopeException();
-            }
-            String currentLine = fileScanner.nextLine();
 
-            //find opening and closing brackets, and update their counter accordingly
-            if (currentLine.contains("{")) {
-                balancedBracketCounter++;
-            }
-            if (currentLine.contains("}")) {
-                balancedBracketCounter--;
-            }
-
-
-            if (balancedBracketCounter == 0) { //i.e in global scope: read lines
-
-                if (lastRowIsReturn == false){ // there was an unexpected expression after a return statement
-                    throw new UnexpectedExpressionAfterReturnException();
-                }
-
-                if (currentLine.matches(JavaSPatterns.EMPTY_LINE) || currentLine.matches(JavaSPatterns.COMMENT_LINE)) {
-                    continue; // ignore empty and comment lines
-                }
-                if (currentLine.matches(JavaSPatterns.VARIABLE_LINE) ||
-                        currentLine.matches(JavaSPatterns.METHOD_SIGNATURE)) { // i.e line is legal
-                    try {
-                        LegalLineParser.parseLine(currentLine, curLineNumber, globalScope);
-                    } catch (SjavaException e) {
-                        e.addLineNumber(curLineNumber);
-                        throw e;
-                    }
-                }
-                if (currentLine.matches("\\s*return\\s*//;\\s*")) { //no return statements expected in global scope
-                    throw new ReturnStatementInGlobalScopeException();
-
-
-                }// line is not empty, comment or legal - i.e illegal line
-                throw new IllegalLineException();
-            }
-            if (balancedBracketCounter != 0) { //inside a method declaration
-                if (!currentLine.matches(JavaSPatterns.EMPTY_LINE)) { //line contains an expression other than empty line
-                    lastRowIsReturn = false;
-                }
-                if (currentLine.matches("\\s*return\\s*//;\\s*")) {
-                    lastRowIsReturn = true;
-                }
-
-            }
-            if (balancedBracketCounter != 0) { // reached end of file, number of opening and closing brackets does not match
-                throw new UnbalancedScopeException();
-            }
-        }
-    }
 
 
     }
