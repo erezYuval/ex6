@@ -7,6 +7,8 @@ import oop.ex6.variables.PREDECLERATIONS;
  * Created by Erez Levanon on 15/06/2015.
  */
 public class JavaSPatterns {
+    final static String EMPTY_LINE = "\\s*";
+    final static String COMMENT_LINE = "\\//.*";
     static String PREDECLARATION;
     static String DECLARATION_VARIABLES;
     static String VARIABLE_LINE;
@@ -23,7 +25,7 @@ public class JavaSPatterns {
     public static void compilePatterns(){
         PREDECLARATION = generateOrString(PREDECLERATIONS.values());
         DECLARATION_VARIABLES = generateOrString(VARIABLE_TYPES.values());
-        VARIABLE_LINE = "(" + PREDECLARATION + "\\s+)?((" + DECLARATION_VARIABLES + ")\\s+)?" + VARIABLE_OR_ASSIGNMENT + "(,\\s*" + VARIABLE_OR_ASSIGNMENT + ")*\\s*;";
+        VARIABLE_LINE = "((" + PREDECLARATION + "\\s+)?((" + DECLARATION_VARIABLES + ")\\s+))?(" + VARIABLE_OR_ASSIGNMENT + "(,\\s*" + VARIABLE_OR_ASSIGNMENT + "))*\\s*;";
         METHOD_SIGNATURE = "(void)(\\s)+(\\w+)(\\s*)\\(\\s*"+ DECLARATION_VARIABLES +"(\\s+)(\\w+)(\\s*)(,(\\s)*"+ DECLARATION_VARIABLES +"(\\s+)(\\w+)(\\s*))*\\)(\\s*)\\{\\s*";
 
     }
@@ -46,13 +48,13 @@ public class JavaSPatterns {
 
     public static void main (String[] args) {
         compilePatterns();
-        for (String s : new String[]{
-                "while(cdas && cdasc || acxv) {",
-                "if (fdsan){",
-                "while ( a && b && c || d ) {"
-        }) {
-            System.out.println(s.matches(BOOLEAN_IN_PARENTHESIS) +" " + s);
-
-        }
+//        for (String s : new String[]{
+//                "while(cdas && cdasc || acxv) {",
+//                "if (fdsan){",
+//                "while ( a && b && c || d ) {"
+//        }) {
+//            System.out.println(s.matches(BOOLEAN_IN_PARENTHESIS) +" " + s);
+//        }
+        System.out.println(VARIABLE_OR_ASSIGNMENT);
     }
 }

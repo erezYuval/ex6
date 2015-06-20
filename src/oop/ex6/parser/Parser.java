@@ -4,16 +4,20 @@ import oop.ex6.main.exceptions.parserExceptions.IllegalLineException;
 import oop.ex6.main.exceptions.parserExceptions.unbalancedScopeException;
 import oop.ex6.scopes.Scope;
 import oop.ex6.parser.JavaSPatterns;
+import oop.ex6.variables.PREDECLERATIONS;
+import sun.security.krb5.KdcComm;
 
+import java.lang.reflect.Type;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * a parser class that parses a java-s file.
  */
 public class Parser{
 
-    final static String EMPTY_LINE = "\\s*";
-    final static String COMMENT_LINE = "\\//.*";
+
     //TODO some sort of a collection of the available methods
 
     /**
@@ -23,8 +27,9 @@ public class Parser{
      */
     public static void parseFile(Scanner fileScanner, Scope globalScope) throws IllegalLineException, unbalancedScopeException {
         int balancedBracketCounter = 0;
+        int curLineNumber = 0;
         while (fileScanner.hasNext()) {
-
+            curLineNumber++;
             if(balancedBracketCounter < 0){ //there is a closing bracket in the file that does not correspond to a
                 //valid opening bracket
                 throw new unbalancedScopeException();
@@ -37,7 +42,7 @@ public class Parser{
 
             if (balancedBracketCounter == 0) { //i.e in global scope: read lines
 
-                if (currentLine == EMPTY_LINE || currentLine == COMMENT_LINE) {
+                if (currentLine == JavaSPatterns.EMPTY_LINE || currentLine == JavaSPatterns.COMMENT_LINE) {
                     continue; // ignore empty and comment lines
                 }
                 if (currentLine == JavaSPatterns.VARIABLE_LINE ||
@@ -57,8 +62,11 @@ public class Parser{
         while (fileScanner.hasNext()) {
             lineNumber++;
             line = fileScanner.nextLine();
-            if (line.matches(JavaSPatterns.VARIABLE_LINE)) {
-                dealWithVariableLine(line);
+
+            if (line.matches(JavaSPatterns.COMMENT_LINE)||line.matches(JavaSPatterns.EMPTY_LINE)) {
+                continue;
+            } else if (line.matches(JavaSPatterns.VARIABLE_LINE)) {
+                dealWithVariableLine(line, scope);
             } else if (line.matches(JavaSPatterns.METHOD_CALL)) {
                 dealWithMethodCall(line);
             } else if (line.matches(JavaSPatterns.CONDITION_BLOCK_STARTERS)) {
@@ -73,7 +81,29 @@ public class Parser{
         }
     }
 
-    private static void dealWithVariableLine(String line) {
+    private static void dealWithVariableLine(String line, Scope scope) {
+        Matcher matcher = Pattern.compile(JavaSPatterns.VARIABLE_LINE).matcher(line);
+        boolean isFinal;
+        boolean isDeclaration;
+        String type = "";
+        if (matcher.matches()) {
+            isFinal = matcher.group(2) != null;
+            isDeclaration = matcher.group(5) != null;
+            if (isDeclaration) {
+                type = matcher.group(5);
+            }
+            System.out.println("DEC " + isDeclaration + " FIN " + isFinal + " TYPE " + type);
+            Matcher variables = Pattern.compile(JavaSPatterns.VARIABLE_OR_ASSIGNMENT).matcher(line);
+            for (int i = 0 ; i< 10; i++) {
+                if(matcher.find()) {
+                    System.out.println("AA");
+                    System.out.println(matcher.group(0));
+                    System.out.println(matcher.group(1));
+                    System.out.println(matcher.group(2));
+                }
+            }
+            }
+
 
     }
 
@@ -83,5 +113,12 @@ public class Parser{
 
     private static void dealWithReturnStatement(String line, Scope scope) {
 
+    }
+
+    public static void main(String[] args) {
+        JavaSPatterns.compilePatterns();
+        Scope s = new Scope(0);
+        String line = "int a = 3, g , d = 5;";
+        dealWithVariableLine(line, s);
     }
 }
