@@ -18,7 +18,9 @@ public class VariableFactory {
         switch(type){
             case INTEGER:returnVariable = new VariableInteger(name);
                 break;
-            case DOUBLE:returnVariable = new VariableDouble(name);
+            case DOUBLE:
+                System.out.println("VDSAVDAS"); //TODO delete this line
+                returnVariable = new VariableDouble(name);
                 break;
             case CHAR:returnVariable = new VariableChar(name);
                 break;

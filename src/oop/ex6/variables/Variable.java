@@ -61,6 +61,8 @@ public abstract class Variable {
      * @param value the new value as a string.
      */
     public void setValue(String value) throws VariableException{
+        System.out.println(this.getVariableType());
+        System.out.println("the value given is - " + value);
         if (isValueLegal(value)) {
             initialized = true;
         } else {
@@ -69,6 +71,7 @@ public abstract class Variable {
     }
 
     public void setValue(Variable variable) throws VariableException{
+        System.out.println("BBBBBB");
         if (canGetVariable(variable)) {
             initialized = true;
         } else {

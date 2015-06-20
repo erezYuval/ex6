@@ -21,11 +21,10 @@ public class Sjavac {
         File testDirectory = new File("C:/ex6try2/tests");
         File[] testFiles = testDirectory.listFiles();
 
-        int i = 0;
         for (File file : testFiles) {
-            i++;
-            System.out.println("TEST NUMBER " + i);
+            System.out.println("TEST NUMBER " + file.getName());
             testOneFile(file);
+//            break;
         }
     }
 
@@ -43,10 +42,13 @@ public class Sjavac {
                 oop.ex6.parser.Parser.parseDeep(fileScanner, global);
             }catch(SjavaException e) {
                 System.out.println(1);
-                System.err.println(e.getErrorMessage());
+//                System.err.println(e.getErrorMessage());
+//                e.printStackTrace();
+                return;
             }
         } catch (IOException e) {
             System.out.println(2);
+            return;
         }
         System.out.println(0);
     }

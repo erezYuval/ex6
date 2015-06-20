@@ -58,8 +58,7 @@ public class Parser{
 
                 if (currentLine.matches(JavaSPatterns.EMPTY_LINE) || currentLine.matches(JavaSPatterns.COMMENT_LINE)) {
                     continue; // ignore empty and comment lines
-                }
-                if (currentLine.matches(JavaSPatterns.VARIABLE_LINE) ||
+                }else if (currentLine.matches(JavaSPatterns.VARIABLE_LINE) ||
                         currentLine.matches(JavaSPatterns.METHOD_SIGNATURE)) { // i.e line is legal
                     try {
                         parseLine(currentLine, curLineNumber, globalScope);
@@ -67,13 +66,12 @@ public class Parser{
                         e.addLineNumber(curLineNumber);
                         throw e;
                     }
-                }
-                if (currentLine.matches("\\s*return\\s*//;\\s*")) { //no return statements expected in global scope
+                } else if (currentLine.matches("\\s*return\\s*//;\\s*")) { //no return statements expected in global scope
                     throw new ReturnStatementInGlobalScopeException();
-
-
-                }// line is not empty, comment or legal - i.e illegal line
-                throw new IllegalLineException();
+                    // line is not empty, comment or legal - i.e illegal line
+                }else {
+                    throw new IllegalLineException();
+                }
             }
             if (balancedBracketCounter != 0) { //inside a method declaration
                 if (!currentLine.matches(JavaSPatterns.EMPTY_LINE)) { //line contains an expression other than empty line
@@ -244,7 +242,7 @@ public class Parser{
 //            System.err.println(e.getMessage());
 //        }
         Scope scope = new Scope(0);
-        String line = "final int a;";
+        String line = "double a = \"hello\";";
         dealWithVariableLine(line ,scope);
     }
 }

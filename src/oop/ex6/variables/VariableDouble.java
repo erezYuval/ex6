@@ -68,6 +68,6 @@ public class VariableDouble extends Variable{
      */
     @Override
     public VARIABLE_TYPES getVariableType() {
-        return null;
+        return VARIABLE_TYPES.DOUBLE;
     }
 }
