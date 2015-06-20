@@ -6,6 +6,7 @@ import oop.ex6.scopes.Scope;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 /**
  * Created by yuvalavrami on 6/18/15.
@@ -15,28 +16,25 @@ import java.util.Scanner;
  */
 public class Sjavac {
 
-    public static Scanner fileScanner;
-
-    public static void Main(String[] Args) throws FileNotFoundException{
+    public static void main(String[] Args) throws FileNotFoundException{
 
         Scope global = new Scope(0); //create global scope
         JavaSPatterns.compilePatterns();
         Scanner fileScanner;
-
-        File sourceFile = new File(Args[0]);
-        if (!sourceFile.exists()){
-            throw new FileNotFoundException();
-        }
-        else{
-            fileScanner = new Scanner(sourceFile);
-        }
         try {
-            oop.ex6.parser.Parser.parseFile(fileScanner, global);
-            fileScanner.reset();
-            oop.ex6.parser.Parser.parseDeep(fileScanner, global);
-        }catch(SjavaException e) {
-        System.err.println(e.getErrorMessage());
+            File sourceFile = new File(Args[0]);
+            fileScanner = new Scanner(sourceFile);
+            try {
+                oop.ex6.parser.Parser.parseFile(fileScanner, global);
+                fileScanner.reset();
+                oop.ex6.parser.Parser.parseDeep(fileScanner, global);
+            }catch(SjavaException e) {
+                System.out.println(1);
+                System.err.println(e.getErrorMessage());
+            }
+        } catch (IOException e) {
+            System.out.println(2);
         }
-
+        System.out.println(0);
     }
 }
