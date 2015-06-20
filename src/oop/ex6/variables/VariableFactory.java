@@ -36,7 +36,9 @@ public class VariableFactory {
      */
     public static Variable produceVariable(VARIABLE_TYPES type, String name, String value){
         Variable returnVariable = produceVariable(type, name);
-        returnVariable.setValue(value);
+        if (value != null) {
+            returnVariable.setValue(value);
+        }
         return returnVariable;
     }
 
