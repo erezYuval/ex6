@@ -5,7 +5,7 @@ import oop.ex6.variables.Variable;
 
 public class AssignUnintializedVariableException extends VariableException {
 
-    private final static String TYPE_ERROR_MESSAGE = "cannot assign to variable - source variable is not initialized";
+    private final String TYPE_ERROR_MESSAGE = "cannot assign to variable - source variable is not initialized";
 
     public AssignUnintializedVariableException(Variable variable) {
         ERROR_MESSAGE = TYPE_ERROR_MESSAGE;

@@ -56,7 +56,7 @@ public class Parser{
                     throw new ReturnStatementInGlobalScopeException();
                     // line is not empty, comment or legal - i.e illegal line
                 } else {
-                    throw new IllegalLineException(currentLine);
+                    throw new IllegalLineException();
                 }
             }
             if (balancedBracketCounter != 0) { //inside a method declaration
@@ -69,10 +69,10 @@ public class Parser{
             }
 
             //find opening and closing brackets, and update their counter accordingly
-            if (currentLine.matches(JavaSPatterns.START_BLOCK)) {
+            if (currentLine.contains("{")) {
                 balancedBracketCounter++;
             }
-            if (currentLine.matches(JavaSPatterns.END_BLOCK)) {
+            if (currentLine.contains("}")) {
                 balancedBracketCounter--;
                 if(balancedBracketCounter == 0) {
                     if (!lastRowIsReturn) {
@@ -112,12 +112,12 @@ public class Parser{
                     dealWithMethodCall(line, scope);
                 } else if (line.matches(JavaSPatterns.CONDITION_AND_BOOLEAN_IN_PARENTHESIS)) {
                     dealWithBooleanConditionLine(line, scope);
-                    Scope innerScope = new Scope(scope);
+                    Scope innerScope = new Scope(lineNumber, scope);
                     parseBlock(fileScanner, innerScope, lineNumber);
                 } else if (line.matches(JavaSPatterns.END_BLOCK)) {
                     return;
                 } else {
-                    throw new IllegalLineException(line);
+                    throw new IllegalLineException();
                 }
             } catch (SjavaException e) {
                 e.addLineNumber(lineNumber);
@@ -233,17 +233,18 @@ public class Parser{
 
 
 
-    public static void parseDeep(Scanner fileScanner, Scope globalScope) throws SjavaException{
+    public static boolean parseDeep(Scanner fileScanner, Scope globalScope) throws SjavaException{
         int lineIndex = 0;
         while (fileScanner.hasNext()) {
             lineIndex++;
             String line = fileScanner.nextLine();
             if(line.matches(JavaSPatterns.METHOD_SIGNATURE)) {
                 Method newMethod = parseMethodSignature(line);
-                Scope scope = new Scope(globalScope, newMethod.getVariables());
+                Scope scope = new Scope(lineIndex, globalScope, newMethod.getVariables());
                 parseBlock(fileScanner, scope, lineIndex);
             }
         }
+        return false;
     }
 
     static Method parseMethodSignature(String methodSignature) throws MethodException {
@@ -270,5 +271,13 @@ public class Parser{
             return new Method(methodName);
         }
         return null;
+    }
+
+    public static void main(String[] args) throws SjavaException{
+        JavaSPatterns.compilePatterns();
+        Scope scope = new Scope(0);
+        String line = "5,7";
+//        System.out.println(line.matches(JavaSPatterns.VALUE));
+        System.out.println(JavaSPatterns.CONDITION_AND_BOOLEAN_IN_PARENTHESIS);
     }
 }
