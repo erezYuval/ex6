@@ -18,34 +18,44 @@ import java.util.Scanner;
 public class Sjavac {
 
     private final static int PATH = 0;
+    private final static boolean testing = true;
 
     public static void main(String[] args) {
-        JavaSPatterns.compilePatterns();
-        Scope global = new Scope(0); //create global scope
-        Scanner fileScanner;
-        try {
-            File sourceFile = new File(args[PATH]);
-            fileScanner = new Scanner(sourceFile);
+        if (!testing) {
+            JavaSPatterns.compilePatterns();
+            Scope global = new Scope(0); //create global scope
+            Scanner fileScanner;
             try {
-                oop.ex6.parser.Parser.parseFile(fileScanner, global);
-                fileScanner.reset();
-                oop.ex6.parser.Parser.parseDeep(fileScanner, global);
-            }catch(SjavaException e) {
-                System.out.println(1);
-                System.err.println(e.getErrorMessage());
-//                e.printStackTrace();
+                File sourceFile = new File(args[PATH]);
+                fileScanner = new Scanner(sourceFile);
+                try {
+                    oop.ex6.parser.Parser.parseFile(fileScanner, global);
+                    fileScanner.reset();
+                    oop.ex6.parser.Parser.parseDeep(fileScanner, global);
+                }catch(SjavaException e) {
+                    System.out.println(1);
+                    System.err.println(e.getErrorMessage());
+    //                e.printStackTrace();
+                    return;
+                }
+            } catch (IOException e) {
+                System.out.println(2);
                 return;
             }
-        } catch (IOException e) {
-            System.out.println(2);
+            System.out.println(0);
             return;
+        } else {
+            int i = 0;
+            int[] tests = new int[]{114,205,206,207,208,216,217,218,223,224,225,226,236,238,244,245,252,254,257,262,264,270,306,307,308,309,310,314,316,402,406,407,408,409,429,430,431,434,435,439,440,441,452,453,454,456,467,468,474,503,504};
+//            tests = new int[]{114};
+            for (int test : tests) {
+                i++;
+                String path = "C:\\ex6try2\\tests\\test" + test + ".sjava";
+                System.out.println(path);
+                runOneTest(path);
+            }
+            System.out.println("TOTAL TESTS: " + i);
         }
-        System.out.println(0);
-        return;
-//        for (int test : new int[]{114,205,216}) {
-//            String path = "C:\\ex6try2\\tests\\test" + test + ".sjava";
-//            runOneTest(path);
-//        }
     }
 
     static void runOneTest(String filePath){
@@ -62,7 +72,7 @@ public class Sjavac {
                 oop.ex6.parser.Parser.parseDeep(fileScanner, global);
             }catch(SjavaException e) {
                 System.out.println(1);
-                System.err.println(e.getErrorMessage());
+//                System.err.println(e.getErrorMessage());
 //                e.printStackTrace();
                 return;
             }

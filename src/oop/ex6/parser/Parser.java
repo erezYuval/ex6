@@ -207,6 +207,7 @@ public class Parser{
 
 
     public static boolean parseDeep(Scanner fileScanner, Scope globalScope) throws SjavaException{
+        System.out.println("I AM HERE!!!!!!");
         int lineIndex = 0;
         while (fileScanner.hasNext()) {
             lineIndex++;
@@ -233,14 +234,12 @@ public class Parser{
                         String name = variableMatcher.group(NAME_SUB_GROUP);
                         VARIABLE_TYPES type = VariableUtils.stringToType(variableMatcher.group(TYPE_SUB_GROUP));
                         try {
-                            System.out.println(type + " " + name);
                             Variable newVariable = VariableFactory.produceVariable(type, name);
                             newMethod.addVariable(newVariable);
                         } catch (VariableException e) {
                             throw new IllegalArgumentNameException(name);
                         }
                     }
-                    System.out.println();
                     return newMethod;
             }
             return new Method(methodName);
