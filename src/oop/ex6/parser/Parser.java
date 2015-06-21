@@ -248,8 +248,8 @@ public class Parser{
     public static void main(String[] args) throws SjavaException{
         JavaSPatterns.compilePatterns();
         Scope scope = new Scope(0);
-        String line = "int b = goo();";
-        System.out.println(VariableUtils.isNameLegal("_"));
+        String line = "\t\tfoo2                (            5          , 7   );\n";
+        System.out.println(line.matches(JavaSPatterns.METHOD_CALL));
 
     }
 }

@@ -15,10 +15,10 @@ public class JavaSPatterns {
     static String METHOD_SIGNATURE;
     static String VALUE = "((-?\\w+(.\\d+)?)|(\"[^\"]*\")|(\\'[^']*\\'))";
     static String VARIABLE_OR_ASSIGNMENT = "((\\w+)\\s*(=\\s*"+ VALUE +")?\\s*)";
-    static String METHOD_CALL = "(\\w+)\\s*(\\(\\s*("+VALUE+"(\\s*,\\s*"+VALUE+")*)*\\s*\\))\\s*;\\s*";
+    static String METHOD_CALL = "\\s*(\\w+)\\s*(\\(\\s*("+VALUE+"(\\s*,\\s*"+VALUE+")*)*\\s*\\))\\s*;\\s*";
     static String LOGICAL_OPERATORS = "((\\|\\|)|(&&))";
     static String CONDITION_BLOCK_STARTERS = "((if)|(while))";
-    static String CONDITION_AND_BOOLEAN_IN_PARENTHESIS = CONDITION_BLOCK_STARTERS + "(\\s*)(\\()(\\s*)(\\w+)(\\s*)("+LOGICAL_OPERATORS+"(\\s*)(\\w+)(\\s*))*(\\s*)(\\))(\\s*)(\\{)(\\s*)";
+    static String CONDITION_AND_BOOLEAN_IN_PARENTHESIS = "\\s*"+CONDITION_BLOCK_STARTERS + "(\\s*)(\\()(\\s*)(\\w+)(\\s*)("+LOGICAL_OPERATORS+"(\\s*)(\\w+)(\\s*))*(\\s*)(\\))(\\s*)(\\{)(\\s*)";
     static String END_BLOCK = "\\s*\\}\\s*";
     static String RETURN = "\\s*(return)\\s*;\\s*";
     static String VARIABLE_TYPE_NAME;

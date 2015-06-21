@@ -47,7 +47,7 @@ public class Sjavac {
             return;
         } else {
             int i = 0;
-            int[] tests = new int[]{427,428,432,437,501,504};
+            int[] tests = new int[]{428,501,504};
 //            tests = new int[]{tests[0]};
             for (int test : tests) {
                 i++;
