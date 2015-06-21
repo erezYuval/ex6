@@ -50,7 +50,7 @@ public abstract class Variable {
      */
     public boolean isInitialized() {
         return initialized;
-    };
+    }
 
     public void setInitialized(){
         initialized = true;

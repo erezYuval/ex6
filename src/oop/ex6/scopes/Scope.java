@@ -16,8 +16,6 @@ import java.util.Hashtable;
  */
 public class Scope {
 
-    //this will be the line in the code where this scope starts
-    private int firstLine;
     //this will be the parent scope of this scope, (we need it for outer scope variables.)
     private Scope parent;
 
@@ -27,26 +25,22 @@ public class Scope {
 
     /**
      * create a new scope object, and set its first line to be the given int.
-     * @param firstLine the line in the java-s file where this scope starts.
      */
-    public Scope(int firstLine) {
+    public Scope() {
         initializeCollections();
     }
 
     /**
      * create a new scope object, and set it first line to be the given int, and his parent scope to be the given scope.
-     * @param firstLine
      * @param parent
      */
-    public Scope(int firstLine, Scope parent) {
+    public Scope(Scope parent) {
         initializeCollections();
-        this.firstLine = firstLine;
         this.parent = parent;
     }
 
-    public Scope(int firstLine, Scope parent, ArrayList<Variable> methodVariables) throws ScopeException {
+    public Scope(Scope parent, ArrayList<Variable> methodVariables) throws ScopeException {
         initializeCollections();
-        this.firstLine = firstLine;
         this.parent = parent;
         for (Variable variable : methodVariables) {
             addVariable(variable);
@@ -85,37 +79,6 @@ public class Scope {
         methods.put(method.getName(), method);
     }
 
-    /**
-     * get the line where this scope starts in the java-s file.
-     * @return the first line as an int.
-     */
-    public int getFirstLine() {
-        return firstLine;
-    }
-
-    /**
-     * get the parent scope of this scope.
-     * @return the scope object that is the parent of this scope.
-     */
-    public Scope getParent() {
-        return parent;
-    }
-
-    /**
-     * set the first line of this scope
-     * @param firstLine the line number in the java-s file were this scope starts
-     */
-    public void setFirstLine(int firstLine){
-    this.firstLine = firstLine;
-    }
-
-    /**
-     * set the parent scope of this scope
-     * @param parent the parent scope of this scope.
-     */
-    public void setParent(Scope parent) {
-        this.parent = parent;
-    }
 
     /**
      * searches for a variable with a specific name in this scope's variables and in his parents variable lists,
