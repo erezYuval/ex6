@@ -6,6 +6,7 @@ import oop.ex6.main.exceptions.parserExceptions.IllegalLineException;
 import oop.ex6.main.exceptions.parserExceptions.ReturnStatementInGlobalScopeException;
 import oop.ex6.main.exceptions.parserExceptions.UnbalancedScopeException;
 import oop.ex6.main.exceptions.parserExceptions.UnexpectedExpressionAfterReturnException;
+import oop.ex6.main.exceptions.variableExceptions.IllegalBooleanCondition;
 import oop.ex6.main.exceptions.variableExceptions.MultipleAssignmentWithoutDecleration;
 import oop.ex6.main.exceptions.variableExceptions.VariableException;
 import oop.ex6.methods.Method;
@@ -46,7 +47,7 @@ public class Parser{
                 } else if (currentLine.matches(JavaSPatterns.VARIABLE_LINE) ||
                         currentLine.matches(JavaSPatterns.METHOD_SIGNATURE)) { // i.e line is legal
                     try {
-                        parseLine(currentLine, curLineNumber, globalScope);
+                        parseLine(currentLine, globalScope);
                     } catch (SjavaException e) {
                         e.addLineNumber(curLineNumber);
                         throw e;
@@ -89,7 +90,7 @@ public class Parser{
     }
 
 
-    static void parseLine(String line, int lineNumber, Scope currentScope) throws SjavaException {
+    static void parseLine(String line, Scope currentScope) throws SjavaException {
         if(line.matches(JavaSPatterns.METHOD_SIGNATURE)) {
             Method newMethod = Parser.parseMethodSignature(line);
             currentScope.addMethod(newMethod);}
@@ -110,6 +111,7 @@ public class Parser{
                 } else if (line.matches(JavaSPatterns.METHOD_CALL)) {
                     dealWithMethodCall(line, scope);
                 } else if (line.matches(JavaSPatterns.CONDITION_AND_BOOLEAN_IN_PARENTHESIS)) {
+                    dealWithBooleanConditionLine(line, scope);
                     Scope innerScope = new Scope(lineNumber, scope);
                     parseBlock(fileScanner, innerScope, lineNumber);
                 } else if (line.matches(JavaSPatterns.END_BLOCK)) {
@@ -203,6 +205,33 @@ public class Parser{
         }
     }
 
+    private static void dealWithBooleanConditionLine(String line, Scope scope) throws VariableException{
+        final int INSIDE_PARETNHESIS_GROUP = 1;
+        final String DEFAULT_NAME_FOR_BOOLEAN = "bool";
+        System.out.println("LINE:\t" + line); //TODO DEL
+        Matcher insideParenthesis = Pattern.compile(JavaSPatterns.INSIDE_PARENTHESIS).matcher(line);
+        if (insideParenthesis.matches()) {
+            Variable booleanTester = new VariableBoolean(DEFAULT_NAME_FOR_BOOLEAN);
+            String theInside = insideParenthesis.group(INSIDE_PARETNHESIS_GROUP);
+            Matcher valueOrNameMatcher = Pattern.compile(JavaSPatterns.VALUE).matcher(theInside);
+            while (valueOrNameMatcher.find()) {
+                String valueOrName = valueOrNameMatcher.group();
+                Variable isVariable = scope.searchVariableUpwards(valueOrName);
+                try {
+                    if (isVariable != null) {
+                        booleanTester.setValue(isVariable);
+                    } else {
+                        booleanTester.setValue(valueOrName);
+                    }
+                } catch (VariableException e) {
+                    throw new IllegalBooleanCondition(valueOrName);
+                }
+            }
+        }
+    }
+
+
+
 
 
     public static boolean parseDeep(Scanner fileScanner, Scope globalScope) throws SjavaException{
@@ -249,7 +278,7 @@ public class Parser{
         JavaSPatterns.compilePatterns();
         Scope scope = new Scope(0);
         String line = "5,7";
-        System.out.println(line.matches(JavaSPatterns.VALUE));
-
+//        System.out.println(line.matches(JavaSPatterns.VALUE));
+        System.out.println(JavaSPatterns.CONDITION_AND_BOOLEAN_IN_PARENTHESIS);
     }
 }

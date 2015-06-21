@@ -76,4 +76,9 @@ public class FinalVariable extends Variable {
         return insideVar.getVariableType();
 
     }
+
+    @Override
+    protected boolean isFinal() {
+        return true;
+    }
 }

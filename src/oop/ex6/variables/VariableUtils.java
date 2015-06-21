@@ -23,6 +23,9 @@ public class VariableUtils {
         if(variable.isInitialized()){
             variableCopy.setInitialized();
         }
+        if(variable.isFinal()) {
+            return new FinalVariable(variable);
+        }
         return variableCopy;
     }
 

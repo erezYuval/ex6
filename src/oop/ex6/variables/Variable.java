@@ -109,4 +109,8 @@ public abstract class Variable {
         varName = name;
     }
 
+    protected boolean isFinal() {
+        return false;
+    }
+
 }
