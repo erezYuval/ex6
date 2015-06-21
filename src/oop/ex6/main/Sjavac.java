@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class Sjavac {
 
     private final static int PATH = 0;
-    private final static boolean testing = true;
+    private final static boolean testing = false;
 
     public static void main(String[] args) {
         if (!testing) {
