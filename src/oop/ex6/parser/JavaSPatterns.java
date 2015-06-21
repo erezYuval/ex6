@@ -13,15 +13,16 @@ public class JavaSPatterns {
     static String DECLARATION_VARIABLES;
     static String VARIABLE_LINE;
     static String METHOD_SIGNATURE;
-    static String VALUE = "((-?\\w+(\\.\\d+)?)|(\"[^\"]*\")|(\\'[^']*\\'))";
-    static String VARIABLE_OR_ASSIGNMENT = "((\\w+)\\s*(=\\s*"+ VALUE +")?\\s*)";
-    static String METHOD_CALL = "\\s*(\\w+)\\s*(\\(\\s*("+VALUE+"(\\s*,\\s*"+VALUE+")*)*\\s*\\))\\s*;\\s*";
-    static String LOGICAL_OPERATORS = "((\\|\\|)|(&&))";
-    static String INSIDE_PARENTHESIS = "[^\\)\\(]*\\(([^\\)\\(]*)\\)[^\\)\\(]*";
-    static String CONDITION_BLOCK_STARTERS = "((if)|(while))";
-    static String CONDITION_AND_BOOLEAN_IN_PARENTHESIS = "\\s*"+CONDITION_BLOCK_STARTERS + "(\\s*)(\\()(\\s*)"+VALUE+"(\\s*)("+LOGICAL_OPERATORS+"(\\s*)"+VALUE+"(\\s*))*(\\s*)(\\))(\\s*)(\\{)(\\s*)";
-    static String END_BLOCK = "\\s*\\}\\s*";
-    static String RETURN = "\\s*(return)\\s*;\\s*";
+    static final String VALUE = "((-?\\w+(\\.\\d+)?)|(\"[^\"]*\")|(\\'[^']*\\'))";
+    static final String VARIABLE_OR_ASSIGNMENT = "((\\w+)\\s*(=\\s*"+ VALUE +")?\\s*)";
+    static final String METHOD_CALL = "\\s*(\\w+)\\s*(\\(\\s*("+VALUE+"(\\s*,\\s*"+VALUE+")*)*\\s*\\))\\s*;\\s*";
+    static final String LOGICAL_OPERATORS = "((\\|\\|)|(&&))";
+    static final String INSIDE_PARENTHESIS = "[^\\)\\(]*\\(([^\\)\\(]*)\\)[^\\)\\(]*";
+    static final String CONDITION_BLOCK_STARTERS = "((if)|(while))";
+    static final String CONDITION_AND_BOOLEAN_IN_PARENTHESIS = "\\s*"+CONDITION_BLOCK_STARTERS + "(\\s*)(\\()(\\s*)"+VALUE+"(\\s*)("+LOGICAL_OPERATORS+"(\\s*)"+VALUE+"(\\s*))*(\\s*)(\\))(\\s*)(\\{)(\\s*)";
+    static final String END_BLOCK = "[^}]*}[^}]";
+    static final String START_BLOCK = "[^{]*{[^{]*";
+    static final String RETURN = "\\s*(return)\\s*;\\s*";
     static String VARIABLE_TYPE_NAME;
 
     public static void compilePatterns(){

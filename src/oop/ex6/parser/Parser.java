@@ -56,7 +56,7 @@ public class Parser{
                     throw new ReturnStatementInGlobalScopeException();
                     // line is not empty, comment or legal - i.e illegal line
                 } else {
-                    throw new IllegalLineException();
+                    throw new IllegalLineException(currentLine);
                 }
             }
             if (balancedBracketCounter != 0) { //inside a method declaration
@@ -69,10 +69,10 @@ public class Parser{
             }
 
             //find opening and closing brackets, and update their counter accordingly
-            if (currentLine.contains("{")) {
+            if (currentLine.matches(JavaSPatterns.START_BLOCK)) {
                 balancedBracketCounter++;
             }
-            if (currentLine.contains("}")) {
+            if (currentLine.matches(JavaSPatterns.END_BLOCK)) {
                 balancedBracketCounter--;
                 if(balancedBracketCounter == 0) {
                     if (!lastRowIsReturn) {
@@ -117,7 +117,7 @@ public class Parser{
                 } else if (line.matches(JavaSPatterns.END_BLOCK)) {
                     return;
                 } else {
-                    throw new IllegalLineException();
+                    throw new IllegalLineException(line);
                 }
             } catch (SjavaException e) {
                 e.addLineNumber(lineNumber);
@@ -233,7 +233,7 @@ public class Parser{
 
 
 
-    public static boolean parseDeep(Scanner fileScanner, Scope globalScope) throws SjavaException{
+    public static void parseDeep(Scanner fileScanner, Scope globalScope) throws SjavaException{
         int lineIndex = 0;
         while (fileScanner.hasNext()) {
             lineIndex++;
@@ -244,7 +244,6 @@ public class Parser{
                 parseBlock(fileScanner, scope, lineIndex);
             }
         }
-        return false;
     }
 
     static Method parseMethodSignature(String methodSignature) throws MethodException {
@@ -271,13 +270,5 @@ public class Parser{
             return new Method(methodName);
         }
         return null;
-    }
-
-    public static void main(String[] args) throws SjavaException{
-        JavaSPatterns.compilePatterns();
-        Scope scope = new Scope();
-        String line = "5,7";
-//        System.out.println(line.matches(JavaSPatterns.VALUE));
-        System.out.println(JavaSPatterns.CONDITION_AND_BOOLEAN_IN_PARENTHESIS);
     }
 }
