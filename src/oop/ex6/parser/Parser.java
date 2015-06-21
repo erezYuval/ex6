@@ -102,7 +102,6 @@ public class Parser{
         while (fileScanner.hasNext()) {
             lineNumber++;
             line = fileScanner.nextLine();
-
             try {
                 if (line.matches(JavaSPatterns.COMMENT_LINE)||line.matches(JavaSPatterns.EMPTY_LINE)) {
                     continue;
@@ -110,7 +109,7 @@ public class Parser{
                     dealWithVariableLine(line, scope);
                 } else if (line.matches(JavaSPatterns.METHOD_CALL)) {
                     dealWithMethodCall(line, scope);
-                } else if (line.matches(JavaSPatterns.CONDITION_BLOCK_STARTERS)) {
+                } else if (line.matches(JavaSPatterns.CONDITION_AND_BOOLEAN_IN_PARENTHESIS)) {
                     Scope innerScope = new Scope(lineNumber, scope);
                     parseBlock(fileScanner, innerScope, lineNumber);
                 } else if (line.matches(JavaSPatterns.END_BLOCK)) {

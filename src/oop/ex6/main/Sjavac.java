@@ -47,8 +47,8 @@ public class Sjavac {
             return;
         } else {
             int i = 0;
-            int[] tests = new int[]{291,301,302,303,305,311,312,313,315,321,410,427,428,432,433,437,438,451,501,505};
-            tests = new int[]{tests[0]};
+            int[] tests = new int[]{427,428,432,437,501,504};
+//            tests = new int[]{tests[0]};
             for (int test : tests) {
                 i++;
                 String path = "C:\\ex6try2\\tests\\test" + test + ".sjava";
@@ -73,8 +73,8 @@ public class Sjavac {
                 oop.ex6.parser.Parser.parseDeep(fileScanner, global);
             }catch(SjavaException e) {
                 System.out.println(1);
-                System.err.println(e.getErrorMessage());
-                e.printStackTrace();
+//                System.err.println(e.getErrorMessage());
+//                e.printStackTrace();
                 return;
             }
         } catch (IOException e) {
