@@ -208,7 +208,6 @@ public class Parser{
     private static void dealWithBooleanConditionLine(String line, Scope scope) throws VariableException{
         final int INSIDE_PARETNHESIS_GROUP = 1;
         final String DEFAULT_NAME_FOR_BOOLEAN = "bool";
-        System.out.println("LINE:\t" + line); //TODO DEL
         Matcher insideParenthesis = Pattern.compile(JavaSPatterns.INSIDE_PARENTHESIS).matcher(line);
         if (insideParenthesis.matches()) {
             Variable booleanTester = new VariableBoolean(DEFAULT_NAME_FOR_BOOLEAN);
