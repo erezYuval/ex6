@@ -209,7 +209,6 @@ public class Parser{
     public static boolean parseDeep(Scanner fileScanner, Scope globalScope) throws SjavaException{
         int lineIndex = 0;
         while (fileScanner.hasNext()) {
-            System.out.println("I AM HERE TOO!!!");
             lineIndex++;
             String line = fileScanner.nextLine();
             if(line.matches(JavaSPatterns.METHOD_SIGNATURE)) {

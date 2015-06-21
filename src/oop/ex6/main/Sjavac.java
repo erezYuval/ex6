@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class Sjavac {
 
     private final static int PATH = 0;
-    private final static boolean testing = true;
+    private final static boolean testing = false;
 
     public static void main(String[] args) {
         if (!testing) {
@@ -31,6 +31,7 @@ public class Sjavac {
                 try {
                     oop.ex6.parser.Parser.parseFile(fileScanner, global);
                     fileScanner.reset();
+                    fileScanner = new Scanner(sourceFile);
                     oop.ex6.parser.Parser.parseDeep(fileScanner, global);
                 }catch(SjavaException e) {
                     System.out.println(1);
