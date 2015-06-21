@@ -8,8 +8,9 @@ import oop.ex6.main.exceptions.variableExceptions.VariableException;
  */
 public class VariableInteger extends Variable {
 
-    private final VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER};
-    final static String LEGAL_VAL = "\\-?\\d+";
+    private final VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER}; //valid types that an
+     //integer can receive (only another integer)
+    final static String LEGAL_VAL = "\\-?\\d+"; //regular expression for valid integer
 
     /**
      * create a new variable, setValue with the value of an old one to setValue.

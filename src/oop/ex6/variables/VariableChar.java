@@ -8,8 +8,9 @@ import oop.ex6.main.exceptions.variableExceptions.VariableException;
  */
 public class VariableChar extends Variable {
 
-    final String LEGAL_VAL = "'[^']?'";
-    private final VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.CHAR};
+    final String LEGAL_VAL = "'[^']?'"; //regular expression for valid character
+    private final VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.CHAR}; //valid types that a char
+    // accepts (only another char)
 
     /**
      * create a new variable, setValue with the value of an old one to setValue.

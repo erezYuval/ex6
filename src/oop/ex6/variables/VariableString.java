@@ -7,8 +7,9 @@ import oop.ex6.main.exceptions.variableExceptions.VariableException;
  */
 public class VariableString extends Variable {
 
-    final String LEGAL_VAL = "\".*\"";
-    private final VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.STRING};
+    final String LEGAL_VAL = "\".*\""; //regular expression for valid string
+    private final VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.STRING}; //valid types that a
+     //String can receive (only another String)
 
     /**
      * create a new variable, setValue with the value of an old one to setValue.

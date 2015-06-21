@@ -8,8 +8,8 @@ import oop.ex6.main.exceptions.variableExceptions.VariableException;
 public class VariableDouble extends Variable{
 
     private final VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER,
-                                                                                    VARIABLE_TYPES.DOUBLE};
-    final static String LEGAL_VAL = "\\-?\\d+(\\.\\d+)?";
+            VARIABLE_TYPES.DOUBLE}; //valid types a double accepts (an integer or another double)
+    final static String LEGAL_VAL = "\\-?\\d+(\\.\\d+)?"; //regular expression for valid double
 
     /**
      * create a new variable, setValue with the value of an old one to setValue.
