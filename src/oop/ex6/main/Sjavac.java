@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class Sjavac {
 
     private final static int PATH = 0;
-    private final static boolean testing = true;
+    private final static boolean testing = false;
 
     public static void main(String[] args) {
         if (!testing) {
@@ -47,7 +47,7 @@ public class Sjavac {
             return;
         } else {
             int i = 0;
-            int[] tests = new int[]{504};
+            int[] tests = new int[]{};
 //            tests = new int[]{tests[0]};
             for (int test : tests) {
                 i++;

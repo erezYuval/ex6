@@ -102,6 +102,7 @@ public class Parser{
         while (fileScanner.hasNext()) {
             lineNumber++;
             line = fileScanner.nextLine();
+            System.out.println("LAST LINE:\t" + line);
             try {
                 if (line.matches(JavaSPatterns.COMMENT_LINE)||line.matches(JavaSPatterns.EMPTY_LINE)) {
                     continue;
