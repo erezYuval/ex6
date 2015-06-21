@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class Sjavac {
 
     private final static int PATH = 0;
-    private final static boolean testing = false;
+    private final static boolean testing = true;
 
     public static void main(String[] args) {
         if (!testing) {
@@ -47,8 +47,8 @@ public class Sjavac {
             return;
         } else {
             int i = 0;
-            int[] tests = new int[]{114,205,206,207,208,216,217,218,223,224,225,226,236,238,244,245,252,254,257,262,264,270,306,307,308,309,310,314,316,402,406,407,408,409,429,430,431,434,435,439,440,441,452,453,454,456,467,468,474,503,504};
-//            tests = new int[]{114};
+            int[] tests = new int[]{291,301,302,303,305,311,312,313,315,321,410,427,428,432,433,437,438,451,501,505};
+            tests = new int[]{tests[0]};
             for (int test : tests) {
                 i++;
                 String path = "C:\\ex6try2\\tests\\test" + test + ".sjava";
@@ -73,8 +73,8 @@ public class Sjavac {
                 oop.ex6.parser.Parser.parseDeep(fileScanner, global);
             }catch(SjavaException e) {
                 System.out.println(1);
-//                System.err.println(e.getErrorMessage());
-//                e.printStackTrace();
+                System.err.println(e.getErrorMessage());
+                e.printStackTrace();
                 return;
             }
         } catch (IOException e) {

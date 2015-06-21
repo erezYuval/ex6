@@ -74,10 +74,11 @@ public class Scope {
             found = parent.searchVariableUpwards(variableName);
             if (found != null) {
                 addVariable(VariableUtils.deepCopyVariable(found));
-                updateVariable(variableName,value);
+                updateVariable(variableName, value);
             }
+        } else {
+            throw new NonexistingVariableException(variableName);
         }
-        throw new NonexistingVariableException(variableName);
     }
 
     public void addMethod(Method method){
