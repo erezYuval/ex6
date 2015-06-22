@@ -8,14 +8,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 /**
- * Created by yuvalavrami on 6/18/15.
- *
  * main method of the S-java verifier - receives a file, which if legal will be converted to a Scanner
  * that will be sent to a parser, that will read it line by line.
  */
 public class Sjavac {
 
+    // argument constant
     private final static int PATH = 0;
+
+    // return values constants
+    private final static int ALL_OK = 0, LANGUAGE_ISSUE = 1, IO_ISSUE = 2;
 
     /**
      * main method. receives a text file, and returns one of the following:
@@ -37,15 +39,15 @@ public class Sjavac {
                     fileScanner = new Scanner(sourceFile);
                     Parser.parseInsideMethods(fileScanner, global);
                 }catch(SjavaException e) {
-                    System.out.println(1);
+                    System.out.println(LANGUAGE_ISSUE);
                     System.err.println(e.getMessage());
                     return;
                 }
             } catch (IOException e) {
-                System.out.println(2);
+                System.out.println(IO_ISSUE);
                 return;
             }
-            System.out.println(0);
+            System.out.println(ALL_OK);
             return;
     }
 }
