@@ -38,10 +38,7 @@ public class Parser{
                 throw new UnbalancedScopeException();
             }
             String currentLine = fileScanner.nextLine();
-
-
             if (balancedBracketCounter == 0) { //i.e in global scope: read lines
-
                 if (currentLine.matches(JavaSPatterns.EMPTY_LINE) || currentLine.matches(JavaSPatterns.COMMENT_LINE)) {
                     continue; // ignore empty and comment lines
                 } else if (currentLine.matches(JavaSPatterns.VARIABLE_LINE) ||
@@ -69,10 +66,10 @@ public class Parser{
             }
 
             //find opening and closing brackets, and update their counter accordingly
-            if (currentLine.contains("{")) {
+            if (currentLine.matches(JavaSPatterns.START_BLOCK)) {
                 balancedBracketCounter++;
             }
-            if (currentLine.contains("}")) {
+            if (currentLine.matches(JavaSPatterns.END_BLOCK)) {
                 balancedBracketCounter--;
                 if(balancedBracketCounter == 0) {
                     if (!lastRowIsReturn) {

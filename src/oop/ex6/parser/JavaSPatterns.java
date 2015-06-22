@@ -20,6 +20,7 @@ public class JavaSPatterns {
     static String INSIDE_PARENTHESIS = "[^\\)\\(]*\\(([^\\)\\(]*)\\)[^\\)\\(]*";
     static String CONDITION_BLOCK_STARTERS = "((if)|(while))";
     static String CONDITION_AND_BOOLEAN_IN_PARENTHESIS = "\\s*"+CONDITION_BLOCK_STARTERS + "(\\s*)(\\()(\\s*)"+VALUE+"(\\s*)("+LOGICAL_OPERATORS+"(\\s*)"+VALUE+"(\\s*))*(\\s*)(\\))(\\s*)(\\{)(\\s*)";
+    static String START_BLOCK = "[^\\{\\}]*\\{\\s*";
     static String END_BLOCK = "\\s*\\}\\s*";
     static String RETURN = "\\s*(return)\\s*;\\s*";
     static String VARIABLE_TYPE_NAME;
