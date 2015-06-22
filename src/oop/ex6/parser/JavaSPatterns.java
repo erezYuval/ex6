@@ -24,7 +24,9 @@ public class JavaSPatterns {
     final static String LOGICAL_OPERATORS = "((\\|\\|)|(&&))";
     final static String INSIDE_PARENTHESIS = "[^\\)\\(]*\\(([^\\)\\(]*)\\)[^\\)\\(]*";
     final static String CONDITION_BLOCK_STARTERS = "((if)|(while))";
-    final static String CONDITION_AND_BOOLEAN_IN_PARENTHESIS = "\\s*"+CONDITION_BLOCK_STARTERS + "(\\s*)(\\()(\\s*)"+VALUE+"(\\s*)("+LOGICAL_OPERATORS+"(\\s*)"+VALUE+"(\\s*))*(\\s*)(\\))(\\s*)(\\{)(\\s*)";
+    final static String CONDITION_AND_BOOLEAN_IN_PARENTHESIS = "\\s*"+CONDITION_BLOCK_STARTERS +
+                                                                "(\\s*)(\\()(\\s*)"+VALUE+"(\\s*)("+LOGICAL_OPERATORS+
+                                                                "(\\s*)"+VALUE+"(\\s*))*(\\s*)(\\))(\\s*)(\\{)(\\s*)";
     final static String START_BLOCK = "[^\\{\\}]*\\{\\s*";
     final static String END_BLOCK = "\\s*\\}\\s*";
     final static String RETURN = "\\s*(return)\\s*;\\s*";
@@ -40,8 +42,10 @@ public class JavaSPatterns {
         PREDECLARATION = generateOrString(PreDeclaration.values());
         DECLARATION_VARIABLES = generateOrString(VariableTypes.values());
         VARIABLE_TYPE_NAME = "(\\s*" + DECLARATION_VARIABLES + "\\s+)(\\w+)";
-        VARIABLE_LINE = "\\s*((" + PREDECLARATION + "\\s+)?((" + DECLARATION_VARIABLES + ")\\s+))?(" + VARIABLE_OR_ASSIGNMENT + "(,\\s*" + VARIABLE_OR_ASSIGNMENT + ")*)\\s*;\\s*";
-        METHOD_SIGNATURE = "(\\s*void)(\\s)+(\\w+)(\\s*)\\(\\s*("+ DECLARATION_VARIABLES +"(\\s+)(\\w+)(\\s*)(,(\\s)*"+ DECLARATION_VARIABLES +"(\\s+)(\\w+)(\\s*))*)?\\)(\\s*)\\{\\s*";
+        VARIABLE_LINE = "\\s*((" + PREDECLARATION + "\\s+)?((" + DECLARATION_VARIABLES + ")\\s+))?(" +
+                        VARIABLE_OR_ASSIGNMENT + "(,\\s*" + VARIABLE_OR_ASSIGNMENT + ")*)\\s*;\\s*";
+        METHOD_SIGNATURE = "(\\s*void)(\\s)+(\\w+)(\\s*)\\(\\s*("+ DECLARATION_VARIABLES +
+                        "(\\s+)(\\w+)(\\s*)(,(\\s)*"+ DECLARATION_VARIABLES +"(\\s+)(\\w+)(\\s*))*)?\\)(\\s*)\\{\\s*";
 
     }
 
