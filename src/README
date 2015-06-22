@@ -60,29 +60,23 @@ main 									                            - package
                         AttemptChangeFinalVarException              - implements FinalVariableException
                         DeclaredFinalVarWithoutInitialization       - implements FinalVariableException
 
-
-
-		
-
-
-
 =============================
 =          Design           =
 =============================
 Our design is based on having a class representing each component of the language - variable, method,
 and scope; and a parser that runs on the code and attempts to execute the described actions, as well as
 catching the last component - exceptions.
-each component is in a different package, and only ‚Äúknows‚Äù about itself, i.e. a variable knows what
+each component is in a different package, and only ‚Ä?knows‚Ä? about itself, i.e. a variable knows what
 a legal variable name is, so a scope doesn‚Äôt need to know if the variables it holds are legal as the
 variable class already checks that.
 
 The variable package holds classes for each type of variable (to know what legal values and other variables
 that specific type can accept during assignment), as well as a variableUtils class that holds static methods
 that are shared by all classes in the package; a factory class; an enum class holding the various variable
-types;  and 2 classes that comprise the ‚Äúfinal‚Äù decorator for the class:
+types;  and 2 classes that comprise the ‚Ä?final‚Ä? decorator for the class:
 a. finalVariable - the actual decorator for a final variable
 b. PREDECLARATIONS - a class that holds the various expressions that can precede a variable (at the moment
-the only one it holds is ‚Äùfinal‚Äù, but we decided to create the class for extensibility reasons, for future
+the only one it holds is ‚Ä?final‚Ä?, but we decided to create the class for extensibility reasons, for future
 possible expressions).
 
 The method package holds the method class, that represents each method in the code.
