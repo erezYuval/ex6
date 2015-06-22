@@ -16,6 +16,9 @@ public enum VARIABLE_TYPES{
         this.asString = stringRepresenation;
     }
 
+    /**
+     * @return a type's String representation, as it will appear in a s-java code file (e.g for Integer return 'int')
+     */
     @Override
     public String toString() {
         return this.asString;
