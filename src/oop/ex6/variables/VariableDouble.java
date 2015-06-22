@@ -36,7 +36,7 @@ public class VariableDouble extends Variable{
     /**
      * create a new variable, not initialized with a value.
      *
-     * @param variableName
+     * @param variableName the variable name
      * @throws VariableException if name is illegal
      */
     public VariableDouble(String variableName)throws VariableException {
@@ -46,7 +46,7 @@ public class VariableDouble extends Variable{
     /**
      * determines whether a string is legal as the value of the specific variable type.
      *
-     * @param value
+     * @param value the value to be set to this variable
      */
     @Override
     protected boolean isValueLegal(String value) {
@@ -57,10 +57,14 @@ public class VariableDouble extends Variable{
      * determines whether this variable can get another variable as a value.
      *
      * @param otherVariable the variable to determine whether it can be used as a value.
-     * @return
+     * @return true if can get the other variable, false otherwise
      */
     @Override
     protected boolean canGetVariable(Variable otherVariable) {
+        for(VariableTypes type: LEGAL_TYPES){
+            if(otherVariable.getVariableType() == type){
+                return true;}
+        }
         return false;
     }
 

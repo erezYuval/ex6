@@ -41,7 +41,7 @@ public abstract class Variable {
 
     /**
      * create a new variable, not initialized with a value.
-     * @param variableName
+     * @param variableName the wanted name
      * @throws IllegalNameException if the name is not legal
      */
     public Variable(String variableName) throws IllegalNameException{
@@ -56,7 +56,7 @@ public abstract class Variable {
      */
     public boolean isInitialized() {
         return initialized;
-    };
+    }
 
     /**
      * sets a variable's initialized state to true
@@ -80,8 +80,8 @@ public abstract class Variable {
 
     /**
      * initalize the variable with another variable
-     * @param variable
-     * @throws VariableException
+     * @param variable the wanted variable to set to this one
+     * @throws VariableException if they do not match
      */
     public void setValue(Variable variable) throws VariableException{
         if (!variable.isInitialized()) {
@@ -122,7 +122,7 @@ public abstract class Variable {
 
     /**
      * set a variable's name to given name
-     * @param name
+     * @param name the wanted name
      * @throws IllegalNameException
      */
     private void setVarName(String name) throws IllegalNameException {

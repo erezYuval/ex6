@@ -36,8 +36,8 @@ public class VariableString extends Variable {
     /**
      * create a new variable, not initialized with a value.
      *
-     * @param variableName
-     * @throws VariableException
+     * @param variableName the wanted variable name
+     * @throws VariableException if the name is illegal
      */
     public VariableString(String variableName)throws VariableException {
         super(variableName);
@@ -46,7 +46,7 @@ public class VariableString extends Variable {
     /**
      * determines whether a string is legal as the value of the specific variable type.
      *
-     * @param value
+     * @param value the wanted value
      */
     @Override
     protected boolean isValueLegal(String value) {
@@ -57,7 +57,7 @@ public class VariableString extends Variable {
      * determines whether this variable can get another variable as a value.
      *
      * @param otherVariable the variable to determine whether it can be used as a value.
-     * @return
+     * @return true if the variable can get the other one, flase otherwise
      */
     @Override
     protected boolean canGetVariable(Variable otherVariable) {

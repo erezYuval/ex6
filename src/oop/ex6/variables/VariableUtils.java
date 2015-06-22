@@ -20,9 +20,9 @@ public class VariableUtils {
 
     /**
      * creates a copy for a variable, identical to the given variable
-     * @param variable
-     * @return variableCopy
-     * @throws VariableException
+     * @param variable the variable to be copied
+     * @return variableCopy a variable identical to the given one
+     * @throws VariableException if anything is wrong in the copy process
      */
     public static Variable deepCopyVariable(Variable variable)throws VariableException {
         Variable variableCopy = VariableFactory.produceVariable(variable.getVariableType(),variable.toString());
@@ -37,8 +37,8 @@ public class VariableUtils {
 
     /**
      * converts a string representation of a type as appears in a s-java code file to its respective type
-     * @param type
-     * @return
+     * @param type the wanted variable type as a string
+     * @return the variable type the goes with this string
      */
     public static VariableTypes stringToType(String type) {
         for (VariableTypes variableTypes : VariableTypes.values()) {
