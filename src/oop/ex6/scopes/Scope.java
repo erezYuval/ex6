@@ -43,9 +43,9 @@ public class Scope {
     /**
      * create a new scope and supply a list of variables that he will recognize as is own (usually the parent
      * method's arguments.
-     * @param parent
-     * @param methodVariables
-     * @throws ScopeException
+     * @param parent the parent scope
+     * @param methodVariables the arguments of a method signature
+     * @throws ScopeException id the variables are double
      */
     public Scope(Scope parent, ArrayList<Variable> methodVariables) throws ScopeException {
         initializeCollections();
@@ -57,8 +57,8 @@ public class Scope {
 
     /**
      * add a variable to the variable collection of this scope, if not existing already.
-     * @param variable
-     * @throws ScopeException
+     * @param variable the new variable to add
+     * @throws ScopeException if a variable iwth the same name already exists in this scope
      */
     public void addVariable(Variable variable) throws ScopeException{
         Variable found = searchVariableLocally(variable.toString());

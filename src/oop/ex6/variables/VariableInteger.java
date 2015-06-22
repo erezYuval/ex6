@@ -37,7 +37,7 @@ public class VariableInteger extends Variable {
     /**
      * create a new variable, not initialized with a value.
      *
-     * @param variableName
+     * @param variableName the wanted name
      * @throws VariableException if the name is illegal
      */
     public VariableInteger(String variableName) throws VariableException{
@@ -47,7 +47,8 @@ public class VariableInteger extends Variable {
     /**
      * determines whether a string is legal as the value of the specific variable type.
      *
-     * @param value
+     * @param value the wanted value
+     * @return true if the value is legal for this variable false otherwise
      */
     @Override
     protected boolean isValueLegal(String value) {

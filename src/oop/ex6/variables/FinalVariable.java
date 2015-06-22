@@ -15,7 +15,7 @@ public class FinalVariable extends Variable {
     /**
      * constructor for a final variable that receives a variable
      *
-     * @param variable
+     * @param variable the variable to be encapsuled
      * @throws DeclaredFinalIntWithoutInitializationException
      */
     public FinalVariable(Variable variable) throws DeclaredFinalIntWithoutInitializationException {
@@ -27,8 +27,8 @@ public class FinalVariable extends Variable {
 
     /**
      * constructor for a final variable that receives a name and a variable - is not supported
-     * @param variableName
-     * @param variable
+     * @param variableName the variable name
+     * @param variable the given variable
      */
     public FinalVariable(String variableName, Variable variable){
         throw new UnsupportedOperationException();
@@ -36,8 +36,8 @@ public class FinalVariable extends Variable {
 
     /**
      * constructor for a final variable that only receives a variable name - is not supported
-     * @param variableName
-     * @throws DeclaredFinalIntWithoutInitializationException
+     * @param variableName the given name
+     * @throws DeclaredFinalIntWithoutInitializationException trying to set uninitialized final variable
      */
     public FinalVariable(String variableName) throws DeclaredFinalIntWithoutInitializationException{
         throw new DeclaredFinalIntWithoutInitializationException(variableName);
@@ -45,7 +45,7 @@ public class FinalVariable extends Variable {
 
     /**
      * all final variables must be initialized - this method always returns true
-     * @return
+     * @return true
      */
     public boolean isInitialized() {
         return true;
@@ -53,7 +53,7 @@ public class FinalVariable extends Variable {
 
     /**
      * returns String representation of variable
-     * @return
+     * @return the encapsulated variable name
      */
     @Override
     public String toString() {
@@ -62,7 +62,7 @@ public class FinalVariable extends Variable {
 
     /**
      * determines whether a string is legal as the value of the specific variable type.
-     * @param value
+     * @param value the wanted value
      */
     @Override
     protected boolean isValueLegal(String value) {
@@ -73,7 +73,7 @@ public class FinalVariable extends Variable {
      * determines whether this variable can get another variable as a value.
      *
      * @param otherVariable the variable to determine whether it can be used as a value.
-     * @return
+     * @return delcated to inside variable
      */
     @Override
     protected boolean canGetVariable(Variable otherVariable) {
@@ -83,7 +83,7 @@ public class FinalVariable extends Variable {
     /**
      * attempting to change a final variable's value after initialization is illegal
      * @param value the new value as a string.
-     * @throws VariableException
+     * @throws VariableException trying to change final variable
      */
     @Override
     public void setValue(String value) throws VariableException{
@@ -93,7 +93,7 @@ public class FinalVariable extends Variable {
     /**
      * attempting to change a final variable's value after initialization is illegal
      * @param variable the new variable
-     * @throws VariableException
+     * @throws VariableException trying to change final variable
      */
     @Override
     public void setValue(Variable variable) throws VariableException{
