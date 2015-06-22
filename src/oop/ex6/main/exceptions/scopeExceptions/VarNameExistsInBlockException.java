@@ -1,10 +1,11 @@
 package oop.ex6.main.exceptions.scopeExceptions;
 
 /**
- * Created by yuvalavrami on 6/14/15.
+ an exception representing a state where a variable name already exists in the current block.
  */
 public class VarNameExistsInBlockException extends ScopeException {
-    private final static String TYPE_ERROR_MESSAGE = "cannot assign this name to variable - name already exists in block";
+    private final static String TYPE_ERROR_MESSAGE =
+            "cannot assign this name to variable - name already exists in block";
 
     /**
      * constructor for exception. holds an error message according to the type of exception,

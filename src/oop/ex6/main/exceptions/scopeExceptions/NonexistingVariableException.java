@@ -1,7 +1,7 @@
 package oop.ex6.main.exceptions.scopeExceptions;
 
 /**
- * Created by yuvalavrami on 6/14/15.
+ an exception representing a state where a called variable does not exist
  */
 public class NonexistingVariableException extends ScopeException {
    private final static String TYPE_ERROR_MESSAGE = "variable does not exist";

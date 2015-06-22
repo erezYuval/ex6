@@ -3,7 +3,8 @@ package oop.ex6.main.exceptions.parserExceptions;
 import oop.ex6.main.exceptions.SjavaException;
 
 /**
- * Created by yuvalavrami on 6/14/15.
+ an exception representing a state where the global scope of the code contains a return statement, not in accordance
+ with S-Java specifications.
  */
 public class ReturnStatementInGlobalScopeException extends SjavaException{
     private final static String TYPE_ERROR_MESSAGE = "unexpected return statement in global scope";

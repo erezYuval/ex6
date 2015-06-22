@@ -1,7 +1,7 @@
 package oop.ex6.main.exceptions.methodExceptions;
 
 /**
- * Created by yuvalavrami on 6/14/15.
+ an exception representing a state where a method's name is illegal.
  */
 public class IllegalMethodNameException extends MethodException {
     private final static String TYPE_ERROR_MESSAGE = "cannot assign this name to method: name is illegal";

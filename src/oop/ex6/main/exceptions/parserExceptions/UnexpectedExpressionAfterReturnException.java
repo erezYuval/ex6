@@ -3,7 +3,8 @@ package oop.ex6.main.exceptions.parserExceptions;
 import oop.ex6.main.exceptions.SjavaException;
 
 /**
- * Created by yuvalavrami on 6/14/15.
+ an exception representing a state where a scope contains expressions other than an empty line after the last
+ return statement.
  */
 public class UnexpectedExpressionAfterReturnException extends SjavaException{
     private final static String TYPE_ERROR_MESSAGE = "unexpected expression after return statement";
