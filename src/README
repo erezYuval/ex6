@@ -1,6 +1,5 @@
 erez.levanon
-
-
+yuval.avrami
 
 
 =============================
@@ -70,10 +69,59 @@ main 									                            - package
 =============================
 =          Design           =
 =============================
+Our design is based on having a class representing each component of the language - variable, method,
+and scope; and a parser that runs on the code and attempts to execute the described actions, as well as
+catching the last component - exceptions.
+each component is in a different package, and only “knows” about itself, i.e. a variable knows what
+a legal variable name is, so a scope doesn’t need to know if the variables it holds are legal as the
+variable class already checks that.
+
+The variable package holds classes for each type of variable (to know what legal values and other variables
+that specific type can accept during assignment), as well as a variableUtils class that holds static methods
+that are shared by all classes in the package; a factory class; an enum class holding the various variable
+types;  and 2 classes that comprise the “final” decorator for the class:
+a. finalVariable - the actual decorator for a final variable
+b. PREDECLARATIONS - a class that holds the various expressions that can precede a variable (at the moment
+the only one it holds is ”final”, but we decided to create the class for extensibility reasons, for future
+possible expressions).
+
+The method package holds the method class, that represents each method in the code.
+
+The scope package holds the scope class, representing the different scopes in the code. Each scope holds the
+variables and methods it knows, and knows to search them and in parent classes, to determine if an assignment
+or method call is legal.
+
+The parser package holds the SJavaPatterns class, that holds the regular expressions we used,
+and the parser itself - that goes over the code and attempts executing actions by calling the respective
+classes and their methods.
+
+The main package holds the main method of the S-Java verifier - that tries parsing the files, using our parsing
+methods in our parsing class, and catches exceptions should they arise;
+and a sub-package - exceptions - that holds all possible exceptions, divided into sub-packages, not unlike
+the division of the main packages (by different components of the language). we decided to put all exceptions
+in the same package (and not each exception type in its component’s package) so we can have a mutual parent
+to all exceptions,and then trying catching that parent-exception catches all of its inheriting children.
+
+One of the design ideas we considered but later dismissed was extensively using the line number as a data
+member in our code, that will be used in discerning the different scopes, and the actions on them (looking
+for variables, searching for expressions in a scope after the last return statement etc).
+We decided to dismiss this tactic and simply go over the code, throwing exceptions once illegal code is found,
+keeping track of the current scope with a bracket-balancing mechanism.
+The line numbers are eventually used only in the error messages for a more informative description of where
+in the code the error happened, and do not serve a real purpose.
+
 
 =============================
 =  Implementation details   =s
 =============================
+Error handling:
+We decided not to use boolean methods that return a true/false value that correspond to whether
+the code is legal or not, but rather run on the given text, try executing the described actions(i.e
+declaring methods, calling methods, assigning variables etc), mainly with void methods, and throw
+respective exceptions the moment we reach them.
+   This way we (a) make use of the exceptions mechanism, (b) react to illegal code the moment it is met,
+and (c) gather information about why the exception happened (e.g what was the illegal value that caused
+it, in what line did it happen) to use while printing the error message to the user.
 
 =============================
 =    Answers to questions   =
