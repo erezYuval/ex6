@@ -3,7 +3,7 @@ package oop.ex6.variables;
 import oop.ex6.main.exceptions.variableExceptions.*;
 
 /**
- * classes implementing this interface will represent variables of different types in
+ * classes extending this abstract class will represent variables of different types in
  * java-s.
  */
 public abstract class Variable {
