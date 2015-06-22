@@ -15,10 +15,7 @@ public class Method{
 
     private ArrayList<Variable> variablesInOrder;
     private String name;
-    private int firstLine;
-    private int lastLine;
-    private boolean hasReturnStatement = false;
-    private static final String LEGAL_NAME = "[a-zA-Z]\\w*";
+    private static final String LEGAL_NAME = "[a-zA-Z]\\w*"; //regular expression for a legal method name
 
     /**
      * construct a new method using the given variable types and names.
@@ -30,6 +27,10 @@ public class Method{
         setName(methodName);
     }
 
+    /**
+     * construct a new method (that receives no arguments)
+     * @param methodName
+     */
     public Method(String methodName) throws MethodException{
         variablesInOrder = new ArrayList<>();
         setName(methodName);
@@ -80,18 +81,6 @@ public class Method{
         return variablesInOrder;
     }
 
-    public int getLastLine() {
-        return lastLine;
-    }
-
-    public void setLastLine(int lastLine) {
-        this.lastLine = lastLine;
-    }
-
-    public boolean isHasReturnStatement() {
-        return hasReturnStatement;
-    }
-
     public int getNumOfArguments() {
         return variablesInOrder.size();
     }
@@ -101,9 +90,5 @@ public class Method{
             throw new IllegalMethodNameException(name);
         }
         this.name = name;
-    }
-
-    public void setHasReturnStatement(boolean hasReturnStatement) {
-        this.hasReturnStatement = hasReturnStatement;
     }
 }
