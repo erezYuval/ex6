@@ -4,7 +4,7 @@ package oop.ex6.variables;
 import oop.ex6.main.exceptions.variableExceptions.VariableException;
 
 /**
- * Created by Erez Levanon on 14/06/2015.
+ * a class representing an integer variable in java-s language.
  */
 public class VariableInteger extends Variable {
 

@@ -1,7 +1,7 @@
 package oop.ex6.variables;
 
 /**
- * Created by Erez Levanon on 15/06/2015.
+ * an enum of all reserved words that are allowed before a variable declaration.
  */
 public enum PREDECLARATIONS {
     FINAL("final");

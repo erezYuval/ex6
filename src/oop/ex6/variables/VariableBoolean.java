@@ -3,7 +3,7 @@ package oop.ex6.variables;
 import oop.ex6.main.exceptions.variableExceptions.VariableException;
 
 /**
- * Created by yuvalavrami on 6/14/15.
+ *  a class representing a boolean variable in java-s language.
  */
 public class VariableBoolean extends Variable {
 

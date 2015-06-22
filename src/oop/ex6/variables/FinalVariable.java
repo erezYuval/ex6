@@ -5,7 +5,7 @@ import oop.ex6.main.exceptions.variableExceptions.DeclaredFinalIntWithoutInitial
 import oop.ex6.main.exceptions.variableExceptions.VariableException;
 
 /**
- * Created by Erez Levanon on 14/06/2015.
+ * a decorator class for an variable - making it a final unchangable variable
  */
 public class FinalVariable extends Variable {
 
