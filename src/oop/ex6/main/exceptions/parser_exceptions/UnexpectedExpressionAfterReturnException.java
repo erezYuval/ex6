@@ -11,7 +11,7 @@ public class UnexpectedExpressionAfterReturnException extends SjavaException{
 
     /**
      * constructor for exception. holds an error message according to the type of exception.
-     * @param lineNumber
+     * @param lineNumber relevant line's number in code
      */
     public UnexpectedExpressionAfterReturnException(int lineNumber) {
         ERROR_MESSAGE = TYPE_ERROR_MESSAGE;

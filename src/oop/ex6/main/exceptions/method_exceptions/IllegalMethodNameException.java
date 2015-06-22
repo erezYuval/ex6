@@ -9,7 +9,7 @@ public class IllegalMethodNameException extends MethodException {
     /**
      * constructor for exception. holds an error message according to the type of exception,
      * and a unique message updated according to the illegal method name for which it was thrown.
-     * @param name
+     * @param name relevant name
      */
     public IllegalMethodNameException(String name) {
         ERROR_MESSAGE = TYPE_ERROR_MESSAGE;

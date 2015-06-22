@@ -11,7 +11,7 @@ public class ReturnStatementInGlobalScopeException extends SjavaException{
 
     /**
      * constructor for exception. holds an error message according to the type of exception.
-     * @param linenumber
+     * @param linenumber relevant line's number in code
      */
     public ReturnStatementInGlobalScopeException(int linenumber) {
         ERROR_MESSAGE = TYPE_ERROR_MESSAGE;

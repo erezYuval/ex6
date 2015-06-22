@@ -11,9 +11,9 @@ public class IllegalArgumentValueException extends MethodException {
     /**
      * constructor for exception. holds an error message according to the type of exception,
      * and a unique message updated according to the illegal argument for which it was thrown.
-     * @param method
-     * @param argumentIndex
-     * @param value
+     * @param method relevant method
+     * @param argumentIndex argument index
+     * @param value relevant value
      */
     public IllegalArgumentValueException(Method method, int argumentIndex, String value) {
         uniqueMessage = "in " + method.getName() + " method the value " + value + " as the " +argumentIndex +

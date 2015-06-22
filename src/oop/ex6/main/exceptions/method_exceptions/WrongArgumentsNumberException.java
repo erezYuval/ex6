@@ -12,8 +12,8 @@ public class WrongArgumentsNumberException extends MethodException {
     /**
      * constructor for exception. holds an error message according to the type of exception,
      * and a unique message updated according to the illegal number of arguments for which it was thrown.
-     * @param method
-     * @param numOfArgs
+     * @param method relevant method
+     * @param numOfArgs number of arguments
      */
     public WrongArgumentsNumberException(Method method, int numOfArgs) {
         ERROR_MESSAGE = TYPE_ERROR_MESSAGE;
