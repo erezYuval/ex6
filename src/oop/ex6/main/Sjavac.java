@@ -18,6 +18,7 @@ public class Sjavac {
 
     // return values constants
     private final static int ALL_OK = 0, LANGUAGE_ISSUE = 1, IO_ISSUE = 2;
+    private final static String IO_ERROR_MESSAGE = "there was a problem reading the file.";
 
     /**
      * main method. receives a text file, and returns one of the following:
@@ -44,6 +45,7 @@ public class Sjavac {
                     return;
                 }
             } catch (IOException e) {
+                System.err.println(IO_ERROR_MESSAGE);
                 System.out.println(IO_ISSUE);
                 return;
             }
