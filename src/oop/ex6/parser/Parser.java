@@ -2,13 +2,8 @@ package oop.ex6.parser;
 
 import oop.ex6.main.exceptions.SjavaException;
 import oop.ex6.main.exceptions.methodExceptions.*;
-import oop.ex6.main.exceptions.parserExceptions.IllegalLineException;
-import oop.ex6.main.exceptions.parserExceptions.ReturnStatementInGlobalScopeException;
-import oop.ex6.main.exceptions.parserExceptions.UnbalancedScopeException;
-import oop.ex6.main.exceptions.parserExceptions.UnexpectedExpressionAfterReturnException;
-import oop.ex6.main.exceptions.variableExceptions.IllegalBooleanCondition;
-import oop.ex6.main.exceptions.variableExceptions.MultipleAssignmentWithoutDecleration;
-import oop.ex6.main.exceptions.variableExceptions.VariableException;
+import oop.ex6.main.exceptions.parserExceptions.*;
+import oop.ex6.main.exceptions.variableExceptions.*;
 import oop.ex6.methods.Method;
 import oop.ex6.scopes.Scope;
 import oop.ex6.variables.*;
@@ -18,26 +13,28 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * a parser class that parses a java-s file.
+ * a parser class that have static methods the parse a java-s file.
  */
 public class Parser{
 
+
     /**
-     * a method that goes through each line of the java-s file, translates the lines to commands and executes
-     * the wanted actions on Scopes.
+     * a method that gets a Scope (the file's global scope), and a java-s file, and reads all the lines that
+     * are qualified as legal lines in the global scope of the file, and executes the wanted java-s commands.
      * @param fileScanner - a scanner that runs on a legal file
+     * @param globalScope the global scope of this java-s file.
+     * @throws SjavaException if something went wrong attempting to execute the file.
      */
     public static void parseGlobalScope(Scanner fileScanner, Scope globalScope) throws SjavaException {
-        int balancedBracketCounter = 0;
-        int curLineNumber = 0;
+        int balancedBracketCounter = 0 , curLineNumber = 0;
         boolean lastRowIsReturn = true;
         while (fileScanner.hasNext()) {
             curLineNumber++;
+            String currentLine = fileScanner.nextLine();
             if (balancedBracketCounter < 0) { //there is a closing bracket in the file that does not correspond to a
                 //valid opening bracket
                 throw new UnbalancedScopeException();
             }
-            String currentLine = fileScanner.nextLine();
             if (balancedBracketCounter == 0) { //i.e in global scope: read lines
                 if (currentLine.matches(JavaSPatterns.EMPTY_LINE) || currentLine.matches(JavaSPatterns.COMMENT_LINE)) {
                     continue; // ignore empty and comment lines
@@ -53,14 +50,15 @@ public class Parser{
                     throw new ReturnStatementInGlobalScopeException();
                     // line is not empty, comment or legal - i.e illegal line
                 } else {
-                    throw new IllegalLineException();
+                    throw new IllegalLineException(currentLine);
                 }
-            }
-            if (balancedBracketCounter != 0) { //inside a method declaration
+            } else { //inside a method declaration
                 if (currentLine.matches(JavaSPatterns.RETURN)) {
                     lastRowIsReturn = true;
                 }
-                else if (currentLine.matches(JavaSPatterns.VARIABLE_LINE)||currentLine.matches(JavaSPatterns.METHOD_CALL)) { //line contains an expression other than empty line
+                else if (currentLine.matches(JavaSPatterns.VARIABLE_LINE)||
+                        currentLine.matches(JavaSPatterns.METHOD_CALL)) {   //line contains an expression
+                                                                            // other than empty line
                     lastRowIsReturn = false;
                 }
             }
@@ -127,7 +125,7 @@ public class Parser{
                 } else if (line.matches(JavaSPatterns.END_BLOCK)) {
                     return;
                 } else {
-                    throw new IllegalLineException();
+                    throw new IllegalLineException(line);
                 }
             } catch (SjavaException e) {
                 e.addLineNumber(lineNumber);
