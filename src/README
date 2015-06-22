@@ -102,8 +102,15 @@ implementing additional functionality -
         run, this procedure will make sure they are all reachable and recognizable for this file.
 
     switch statement:
-        after dealing with the regex involved, the switch statement mechanism will be pretty simple to.
-        first we we'll check the type
+        after dealing with the regex involved, the switch statement mechanism will be pretty simple too.
+        first we we'll check the type of the expression inside the switch statement parenthesis ( "(XXXX)" )
+        then we will continue with the scanner nextLine method. every time a line will match "case: YYYY"
+        we will start a new scope, that the current scope is it's parent scope and that YYYY is a constant value
+        or a final variable, and try to set it for the variable type of XXXX. then we keep going through the code.
+        when we find a new case expression, we we'll go back to the parent scope, and start a new scope again
+        the same way until leaving the switch scope (ends with a '}').
+        every thing that may happen wrongly inside the case statements or the inner scope will throw an exception that
+        we will catch.
 
 
 
