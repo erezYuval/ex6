@@ -12,6 +12,7 @@ public class UnbalancedScopeException extends SjavaException{
 
     /**
      * constructor for exception. holds an error message according to the type of exception.
+     * @param line
      */
     public UnbalancedScopeException(int line) {
         ERROR_MESSAGE = TYPE_ERROR_MESSAGE;

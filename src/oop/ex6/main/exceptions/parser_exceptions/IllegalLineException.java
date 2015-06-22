@@ -10,6 +10,7 @@ public class IllegalLineException extends SjavaException{
     /**
      * constructor for exception. holds an error message according to the type of exception,
      * and a unique message updated according to the illegal line for which it was thrown.
+     * @param line
      */
     public IllegalLineException (String line) {
         ERROR_MESSAGE = TYPE_ERROR_MESSAGE;
@@ -19,6 +20,8 @@ public class IllegalLineException extends SjavaException{
     /**
      * constructor for exception. holds an error message according to the type of exception,
      * and a unique message updated according to the illegal line for which it was thrown.
+     * @param line
+     * @param lineNumber
      */
     public IllegalLineException (String line, int lineNumber) {
         ERROR_MESSAGE = TYPE_ERROR_MESSAGE;
