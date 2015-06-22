@@ -27,24 +27,22 @@ public class Scope {
 
     /**
      * create a new scope object, and set its first line to be the given int.
-     * @param firstLine the line in the java-s file where this scope starts.
      */
-    public Scope(int firstLine) {
+    public Scope() {
         initializeCollections();
     }
 
     /**
      * create a new scope object, and set it first line to be the given int, and his parent scope to be the given scope.
-     * @param firstLine
      * @param parent
      */
-    public Scope(int firstLine, Scope parent) {
+    public Scope(Scope parent) {
         initializeCollections();
         this.firstLine = firstLine;
         this.parent = parent;
     }
 
-    public Scope(int firstLine, Scope parent, ArrayList<Variable> methodVariables) throws ScopeException {
+    public Scope(Scope parent, ArrayList<Variable> methodVariables) throws ScopeException {
         initializeCollections();
         this.firstLine = firstLine;
         this.parent = parent;

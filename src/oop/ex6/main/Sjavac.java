@@ -19,7 +19,7 @@ public class Sjavac {
 
     public static void main(String[] args) {
             JavaSPatterns.compilePatterns();
-            Scope global = new Scope(0); //create global scope
+            Scope global = new Scope(); //create global scope
             Scanner fileScanner;
             try {
                 File sourceFile = new File(args[PATH]);
@@ -44,7 +44,7 @@ public class Sjavac {
 
     static void runOneTest(String filePath){
         JavaSPatterns.compilePatterns();
-        Scope global = new Scope(0); //create global scope
+        Scope global = new Scope(); //create global scope
         Scanner fileScanner;
         try {
             File sourceFile = new File(filePath);
