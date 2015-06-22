@@ -1,7 +1,8 @@
 package oop.ex6.main.exceptions.variableExceptions;
 
 /**
- * Created by yuvalavrami on 6/14/15.
+ an exception representing an attempted assignment of a boolean value with anything other than the legal boolean values:
+ numbres, 'true' and 'false'.
  */
 public class IllegalBooleanCondition extends VariableException {
     private final static String TYPE_ERROR_MESSAGE = "cannot use this variable or value as a boolean condition";

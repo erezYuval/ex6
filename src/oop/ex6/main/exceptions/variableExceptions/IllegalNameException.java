@@ -1,7 +1,7 @@
 package oop.ex6.main.exceptions.variableExceptions;
 
 /**
- * Created by yuvalavrami on 6/14/15.
+ an exception representing an attempted assignment of a variable with an illegal name.
  */
 public class IllegalNameException extends VariableException {
     private final static String TYPE_ERROR_MESSAGE = "cannot assign this name to variable: name is illegal";
