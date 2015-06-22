@@ -61,16 +61,14 @@ public class Parser{
                     lastRowIsReturn = false;
                 }
             }
-            //find opening and closing brackets, and update their counter accordingly
-            if (currentLine.matches(JavaSPatterns.START_BLOCK)) {
+
+            if (currentLine.matches(JavaSPatterns.START_BLOCK)){ //find opening and closing brackets, and update counter
                 balancedBracketCounter++;
             }
             if (currentLine.matches(JavaSPatterns.END_BLOCK)) {
                 balancedBracketCounter--;
-                if(balancedBracketCounter == 0) {
-                    if (!lastRowIsReturn) {
+                if(balancedBracketCounter == 0 && !lastRowIsReturn) {
                         throw new UnexpectedExpressionAfterReturnException(curLineNumber);
-                    }
                 }
             }
         }
@@ -80,14 +78,27 @@ public class Parser{
     }
 
 
-    static void parseGlobalScopeLine(String line, Scope currentScope) throws SjavaException {
+    /*
+     * parse a legal line of the global scope
+     * @param line the line
+     * @param globalScope the Scope object representing the global scope
+     * @throws SjavaException if there is a problem with the execution of the code line
+     */
+    private static void parseGlobalScopeLine(String line, Scope globalScope) throws SjavaException {
         if(line.matches(JavaSPatterns.METHOD_SIGNATURE)) {
             Method newMethod = Parser.parseMethodSignature(line);
-            currentScope.addMethod(newMethod);}
+            globalScope.addMethod(newMethod);}
         if(line.matches(JavaSPatterns.VARIABLE_LINE)){
-            Parser.dealWithVariableLine(line, currentScope);}
+            Parser.dealWithVariableLine(line, globalScope);}
     }
 
+    /**
+     * a parser method that goes through all the lines in the file, and use parseInnerScopeBlock on each of the
+     * methods in the java-s file
+     * @param fileScanner a scanner that scans the java-s file
+     * @param globalScope the Scope object representing the java-s global scope
+     * @throws SjavaException if something goes wrong with the execution of the java-s file
+     */
     public static void parseInsideMethods(Scanner fileScanner, Scope globalScope) throws SjavaException{
         final int NAME_GROUP = 3;
         int lineIndex = 0;
@@ -104,7 +115,15 @@ public class Parser{
         }
     }
 
-    public static void parseInnerScopesBlock(Scanner fileScanner, Scope scope, int lineNumber) throws SjavaException{
+    /*
+     * a parser method that parse and execute all commands of a single block, and all it's nested blocks
+     * of a java-s file
+     * @param fileScanner a scanner that runs through the file, currently looking at the scope's first line
+     * @param scope the Scope object representing this scope.
+     * @param lineNumber the line number of the scope's first line
+     * @throws SjavaException if anything goes wrong with the execution of the java-s commands
+     */
+    private static void parseInnerScopesBlock(Scanner fileScanner, Scope scope, int lineNumber) throws SjavaException{
         String line;
         while (fileScanner.hasNext()) {
             lineNumber++;
@@ -133,12 +152,20 @@ public class Parser{
         }
     }
 
-    static void dealWithVariableLine(String line, Scope scope) throws SjavaException{
-        if(line.matches(JavaSPatterns.RETURN)) return;
+    /*\
+     * a method that attempt to execute a variable line of java-s code
+     * @param line the variable line
+     * @param scope the current scope of the code
+     * @throws SjavaException if anything goes wrong with the execution
+     */
+    private static void dealWithVariableLine(String line, Scope scope) throws SjavaException{
         final int FINAL_GROUP = 3, TYPE_GROUP = 5, NAME_AND_VALUES_GROUP = 7, NAME_SUBGROUP = 2, VALUE_SUBGROUP = 4;
+        if(line.matches(JavaSPatterns.RETURN)) return;
         Matcher lineMatcher = Pattern.compile(JavaSPatterns.VARIABLE_LINE).matcher(line);
         if (lineMatcher.matches()) {
-            Matcher variablesMatcher = Pattern.compile(JavaSPatterns.VARIABLE_OR_ASSIGNMENT).matcher(lineMatcher.group(NAME_AND_VALUES_GROUP));
+            Matcher variablesMatcher =
+                    Pattern.compile(JavaSPatterns.VARIABLE_OR_ASSIGNMENT).matcher(
+                                                                            lineMatcher.group(NAME_AND_VALUES_GROUP));
             boolean isFinal = lineMatcher.group(FINAL_GROUP) != null;
             boolean isDeclaration = lineMatcher.group(TYPE_GROUP) != null;
             if (isDeclaration) {
@@ -173,7 +200,13 @@ public class Parser{
             }
     }
 
-    static void dealWithMethodCall(String line, Scope scope) throws MethodException{
+    /*
+     * a method that deals with a java-s line that is formatted as a method call.
+     * @param line the line
+     * @param scope a Scope object of the current scope of the java-s file
+     * @throws MethodException if anything goes wrong with the call execution
+     */
+    private static void dealWithMethodCall(String line, Scope scope) throws MethodException{
         final int NAME_GROUP = 1, VALUES_GROUP = 2;
         Matcher lineMatcher = Pattern.compile(JavaSPatterns.METHOD_CALL).matcher(line);
         if(lineMatcher.matches()) {
@@ -188,18 +221,18 @@ public class Parser{
                 valueIndex++;
                 String value = valuesMatcher.group();
                 Variable variable;
-                if (VariableUtils.isNameLegal(value)) {
+                if (VariableUtils.isNameLegal(value)) { // the given argument may be a variable
                     variable = scope.searchVariableUpwards(value);
-                    if (variable != null) {
+                    if (variable != null) { // if there was a variable with this name
                         try {
                             method.checkArgumentInIndex(valueIndex, variable);
                         } catch (VariableException e) {
                             throw new IllegalArgumentTypeException(method, valueIndex, variable);
                         }
-                        continue;
+                        continue; // if it worked we continue to the next argument
                     }
                 }
-                try {
+                try {  // try use the argument as a value.
                     method.checkArgumentInIndex(valueIndex,value);
                 } catch (VariableException e) {
                     throw new IllegalArgumentValueException(method, valueIndex, value);
@@ -211,6 +244,13 @@ public class Parser{
         }
     }
 
+
+    /*
+     * deal with a boolean condition line (such as "if (a && b || 3) { ")
+     * @param line the line
+     * @param scope the Scope representing the current java-s file scope
+     * @throws VariableException if any of the things inside the parenthesis aren't boolean conditions
+     */
     private static void dealWithBooleanConditionLine(String line, Scope scope) throws VariableException{
         final int INSIDE_PARENTHESIS_GROUP = 1;
         final String DEFAULT_NAME_FOR_BOOLEAN = "bool";
@@ -235,7 +275,13 @@ public class Parser{
         }
     }
 
-    static Method parseMethodSignature(String methodSignature) throws MethodException {
+    /*
+     * a method that gets line representing a method signature and create the appropriate Method object
+     * @param methodSignature the String representing a method signature
+     * @return a Method object representing the wanted method in the java-s file
+     * @throws MethodException if anything went wrong with the creation of the method
+     */
+    private static Method parseMethodSignature(String methodSignature) throws MethodException {
         final int NAME_GROUP = 3, ARGUMENTS_GROUP = 5, TYPE_SUB_GROUP = 2, NAME_SUB_GROUP = 3;
         Matcher methodMatcher = Pattern.compile(JavaSPatterns.METHOD_SIGNATURE).matcher(methodSignature);
         if (methodMatcher.matches()) {
