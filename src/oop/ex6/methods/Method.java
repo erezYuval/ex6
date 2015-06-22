@@ -50,6 +50,10 @@ public class Method{
         }
     }
 
+    /**
+     * adds variable to a method's arguments list and initializes it
+     * @param variable
+     */
     public void addVariable(Variable variable) {
         variable.setInitialized();
         variablesInOrder.add(variable);
@@ -77,14 +81,27 @@ public class Method{
         return name;
     }
 
+    /**
+     * get the method's arguments
+     * @return a list of the method's arguments as variables(type and name)
+     */
     public ArrayList<Variable> getVariables() {
         return variablesInOrder;
     }
 
+    /**
+     * get the number of the method's arguments
+     * @return number of arguments the method receives
+     */
     public int getNumOfArguments() {
         return variablesInOrder.size();
     }
 
+    /**
+     * set a method's name to the given name
+     * @param name
+     * @throws IllegalMethodNameException
+     */
     private void setName(String name) throws IllegalMethodNameException{
         if(!name.matches(LEGAL_NAME)) {
             throw new IllegalMethodNameException(name);
