@@ -2,7 +2,6 @@ package oop.ex6.main;
 
 import oop.ex6.main.exceptions.SjavaException;
 import oop.ex6.parser.JavaSPatterns;
-import oop.ex6.parser.LegalLineParser;
 import oop.ex6.scopes.Scope;
 
 import java.io.File;

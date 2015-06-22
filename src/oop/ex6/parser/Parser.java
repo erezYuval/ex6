@@ -220,12 +220,12 @@ public class Parser{
     }
 
     private static void dealWithBooleanConditionLine(String line, Scope scope) throws VariableException{
-        final int INSIDE_PARETNHESIS_GROUP = 1;
+        final int INSIDE_PARENTHESIS_GROUP = 1;
         final String DEFAULT_NAME_FOR_BOOLEAN = "bool";
         Matcher insideParenthesis = Pattern.compile(JavaSPatterns.INSIDE_PARENTHESIS).matcher(line);
         if (insideParenthesis.matches()) {
             Variable booleanTester = new VariableBoolean(DEFAULT_NAME_FOR_BOOLEAN);
-            String theInside = insideParenthesis.group(INSIDE_PARETNHESIS_GROUP);
+            String theInside = insideParenthesis.group(INSIDE_PARENTHESIS_GROUP);
             Matcher valueOrNameMatcher = Pattern.compile(JavaSPatterns.VALUE).matcher(theInside);
             while (valueOrNameMatcher.find()) {
                 String valueOrName = valueOrNameMatcher.group();
@@ -242,12 +242,6 @@ public class Parser{
             }
         }
     }
-
-
-
-
-
-
 
     static Method parseMethodSignature(String methodSignature) throws MethodException {
         final int NAME_GROUP = 3, ARGUMENTS_GROUP = 5, TYPE_SUB_GROUP = 2, NAME_SUB_GROUP = 3;
@@ -273,13 +267,5 @@ public class Parser{
             return new Method(methodName);
         }
         return null;
-    }
-
-    public static void main(String[] args) throws SjavaException{
-        JavaSPatterns.compilePatterns();
-        Scope scope = new Scope(0);
-        String line = "5,7";
-//        System.out.println(line.matches(JavaSPatterns.VALUE));
-        System.out.println(JavaSPatterns.CONDITION_AND_BOOLEAN_IN_PARENTHESIS);
     }
 }
