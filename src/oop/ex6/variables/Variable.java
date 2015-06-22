@@ -21,6 +21,7 @@ public abstract class Variable {
      * create a new variable, setValue with the value of an old one to setValue.
      * @param variable the value to be used
      * @param variableName the name of the variable
+     * @throws VariableException if the name or variable type don't match this variable
      */
     public Variable(String variableName, Variable variable) throws VariableException{
         setVarName(variableName);
@@ -31,6 +32,7 @@ public abstract class Variable {
      * create a new variable, initialized with a value given as a string.
      * @param value string representation of the new value.
      * @param variableName the name of the variable
+     * @throws VariableException if the name or value are illegal
      */
     public Variable(String variableName, String value) throws VariableException{
         setVarName(variableName);
@@ -40,6 +42,7 @@ public abstract class Variable {
     /**
      * create a new variable, not initialized with a value.
      * @param variableName
+     * @throws IllegalNameException if the name is not legal
      */
     public Variable(String variableName) throws IllegalNameException{
         setVarName(variableName);
@@ -65,6 +68,7 @@ public abstract class Variable {
     /**
      * initalize the variable with a value.
      * @param value the new value as a string.
+     * @throws VariableException if the value is illegal
      */
     public void setValue(String value) throws VariableException{
         if (isValueLegal(value)) {
@@ -99,14 +103,14 @@ public abstract class Variable {
 
     /**
      * determines whether a string is legal as the value of the specific variable type.
-     * @param value
+     * @param value the wanted value to assign
      */
     abstract protected boolean isValueLegal(String value);
 
     /**
      * determines whether this variable can get another variable as a value.
      * @param otherVariable the variable to determine whether it can be used as a value.
-     * @return
+     * @return true if can get the variable, else otherwise
      */
     abstract protected boolean canGetVariable(Variable otherVariable);
 

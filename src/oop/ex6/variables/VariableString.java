@@ -16,6 +16,7 @@ public class VariableString extends Variable {
      *
      * @param variableName the name of the variable
      * @param variable     the value to be used
+     * @throws VariableException if the name or value aren't legal.
      */
     public VariableString(String variableName, Variable variable)throws VariableException {
         super(variableName, variable);
@@ -26,6 +27,7 @@ public class VariableString extends Variable {
      *
      * @param variableName the name of the variable
      * @param value        string representation of the new value.
+     * @throws VariableException if the name or value aren't legal.
      */
     public VariableString(String variableName, String value)throws VariableException {
         super(variableName, value);
@@ -35,6 +37,7 @@ public class VariableString extends Variable {
      * create a new variable, not initialized with a value.
      *
      * @param variableName
+     * @throws VariableException
      */
     public VariableString(String variableName)throws VariableException {
         super(variableName);
