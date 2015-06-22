@@ -10,8 +10,7 @@ public class VariableBoolean extends Variable {
     final String LEGAL_VAL = VariableInteger.LEGAL_VAL + "|" + VariableDouble.LEGAL_VAL + "|" + "true|false"; //defines
      //valid boolean value: any valid number (integer or double), or the expressions true or false
     private final VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.BOOLEAN,
-            VARIABLE_TYPES.INTEGER, VARIABLE_TYPES.DOUBLE}; //valid types that a boolean accepts (integer, double and
-            //and another boolean)
+            VARIABLE_TYPES.INTEGER, VARIABLE_TYPES.DOUBLE}; //types that boolean accepts (integer, double and boolean)
 
     /**
      * create a new variable, setValue with the value of an old one to setValue.
