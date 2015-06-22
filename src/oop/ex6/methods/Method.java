@@ -4,9 +4,7 @@ import oop.ex6.main.exceptions.methodExceptions.IllegalMethodNameException;
 import oop.ex6.main.exceptions.methodExceptions.MethodException;
 import oop.ex6.main.exceptions.methodExceptions.WrongArgumentsNumberException;
 import oop.ex6.main.exceptions.variableExceptions.VariableException;
-import oop.ex6.scopes.Scope;
 import oop.ex6.variables.Variable;
-import oop.ex6.variables.VariableFactory;
 
 import java.util.ArrayList;
 
@@ -25,8 +23,7 @@ public class Method{
     /**
      * construct a new method using the given variable types and names.
      * @param methodName
-     * @param argumentTypesInOrder
-     * @param argumentNamesInOrder
+     * @param variablesInOrder
      */
     public Method(String methodName, ArrayList<Variable> variablesInOrder) throws IllegalMethodNameException {
         this.variablesInOrder = variablesInOrder;
