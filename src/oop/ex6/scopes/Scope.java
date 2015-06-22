@@ -58,6 +58,7 @@ public class Scope {
     /**
      * add a variable to the variable collection of this scope, if not existing already.
      * @param variable
+     * @throws ScopeException
      */
     public void addVariable(Variable variable) throws ScopeException{
         Variable found = searchVariableLocally(variable.toString());
