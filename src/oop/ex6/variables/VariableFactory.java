@@ -3,7 +3,7 @@ package oop.ex6.variables;
 import oop.ex6.main.exceptions.variableExceptions.VariableException;
 
 /**
- * this class is a factory to Variables.
+ * this class is a factory for Variables.
  */
 public class VariableFactory {
 
@@ -32,7 +32,7 @@ public class VariableFactory {
     }
 
     /**
-     * produces a variable instance with the given arguments, with setting a value
+     * produces a variable instance with the given arguments, and sets a value
      * @param type the wanted variable type
      * @param name the variable name
      * @param value the wanted value
