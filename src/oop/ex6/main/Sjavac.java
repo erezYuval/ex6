@@ -6,7 +6,6 @@ import oop.ex6.parser.LegalLineParser;
 import oop.ex6.scopes.Scope;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 /**
@@ -27,10 +26,10 @@ public class Sjavac {
                 File sourceFile = new File(args[PATH]);
                 fileScanner = new Scanner(sourceFile);
                 try {
-                    oop.ex6.parser.Parser.parseFile(fileScanner, global);
+                    oop.ex6.parser.Parser.parseGlobalScope(fileScanner, global);
                     fileScanner.reset();
                     fileScanner = new Scanner(sourceFile);
-                    oop.ex6.parser.Parser.parseDeep(fileScanner, global);
+                    oop.ex6.parser.Parser.parseInsideMethods(fileScanner, global);
                 }catch(SjavaException e) {
                     System.out.println(1);
                     System.err.println(e.getErrorMessage());
@@ -52,10 +51,10 @@ public class Sjavac {
             File sourceFile = new File(filePath);
             fileScanner = new Scanner(sourceFile);
             try {
-                oop.ex6.parser.Parser.parseFile(fileScanner, global);
+                oop.ex6.parser.Parser.parseGlobalScope(fileScanner, global);
                 fileScanner.reset();
                 fileScanner = new Scanner(sourceFile);
-                oop.ex6.parser.Parser.parseDeep(fileScanner, global);
+                oop.ex6.parser.Parser.parseInsideMethods(fileScanner, global);
             }catch(SjavaException e) {
                 System.out.println(1);
 //                System.err.println(e.getErrorMessage());

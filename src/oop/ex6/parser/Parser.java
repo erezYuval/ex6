@@ -27,7 +27,7 @@ public class Parser{
      * the wanted actions on Scopes.
      * @param fileScanner - a scanner that runs on a legal file
      */
-    public static void parseFile(Scanner fileScanner, Scope globalScope) throws SjavaException {
+    public static void parseGlobalScope(Scanner fileScanner, Scope globalScope) throws SjavaException {
         int balancedBracketCounter = 0;
         int curLineNumber = 0;
         boolean lastRowIsReturn = true;
@@ -47,7 +47,7 @@ public class Parser{
                 } else if (currentLine.matches(JavaSPatterns.VARIABLE_LINE) ||
                         currentLine.matches(JavaSPatterns.METHOD_SIGNATURE)) { // i.e line is legal
                     try {
-                        parseLine(currentLine, globalScope);
+                        parseGlobalScopeLine(currentLine, globalScope);
                     } catch (SjavaException e) {
                         e.addLineNumber(curLineNumber);
                         throw e;
@@ -90,7 +90,7 @@ public class Parser{
     }
 
 
-    static void parseLine(String line, Scope currentScope) throws SjavaException {
+    static void parseGlobalScopeLine(String line, Scope currentScope) throws SjavaException {
         if(line.matches(JavaSPatterns.METHOD_SIGNATURE)) {
             Method newMethod = Parser.parseMethodSignature(line);
             currentScope.addMethod(newMethod);}
@@ -98,7 +98,21 @@ public class Parser{
             Parser.dealWithVariableLine(line, currentScope);}
     }
 
-    public static void parseBlock(Scanner fileScanner, Scope scope, int lineNumber) throws SjavaException{
+    public static boolean parseInsideMethods(Scanner fileScanner, Scope globalScope) throws SjavaException{
+        int lineIndex = 0;
+        while (fileScanner.hasNext()) {
+            lineIndex++;
+            String line = fileScanner.nextLine();
+            if(line.matches(JavaSPatterns.METHOD_SIGNATURE)) {
+                Method newMethod = parseMethodSignature(line);
+                Scope scope = new Scope(lineIndex, globalScope, newMethod.getVariables());
+                parseInnerScopesBlock(fileScanner, scope, lineIndex);
+            }
+        }
+        return false;
+    }
+
+    public static void parseInnerScopesBlock(Scanner fileScanner, Scope scope, int lineNumber) throws SjavaException{
         String line;
         while (fileScanner.hasNext()) {
             lineNumber++;
@@ -113,7 +127,7 @@ public class Parser{
                 } else if (line.matches(JavaSPatterns.CONDITION_AND_BOOLEAN_IN_PARENTHESIS)) {
                     dealWithBooleanConditionLine(line, scope);
                     Scope innerScope = new Scope(lineNumber, scope);
-                    parseBlock(fileScanner, innerScope, lineNumber);
+                    parseInnerScopesBlock(fileScanner, innerScope, lineNumber);
                 } else if (line.matches(JavaSPatterns.END_BLOCK)) {
                     return;
                 } else {
@@ -233,19 +247,7 @@ public class Parser{
 
 
 
-    public static boolean parseDeep(Scanner fileScanner, Scope globalScope) throws SjavaException{
-        int lineIndex = 0;
-        while (fileScanner.hasNext()) {
-            lineIndex++;
-            String line = fileScanner.nextLine();
-            if(line.matches(JavaSPatterns.METHOD_SIGNATURE)) {
-                Method newMethod = parseMethodSignature(line);
-                Scope scope = new Scope(lineIndex, globalScope, newMethod.getVariables());
-                parseBlock(fileScanner, scope, lineIndex);
-            }
-        }
-        return false;
-    }
+
 
     static Method parseMethodSignature(String methodSignature) throws MethodException {
         final int NAME_GROUP = 3, ARGUMENTS_GROUP = 5, TYPE_SUB_GROUP = 2, NAME_SUB_GROUP = 3;
