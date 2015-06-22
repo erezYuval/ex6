@@ -104,6 +104,7 @@ public abstract class Variable {
     /**
      * determines whether a string is legal as the value of the specific variable type.
      * @param value the wanted value to assign
+     * @return true iff value is legal
      */
     abstract protected boolean isValueLegal(String value);
 
@@ -133,7 +134,7 @@ public abstract class Variable {
     }
 
     /**
-     * @return flase isFinal state for all variables that are not final
+     * @return false isFinal state for all variables that are not final
      */
     protected boolean isFinal() {
         return false;
