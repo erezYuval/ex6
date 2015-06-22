@@ -7,7 +7,7 @@ import oop.ex6.main.exceptions.variableExceptions.VariableException;
  */
 public class VariableUtils {
 
-    private final static String LEGAL_NAME = "((_\\w+)|([a-zA-Z]\\w*))";
+    private final static String LEGAL_NAME = "((_\\w+)|([a-zA-Z]\\w*))"; //regular expression for a legal variable name
 
     /**
      * determines whether a string is legal as a variable name.
@@ -18,6 +18,12 @@ public class VariableUtils {
         return name != null && name.matches(LEGAL_NAME);
     }
 
+    /**
+     * creates a copy for a variable, identical to the given variable
+     * @param variable
+     * @return variableCopy
+     * @throws VariableException
+     */
     public static Variable deepCopyVariable(Variable variable)throws VariableException {
         Variable variableCopy = VariableFactory.produceVariable(variable.getVariableType(),variable.toString());
         if(variable.isInitialized()){
@@ -29,6 +35,11 @@ public class VariableUtils {
         return variableCopy;
     }
 
+    /**
+     * converts a string representation of a type as appears in a s-java code file to its respective type
+     * @param type
+     * @return
+     */
     public static VARIABLE_TYPES stringToType(String type) {
         for (VARIABLE_TYPES variableTypes : VARIABLE_TYPES.values()) {
             if (type.equals(variableTypes.toString())) {
