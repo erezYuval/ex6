@@ -16,6 +16,7 @@ public class VariableDouble extends Variable{
      *
      * @param variableName the name of the variable
      * @param variable     the value to be used
+     * @throws VariableException if name or variable type are not matching this type
      */
     public VariableDouble(String variableName, Variable variable)throws VariableException {
         super(variableName, variable);
@@ -26,6 +27,7 @@ public class VariableDouble extends Variable{
      *
      * @param variableName the name of the variable
      * @param value        string representation of the new value.
+     * @throws VariableException if name or value are illegal
      */
     public VariableDouble(String variableName, String value) throws VariableException{
         super(variableName, value);
@@ -35,6 +37,7 @@ public class VariableDouble extends Variable{
      * create a new variable, not initialized with a value.
      *
      * @param variableName
+     * @throws VariableException if name is illegal
      */
     public VariableDouble(String variableName)throws VariableException {
         super(variableName);

@@ -17,6 +17,7 @@ public class VariableInteger extends Variable {
      *
      * @param variableName the name of the variable
      * @param variable     the value to be used
+     * @throws VariableException if the name or variable type are illegal
      */
     public VariableInteger(String variableName, Variable variable) throws VariableException {
         super(variableName, variable);
@@ -27,6 +28,7 @@ public class VariableInteger extends Variable {
      *
      * @param variableName the name of the variable
      * @param value        string representation of the new value.
+     * @throws VariableException if the name or value are illegal
      */
     public VariableInteger(String variableName, String value)throws VariableException {
         super(variableName, value);
@@ -36,6 +38,7 @@ public class VariableInteger extends Variable {
      * create a new variable, not initialized with a value.
      *
      * @param variableName
+     * @throws VariableException if the name is illegal
      */
     public VariableInteger(String variableName) throws VariableException{
         super(variableName);
@@ -55,7 +58,7 @@ public class VariableInteger extends Variable {
      * determines whether this variable can get another variable as a value.
      *
      * @param otherVariable the variable to determine whether it can be used as a value.
-     * @return
+     * @return true if the other value can be set as this ones value, else otherwise
      */
     @Override
     protected boolean canGetVariable(Variable otherVariable) {

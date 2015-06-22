@@ -17,6 +17,7 @@ public class VariableChar extends Variable {
      *
      * @param variableName the name of the variable
      * @param variable     the value to be used
+     * @throws VariableException if name or variable type are not matching this variable
      */
     public VariableChar(String variableName, Variable variable) throws VariableException {
         super(variableName, variable);
@@ -27,6 +28,7 @@ public class VariableChar extends Variable {
      *
      * @param variableName the name of the variable
      * @param value        string representation of the new value.
+     * @throws              VariableException if name or value are illegal
      */
     public VariableChar(String variableName, String value) throws VariableException{
         super(variableName, value);
@@ -36,6 +38,7 @@ public class VariableChar extends Variable {
      * create a new variable, not initialized with a value.
      *
      * @param variableName
+     * @throws VariableException if the name is illegal
      */
     public VariableChar(String variableName)throws VariableException {
         super(variableName);
