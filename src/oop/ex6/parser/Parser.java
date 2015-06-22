@@ -72,7 +72,7 @@ public class Parser{
                 }
             }
         }
-            if (balancedBracketCounter != 0) { //reached end of file,number of opening and closing brackets doesn't match
+            if (balancedBracketCounter != 0) { //reached end of file, opening and closing brackets numbers don't match
                 throw new UnbalancedScopeException(curLineNumber);
             }
     }
