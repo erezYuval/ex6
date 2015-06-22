@@ -81,9 +81,6 @@ public class Parser{
                 }
             }
         }
-
-
-
             if (balancedBracketCounter != 0) { // reached end of file, number of opening and closing brackets does not match
                 throw new UnbalancedScopeException();
             }
