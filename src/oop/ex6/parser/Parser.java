@@ -33,7 +33,7 @@ public class Parser{
             String currentLine = fileScanner.nextLine();
             if (balancedBracketCounter < 0) { //there is a closing bracket in the file that does not correspond to a
                 //valid opening bracket
-                throw new UnbalancedScopeException();
+                throw new UnbalancedScopeException(curLineNumber);
             }
             if (balancedBracketCounter == 0) { //i.e in global scope: read lines
                 if (currentLine.matches(JavaSPatterns.EMPTY_LINE) || currentLine.matches(JavaSPatterns.COMMENT_LINE)) {
@@ -47,10 +47,9 @@ public class Parser{
                         throw e;
                     }
                 } else if (currentLine.matches(JavaSPatterns.RETURN)) { //no return statements expected in global scope
-                    throw new ReturnStatementInGlobalScopeException();
-                    // line is not empty, comment or legal - i.e illegal line
-                } else {
-                    throw new IllegalLineException(currentLine);
+                    throw new ReturnStatementInGlobalScopeException(curLineNumber);
+                } else { // line is not empty, comment or legal - i.e illegal line
+                    throw new IllegalLineException(currentLine, curLineNumber);
                 }
             } else { //inside a method declaration
                 if (currentLine.matches(JavaSPatterns.RETURN)) {
@@ -62,7 +61,6 @@ public class Parser{
                     lastRowIsReturn = false;
                 }
             }
-
             //find opening and closing brackets, and update their counter accordingly
             if (currentLine.matches(JavaSPatterns.START_BLOCK)) {
                 balancedBracketCounter++;
@@ -71,13 +69,13 @@ public class Parser{
                 balancedBracketCounter--;
                 if(balancedBracketCounter == 0) {
                     if (!lastRowIsReturn) {
-                        throw new UnexpectedExpressionAfterReturnException();
+                        throw new UnexpectedExpressionAfterReturnException(curLineNumber);
                     }
                 }
             }
         }
             if (balancedBracketCounter != 0) { // reached end of file, number of opening and closing brackets does not match
-                throw new UnbalancedScopeException();
+                throw new UnbalancedScopeException(curLineNumber);
             }
     }
 

@@ -11,4 +11,10 @@ public class IllegalLineException extends SjavaException{
         ERROR_MESSAGE = TYPE_ERROR_MESSAGE;
         uniqueMessage = "the line \n\t" + line + "\nis illegal.";
     }
+
+    public IllegalLineException (String line, int lineNumber) {
+        ERROR_MESSAGE = TYPE_ERROR_MESSAGE;
+        uniqueMessage = "the line \n\t" + line + "\nis illegal.";
+        this.addLineNumber(lineNumber);
+    }
 }

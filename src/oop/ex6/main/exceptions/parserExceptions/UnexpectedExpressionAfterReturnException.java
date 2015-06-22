@@ -6,5 +6,10 @@ import oop.ex6.main.exceptions.SjavaException;
  * Created by yuvalavrami on 6/14/15.
  */
 public class UnexpectedExpressionAfterReturnException extends SjavaException{
-    protected final static String ERROR_MESSAGE = "unexpected expression after return statement";
+    private final static String TYPE_ERROR_MESSAGE = "unexpected expression after return statement";
+
+    public UnexpectedExpressionAfterReturnException(int lineNumber) {
+        ERROR_MESSAGE = TYPE_ERROR_MESSAGE;
+        this.addLineNumber(lineNumber);
+    }
 }
