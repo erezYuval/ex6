@@ -3,7 +3,7 @@ package oop.ex6.main.exceptions.methodExceptions;
 import oop.ex6.methods.Method;
 
 /**
- * Created by yuvalavrami on 6/14/15.
+ an exception representing a state where a called method doesn't receive the right number of arguments.
  */
 public class WrongArgumentsNumberException extends MethodException {
     private final static String TYPE_ERROR_MESSAGE =

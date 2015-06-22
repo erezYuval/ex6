@@ -1,7 +1,7 @@
 package oop.ex6.main.exceptions.methodExceptions;
 
 /**
- * Created by yuvalavrami on 6/14/15.
+ an exception representing a state where a method argument's name is illegal.
  */
 public class IllegalArgumentNameException extends MethodException{
     private final static String TYPE_ERROR_MESSAGE = "cannot use argument with this name: name is illegal";

@@ -4,7 +4,7 @@ import oop.ex6.methods.Method;
 import oop.ex6.variables.Variable;
 
 /**
- * Created by yuvalavrami on 6/14/15.
+ an exception representing a state where a method argument's type is illegal.
  */
 public class IllegalArgumentTypeException extends MethodException {
     private final static String TYPE_ERROR_MESSAGE = "cannot assign argument with this type: type is illegal";
