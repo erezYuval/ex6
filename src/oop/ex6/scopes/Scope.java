@@ -19,26 +19,34 @@ public class Scope {
     //this will be the parent scope of this scope, (we need it for outer scope variables.)
     private Scope parent;
 
+    // collections that hold this scope's available variables and methods.
     private Hashtable<String, Variable> variables;
     private Hashtable<String, Method> methods;
 
 
     /**
-     * create a new scope object, and set its first line to be the given int.
+     * create a new scope object to be the given int.
      */
     public Scope() {
         initializeCollections();
     }
 
     /**
-     * create a new scope object, and set it first line to be the given int, and his parent scope to be the given scope.
-     * @param parent
+     * create a new scope object, and his parent scope to be the given scope.
+     * @param parent this scope's parent scope.
      */
     public Scope(Scope parent) {
         initializeCollections();
         this.parent = parent;
     }
 
+    /**
+     * create a new scope and supply a list of variables that he will recognize as is own (usually the parent
+     * method's arguments.
+     * @param parent
+     * @param methodVariables
+     * @throws ScopeException
+     */
     public Scope(Scope parent, ArrayList<Variable> methodVariables) throws ScopeException {
         initializeCollections();
         this.parent = parent;
@@ -60,6 +68,17 @@ public class Scope {
         }
     }
 
+
+    /**
+     * update an existing variable value
+     * if the existing variable is in this scope - update
+     * if it in a parent variable - deep copy and update
+     * if it doesn't exist in any scope up until the global scope - throw exception
+     * @param variableName the name of the variable to be updated
+     * @param value the value to be given to the variable
+     * @throws VariableException if the value doesn't match the variable type
+     * @throws ScopeException if a variable by this name is not reachable by this scope
+     */
     public void updateVariable(String variableName, String value) throws VariableException, ScopeException{
         Variable found = searchVariableLocally(variableName);
         if (found != null) {
@@ -75,6 +94,10 @@ public class Scope {
         }
     }
 
+    /**
+     * add a method to the collection of accessible methods of this scope.
+     * @param method the new method to be added
+     */
     public void addMethod(Method method){
         methods.put(method.getName(), method);
     }
@@ -111,14 +134,13 @@ public class Scope {
         }
     }
 
-    /*
-    set the collection data members.
-     */
-    private void initializeCollections(){
-        variables = new Hashtable<>();
-        methods = new Hashtable<>();
-    }
 
+
+    /**
+     * search for a method by name in this scope and all the parent scopes. and return it.
+     * @param methodName the name of the  method to be searched
+     * @return the found method if found, null otherwise.
+     */
     public Method searchMethod(String methodName) {
         if (this.parent != null) {
             return parent.searchMethod(methodName);
@@ -126,5 +148,13 @@ public class Scope {
         else {
             return methods.get(methodName);
         }
+    }
+
+    /*
+    set the collection data members.
+     */
+    private void initializeCollections(){
+        variables = new Hashtable<>();
+        methods = new Hashtable<>();
     }
 }
