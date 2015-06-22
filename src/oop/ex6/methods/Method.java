@@ -21,6 +21,7 @@ public class Method{
      * construct a new method using the given variable types and names.
      * @param methodName
      * @param variablesInOrder
+     * @throws IllegalMethodNameException
      */
     public Method(String methodName, ArrayList<Variable> variablesInOrder) throws IllegalMethodNameException {
         this.variablesInOrder = variablesInOrder;
@@ -30,6 +31,7 @@ public class Method{
     /**
      * construct a new method (that receives no arguments)
      * @param methodName
+     * @throws MethodException
      */
     public Method(String methodName) throws MethodException{
         variablesInOrder = new ArrayList<>();
@@ -41,6 +43,8 @@ public class Method{
      * is legal in the location it was given in the call.
      * @param index the location in the method call, starting with 0
      * @param value the value to be used.
+     * @throws VariableException
+     * @throws MethodException
      */
     public void checkArgumentInIndex(int index, String value) throws VariableException, MethodException{
         try {
@@ -64,6 +68,8 @@ public class Method{
      * is legal in the location it was given in the call.
      * @param index the location in the method call, starting with 0
      * @param variable the variable to be used.
+     * @throws VariableException
+     * @throws MethodException
      */
     public void checkArgumentInIndex(int index, Variable variable) throws VariableException, MethodException {
         try {
