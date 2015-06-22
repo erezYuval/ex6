@@ -106,7 +106,7 @@ public class FinalVariable extends Variable {
      * @return the type of this Variable instance.
      */
     @Override
-    public VARIABLE_TYPES getVariableType() {
+    public VariableTypes getVariableType() {
         return insideVar.getVariableType();
 
     }

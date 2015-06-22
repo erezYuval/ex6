@@ -8,7 +8,7 @@ import oop.ex6.main.exceptions.variable_exceptions.VariableException;
  */
 public class VariableInteger extends Variable {
 
-    private final VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER}; //valid types that an
+    private final VariableTypes[] LEGAL_TYPES = new VariableTypes[]{VariableTypes.INTEGER}; //valid types that an
      //integer can receive (only another integer)
     final static String LEGAL_VAL = "\\-?\\d+"; //regular expression for valid integer
 
@@ -59,8 +59,8 @@ public class VariableInteger extends Variable {
      */
     @Override
     protected boolean canGetVariable(Variable otherVariable) {
-        VARIABLE_TYPES otherType = otherVariable.getVariableType();
-        for (VARIABLE_TYPES type : LEGAL_TYPES) {
+        VariableTypes otherType = otherVariable.getVariableType();
+        for (VariableTypes type : LEGAL_TYPES) {
             if (type == otherType) {
                 return true;
             }
@@ -74,7 +74,7 @@ public class VariableInteger extends Variable {
      * @return the type of this Variable instance.
      */
     @Override
-    public VARIABLE_TYPES getVariableType() {
-        return VARIABLE_TYPES.INTEGER;
+    public VariableTypes getVariableType() {
+        return VariableTypes.INTEGER;
     }
 }

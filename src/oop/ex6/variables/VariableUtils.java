@@ -40,8 +40,8 @@ public class VariableUtils {
      * @param type
      * @return
      */
-    public static VARIABLE_TYPES stringToType(String type) {
-        for (VARIABLE_TYPES variableTypes : VARIABLE_TYPES.values()) {
+    public static VariableTypes stringToType(String type) {
+        for (VariableTypes variableTypes : VariableTypes.values()) {
             if (type.equals(variableTypes.toString())) {
                 return variableTypes;
             }

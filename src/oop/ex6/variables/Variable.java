@@ -114,7 +114,7 @@ public abstract class Variable {
      * check which type of variable is a specific instance.
      * @return the type of this Variable instance.
      */
-    abstract public VARIABLE_TYPES getVariableType();
+    abstract public VariableTypes getVariableType();
 
     /**
      * set a variable's name to given name

@@ -170,7 +170,7 @@ public class Parser{
             boolean isDeclaration = lineMatcher.group(TYPE_GROUP) != null;
             if (isDeclaration) {
                 Variable newVariable;
-                VARIABLE_TYPES type = VariableUtils.stringToType(lineMatcher.group(TYPE_GROUP));
+                VariableTypes type = VariableUtils.stringToType(lineMatcher.group(TYPE_GROUP));
                 while(variablesMatcher.find()) {
                     String name = variablesMatcher.group(NAME_SUBGROUP);
                     String value = variablesMatcher.group(VALUE_SUBGROUP);
@@ -292,7 +292,7 @@ public class Parser{
                     Method newMethod = new Method(methodName);
                     while (variableMatcher.find()) {
                         String name = variableMatcher.group(NAME_SUB_GROUP);
-                        VARIABLE_TYPES type = VariableUtils.stringToType(variableMatcher.group(TYPE_SUB_GROUP));
+                        VariableTypes type = VariableUtils.stringToType(variableMatcher.group(TYPE_SUB_GROUP));
                         try {
                             Variable newVariable = VariableFactory.produceVariable(type, name);
                             newMethod.addVariable(newVariable);

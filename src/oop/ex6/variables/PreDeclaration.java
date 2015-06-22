@@ -3,12 +3,12 @@ package oop.ex6.variables;
 /**
  * an enum of all reserved words that are allowed before a variable declaration.
  */
-public enum PREDECLARATIONS {
+public enum PreDeclaration {
     FINAL("final");
 
     String asString;
 
-    PREDECLARATIONS(String stringRep) {
+    PreDeclaration(String stringRep) {
         this.asString = stringRep;
     }
 

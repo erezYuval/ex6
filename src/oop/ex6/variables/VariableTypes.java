@@ -3,7 +3,7 @@ package oop.ex6.variables;
 /**
  * enum representing the different variable types of the java-s language.
  */
-public enum VARIABLE_TYPES{
+public enum VariableTypes {
     INTEGER("int"),
     DOUBLE("double"),
     STRING("String"),
@@ -12,7 +12,7 @@ public enum VARIABLE_TYPES{
 
     private String asString;
 
-    VARIABLE_TYPES(String stringRepresenation) {
+    VariableTypes(String stringRepresenation) {
         this.asString = stringRepresenation;
     }
 

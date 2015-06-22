@@ -9,7 +9,7 @@ import oop.ex6.main.exceptions.variable_exceptions.VariableException;
 public class VariableChar extends Variable {
 
     final String LEGAL_VAL = "'[^']?'"; //regular expression for valid character
-    private final VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.CHAR}; //valid types that a char
+    private final VariableTypes[] LEGAL_TYPES = new VariableTypes[]{VariableTypes.CHAR}; //valid types that a char
     // accepts (only another char)
 
     /**
@@ -59,7 +59,7 @@ public class VariableChar extends Variable {
      */
     @Override
     protected boolean canGetVariable(Variable otherVariable) {
-        for(VARIABLE_TYPES type: LEGAL_TYPES){
+        for(VariableTypes type: LEGAL_TYPES){
             if(otherVariable.getVariableType() == type){
                 return true;}
         }
@@ -72,8 +72,8 @@ public class VariableChar extends Variable {
      * @return the type of this Variable instance.
      */
     @Override
-    public VARIABLE_TYPES getVariableType() {
-        return VARIABLE_TYPES.CHAR;
+    public VariableTypes getVariableType() {
+        return VariableTypes.CHAR;
     }
 
 }

@@ -9,8 +9,8 @@ public class VariableBoolean extends Variable {
 
     final String LEGAL_VAL = VariableInteger.LEGAL_VAL + "|" + VariableDouble.LEGAL_VAL + "|" + "true|false"; //defines
      //valid boolean value: any valid number (integer or double), or the expressions true or false
-    private final VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.BOOLEAN,
-            VARIABLE_TYPES.INTEGER, VARIABLE_TYPES.DOUBLE}; //types that boolean accepts (integer, double and boolean)
+    private final VariableTypes[] LEGAL_TYPES = new VariableTypes[]{VariableTypes.BOOLEAN,
+            VariableTypes.INTEGER, VariableTypes.DOUBLE}; //types that boolean accepts (integer, double and boolean)
 
     /**
      * create a new variable, setValue with the value of an old one to setValue.
@@ -59,7 +59,7 @@ public class VariableBoolean extends Variable {
      */
     @Override
     protected boolean canGetVariable(Variable otherVariable) {
-        for(VARIABLE_TYPES type: LEGAL_TYPES){
+        for(VariableTypes type: LEGAL_TYPES){
             if(otherVariable.getVariableType() == type){
                 return true;}
         }
@@ -72,8 +72,8 @@ public class VariableBoolean extends Variable {
      * @return the type of this Variable instance.
      */
     @Override
-    public VARIABLE_TYPES getVariableType() {
-        return VARIABLE_TYPES.BOOLEAN;
+    public VariableTypes getVariableType() {
+        return VariableTypes.BOOLEAN;
     }
 
 }

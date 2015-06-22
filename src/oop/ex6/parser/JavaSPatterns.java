@@ -1,7 +1,7 @@
 package oop.ex6.parser;
 
-import oop.ex6.variables.VARIABLE_TYPES;
-import oop.ex6.variables.PREDECLARATIONS;
+import oop.ex6.variables.VariableTypes;
+import oop.ex6.variables.PreDeclaration;
 
 /**
  * a class of regex patterns for various uses by the Parser class
@@ -37,8 +37,8 @@ public class JavaSPatterns {
      * and other lines that depend on these.
      */
     public static void generatePatterns(){
-        PREDECLARATION = generateOrString(PREDECLARATIONS.values());
-        DECLARATION_VARIABLES = generateOrString(VARIABLE_TYPES.values());
+        PREDECLARATION = generateOrString(PreDeclaration.values());
+        DECLARATION_VARIABLES = generateOrString(VariableTypes.values());
         VARIABLE_TYPE_NAME = "(\\s*" + DECLARATION_VARIABLES + "\\s+)(\\w+)";
         VARIABLE_LINE = "\\s*((" + PREDECLARATION + "\\s+)?((" + DECLARATION_VARIABLES + ")\\s+))?(" + VARIABLE_OR_ASSIGNMENT + "(,\\s*" + VARIABLE_OR_ASSIGNMENT + ")*)\\s*;\\s*";
         METHOD_SIGNATURE = "(\\s*void)(\\s)+(\\w+)(\\s*)\\(\\s*("+ DECLARATION_VARIABLES +"(\\s+)(\\w+)(\\s*)(,(\\s)*"+ DECLARATION_VARIABLES +"(\\s+)(\\w+)(\\s*))*)?\\)(\\s*)\\{\\s*";

@@ -8,7 +8,7 @@ import oop.ex6.main.exceptions.variable_exceptions.VariableException;
 public class VariableString extends Variable {
 
     final String LEGAL_VAL = "\".*\""; //regular expression for valid string
-    private final VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.STRING}; //valid types that a
+    private final VariableTypes[] LEGAL_TYPES = new VariableTypes[]{VariableTypes.STRING}; //valid types that a
      //String can receive (only another String)
 
     /**
@@ -58,7 +58,7 @@ public class VariableString extends Variable {
      */
     @Override
     protected boolean canGetVariable(Variable otherVariable) {
-        for (VARIABLE_TYPES type : LEGAL_TYPES) {
+        for (VariableTypes type : LEGAL_TYPES) {
             if (otherVariable.getVariableType() == type) {
                 return true;
             }
@@ -72,8 +72,8 @@ public class VariableString extends Variable {
      * @return the type of this Variable instance.
      */
     @Override
-    public VARIABLE_TYPES getVariableType(){
-        return VARIABLE_TYPES.STRING;
+    public VariableTypes getVariableType(){
+        return VariableTypes.STRING;
     }
 
 }

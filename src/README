@@ -55,7 +55,7 @@ main 									                            - package
                     AssignUninitializedVariableException            - implements VariableException
                     IllegalBooleanCondition                         - implements VariableException
                     IllegalNameException                            - implements VariableException
-                    MultipleAssignmentWithoutDeclerationException   - implements VariableException
+                    MultipleAssignmentWithoutDeclarationException   - implements VariableException
                     TypeMismatchException                           - implements VariableException
                     FinalVariableException                          - abstract class, implements VariableException
                         AttemptChangeFinalVarException              - implements FinalVariableException
@@ -70,37 +70,52 @@ main 									                            - package
 =============================
 =          Design           =
 =============================
-same as the one shown in class.
 
 =============================
-=  Implementation details   =
+=  Implementation details   =s
 =============================
-
 
 =============================
 =    Answers to questions   =
 =============================
-1. in the design segment
 
-2. Exception hirarchy (extends relationships) 
 
-java.utils.Exception
-	FilterException
-		IllegalArgFilterException
-		UnexistingFilterException
-		WrongNumberOfArgumentsException
-	OrderException
-		UnexistingOrderException
-		WrongNumberOfArgsOrder
-	ParserExcetpion
-	
-filter and order exceptions are type1 errors, parser exception is type2 error.
-i did so to allow modularity and different dealing with different kinds of exceptions for
-future changes to the program (so you could differ the treatment of order and filter exception e.g)
+6.2
+design - in the design area above ^ .
 
-3. 	i used an ArrayList and the Collections.sort(Collection c, Comparator<T>) for simplicity.
-	because we only need to sort the files once after filtered. the arraylist allows adding of
-	neede files and the sort will sort it with O(nlogn). after sorting, printing will be linear.
+implementing additional functionality -
 
-.
-		
+    importing the methods and global variables of one s-java file to an other:
+        this will be very simple.
+        first we will create a scope to be our file's global scope.
+        while parsing a file's global scope we will check for import command -
+
+        if the import command is directing to a reachable java-s file:
+            we will create a new scope
+            we will use parseGlobalScope method from our Parser class with the newly created scope.
+            the parser will add the methods and global variables to that scope.
+            we will set our global scope parent to be the newly created scope. (recursively upward if there are
+                                                                                several imports)
+            continue parsing our file normally.
+
+        because all the variable and methods are being searched recursively upwards to parent scopes during the parser
+        run, this procedure will make sure they are all reachable and recognizable for this file.
+
+    switch statement:
+        after dealing with the regex involved, the switch statement mechanism will be pretty simple to.
+        first we we'll check the type
+
+
+
+
+6.3
+    we used the expression:
+        ((-?\w+(\.\d+)?)|("[^"]*")|(\'[^']*\'))
+    for any word that can be a value or an argument in a method call, an assignment, or a boolean condition.
+    we used a while(matcher.find()) mechanism to get all of these from one line one by one.
+
+    a second expression we use is:
+        [^\)\(]*\(([^\)\(]*)\)[^\)\(]*
+    that we used in method declaration or boolean condition blocks to get only the part inside the parenthesis
+    with
+    if(matcher.matches) { String insideParenthesis = matcher.group() }

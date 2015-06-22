@@ -7,8 +7,8 @@ import oop.ex6.main.exceptions.variable_exceptions.VariableException;
  */
 public class VariableDouble extends Variable{
 
-    private final VARIABLE_TYPES[] LEGAL_TYPES = new VARIABLE_TYPES[]{VARIABLE_TYPES.INTEGER,
-            VARIABLE_TYPES.DOUBLE}; //valid types a double accepts (an integer or another double)
+    private final VariableTypes[] LEGAL_TYPES = new VariableTypes[]{VariableTypes.INTEGER,
+            VariableTypes.DOUBLE}; //valid types a double accepts (an integer or another double)
     final static String LEGAL_VAL = "\\-?\\d+(\\.\\d+)?"; //regular expression for valid double
 
     /**
@@ -67,7 +67,7 @@ public class VariableDouble extends Variable{
      * @return the type of this Variable instance.
      */
     @Override
-    public VARIABLE_TYPES getVariableType() {
-        return VARIABLE_TYPES.DOUBLE;
+    public VariableTypes getVariableType() {
+        return VariableTypes.DOUBLE;
     }
 }
