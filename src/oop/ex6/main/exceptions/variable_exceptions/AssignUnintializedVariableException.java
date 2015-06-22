@@ -1,8 +1,10 @@
-package oop.ex6.main.exceptions.variableExceptions;
+package oop.ex6.main.exceptions.variable_exceptions;
 
 import oop.ex6.variables.Variable;
 
-
+/**
+ an exception representing a state where an uninitialized variable is attempted assignment into another variable
+ */
 public class AssignUnintializedVariableException extends VariableException {
 
     private final String TYPE_ERROR_MESSAGE = "cannot assign to variable - source variable is not initialized";

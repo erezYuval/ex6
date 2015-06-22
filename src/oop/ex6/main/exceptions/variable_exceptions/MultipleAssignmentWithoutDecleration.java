@@ -1,8 +1,10 @@
-package oop.ex6.main.exceptions.variableExceptions;
+package oop.ex6.main.exceptions.variable_exceptions;
 
 import oop.ex6.variables.Variable;
 
-
+/**
+ an exception representing an attempted assignment of multiple variables in the same line, without initialization.
+ */
 public class MultipleAssignmentWithoutDecleration extends VariableException {
 
     private final String TYPE_ERROR_MESSAGE = "cannot assign multiple variables in a non-declaring line";

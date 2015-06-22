@@ -1,4 +1,4 @@
-package oop.ex6.main.exceptions.parserExceptions;
+package oop.ex6.main.exceptions.parser_exceptions;
 
 import oop.ex6.main.exceptions.SjavaException;
 

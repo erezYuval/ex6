@@ -1,9 +1,9 @@
 package oop.ex6.parser;
 
 import oop.ex6.main.exceptions.SjavaException;
-import oop.ex6.main.exceptions.methodExceptions.*;
-import oop.ex6.main.exceptions.parserExceptions.*;
-import oop.ex6.main.exceptions.variableExceptions.*;
+import oop.ex6.main.exceptions.method_exceptions.*;
+import oop.ex6.main.exceptions.parser_exceptions.*;
+import oop.ex6.main.exceptions.variable_exceptions.*;
 import oop.ex6.methods.Method;
 import oop.ex6.scopes.Scope;
 import oop.ex6.variables.*;

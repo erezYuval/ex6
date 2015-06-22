@@ -1,7 +1,7 @@
 package oop.ex6.main.exceptions;
 
 /**
- * Created by yuvalavrami on 6/18/15.
+parent class for all exceptions in the S-Java verifier
  */
 public abstract class SjavaException extends Exception {
 

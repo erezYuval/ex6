@@ -1,7 +1,7 @@
 package oop.ex6.variables;
 
 
-import oop.ex6.main.exceptions.variableExceptions.VariableException;
+import oop.ex6.main.exceptions.variable_exceptions.VariableException;
 
 /**
  * a class representing an integer variable in java-s language.

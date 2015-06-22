@@ -1,4 +1,4 @@
-package oop.ex6.main.exceptions.scopeExceptions;
+package oop.ex6.main.exceptions.scope_exceptions;
 
 import oop.ex6.main.exceptions.SjavaException;
 

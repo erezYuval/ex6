@@ -1,6 +1,6 @@
 package oop.ex6.variables;
 
-import oop.ex6.main.exceptions.variableExceptions.VariableException;
+import oop.ex6.main.exceptions.variable_exceptions.VariableException;
 
 /**
  * a collection of static utility methods to Variable class.

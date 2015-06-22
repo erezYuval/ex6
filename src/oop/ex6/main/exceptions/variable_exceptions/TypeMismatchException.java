@@ -1,8 +1,11 @@
-package oop.ex6.main.exceptions.variableExceptions;
+package oop.ex6.main.exceptions.variable_exceptions;
 
 import oop.ex6.variables.Variable;
 
-
+/**
+ an exception representing an attempted assignment of a variable with a mismatching type (wither a value that is not
+ valid for the declared type of the variable, or another variable whose type does match the declared type).
+ */
 public class TypeMismatchException extends VariableException {
 
     private final String TYPE_ERROR_MESSAGE = "cannot assign to variable - assigned type does not match required type";

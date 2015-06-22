@@ -1,8 +1,8 @@
 package oop.ex6.variables;
 
-import oop.ex6.main.exceptions.variableExceptions.AttemptedChangeFinalVarException;
-import oop.ex6.main.exceptions.variableExceptions.DeclaredFinalIntWithoutInitializationException;
-import oop.ex6.main.exceptions.variableExceptions.VariableException;
+import oop.ex6.main.exceptions.variable_exceptions.AttemptedChangeFinalVarException;
+import oop.ex6.main.exceptions.variable_exceptions.DeclaredFinalIntWithoutInitializationException;
+import oop.ex6.main.exceptions.variable_exceptions.VariableException;
 
 /**
  * a decorator class for an variable - making it a final unchangable variable
