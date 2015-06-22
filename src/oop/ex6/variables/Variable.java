@@ -15,7 +15,7 @@ public abstract class Variable {
      * constructor for a variable that doesn't receive a value nor a name - is unsupported (all vars must have a name)
      */
     public Variable() {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
     }
 
     /**
