@@ -8,6 +8,9 @@ import oop.ex6.main.exceptions.SjavaException;
 public class ReturnStatementInGlobalScopeException extends SjavaException{
     private final static String TYPE_ERROR_MESSAGE = "unexpected return statement in global scope";
 
+    /**
+     * constructor for exception. holds an error message according to the type of exception.
+     */
     public ReturnStatementInGlobalScopeException(int linenumber) {
         ERROR_MESSAGE = TYPE_ERROR_MESSAGE;
         this.addLineNumber(linenumber);

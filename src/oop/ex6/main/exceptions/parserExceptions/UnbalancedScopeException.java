@@ -8,6 +8,9 @@ import oop.ex6.main.exceptions.SjavaException;
 public class UnbalancedScopeException extends SjavaException{
     private final static String TYPE_ERROR_MESSAGE = "could not parse file - mismatched number of opening and closing brackets";
 
+    /**
+     * constructor for exception. holds an error message according to the type of exception.
+     */
     public UnbalancedScopeException(int line) {
         ERROR_MESSAGE = TYPE_ERROR_MESSAGE;
         this.addLineNumber(line);
