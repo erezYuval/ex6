@@ -11,9 +11,6 @@ public abstract class Variable {
     private boolean initialized;
     private String varName;
 
-    public Variable() {
-    }
-
     /**
      * create a new variable, setValue with the value of an old one to setValue.
      * @param variable the value to be used

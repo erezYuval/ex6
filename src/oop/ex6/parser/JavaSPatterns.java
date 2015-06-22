@@ -1,7 +1,7 @@
 package oop.ex6.parser;
 
 import oop.ex6.variables.VARIABLE_TYPES;
-import oop.ex6.variables.PREDECLERATIONS;
+import oop.ex6.variables.PREDECLARATIONS;
 
 /**
  * Created by Erez Levanon on 15/06/2015.
@@ -26,7 +26,7 @@ public class JavaSPatterns {
     static String VARIABLE_TYPE_NAME;
 
     public static void compilePatterns(){
-        PREDECLARATION = generateOrString(PREDECLERATIONS.values());
+        PREDECLARATION = generateOrString(PREDECLARATIONS.values());
         DECLARATION_VARIABLES = generateOrString(VARIABLE_TYPES.values());
         VARIABLE_TYPE_NAME = "(\\s*" + DECLARATION_VARIABLES + "\\s+)(\\w+)";
         VARIABLE_LINE = "\\s*((" + PREDECLARATION + "\\s+)?((" + DECLARATION_VARIABLES + ")\\s+))?(" + VARIABLE_OR_ASSIGNMENT + "(,\\s*" + VARIABLE_OR_ASSIGNMENT + ")*)\\s*;\\s*";
