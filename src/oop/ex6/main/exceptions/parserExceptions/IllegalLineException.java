@@ -2,7 +2,7 @@ package oop.ex6.main.exceptions.parserExceptions;
 import oop.ex6.main.exceptions.*;
 
 /**
- * Created by yuvalavrami on 6/14/15.
+ an exception representing a state where a line in the code is illegal.
  */
 public class IllegalLineException extends SjavaException{
     protected final static String TYPE_ERROR_MESSAGE = "could not parse file - found an illegal line";
