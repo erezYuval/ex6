@@ -18,7 +18,7 @@ public class Sjavac {
     private final static int PATH = 0;
 
     public static void main(String[] args) {
-            JavaSPatterns.compilePatterns();
+            JavaSPatterns.generatePatterns();
             Scope global = new Scope(); //create global scope
             Scanner fileScanner;
             try {
