@@ -112,8 +112,7 @@ public class FinalVariable extends Variable {
     }
 
     /**
-     * return true isFinal state for all final variables
-     * @return
+     * @return true isFinal state for all final variables
      */
     @Override
     protected boolean isFinal() {

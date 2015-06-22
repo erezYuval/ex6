@@ -15,7 +15,6 @@ public abstract class Variable {
      * constructor for a variable that doesn't receive a value nor a name - is unsupported (all vars must have a name)
      */
     public Variable() {
-        //throw new UnsupportedOperationException();
     }
 
     /**
@@ -56,6 +55,9 @@ public abstract class Variable {
         return initialized;
     };
 
+    /**
+     * sets a variable's initialized state to true
+     */
     public void setInitialized(){
         initialized = true;
     }
@@ -72,6 +74,11 @@ public abstract class Variable {
         }
     }
 
+    /**
+     * initalize the variable with another variable
+     * @param variable
+     * @throws VariableException
+     */
     public void setValue(Variable variable) throws VariableException{
         if (!variable.isInitialized()) {
             throw new AssignUnintializedVariableException(variable);
@@ -82,6 +89,9 @@ public abstract class Variable {
         }
     }
 
+    /**
+     * @return the variable's name
+     */
     @Override
     public String toString() {
         return varName;
@@ -106,6 +116,11 @@ public abstract class Variable {
      */
     abstract public VARIABLE_TYPES getVariableType();
 
+    /**
+     * set a variable's name to given name
+     * @param name
+     * @throws IllegalNameException
+     */
     private void setVarName(String name) throws IllegalNameException {
         if (!VariableUtils.isNameLegal(name)) {
             throw new IllegalNameException(name);
@@ -113,6 +128,9 @@ public abstract class Variable {
         varName = name;
     }
 
+    /**
+     * @return flase isFinal state for all variables that are not final
+     */
     protected boolean isFinal() {
         return false;
     }
