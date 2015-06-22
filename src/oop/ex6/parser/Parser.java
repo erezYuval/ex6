@@ -92,18 +92,20 @@ public class Parser{
             Parser.dealWithVariableLine(line, currentScope);}
     }
 
-    public static boolean parseInsideMethods(Scanner fileScanner, Scope globalScope) throws SjavaException{
+    public static void parseInsideMethods(Scanner fileScanner, Scope globalScope) throws SjavaException{
+        final int NAME_GROUP = 3;
         int lineIndex = 0;
         while (fileScanner.hasNext()) {
             lineIndex++;
             String line = fileScanner.nextLine();
-            if(line.matches(JavaSPatterns.METHOD_SIGNATURE)) {
-                Method newMethod = parseMethodSignature(line);
-                Scope scope = new Scope(globalScope, newMethod.getVariables());
+            Matcher methodMatcher = Pattern.compile(JavaSPatterns.METHOD_SIGNATURE).matcher(line);
+            if(methodMatcher.matches()) {
+                String methodName = methodMatcher.group(NAME_GROUP);
+                Method parentMethod = globalScope.searchMethod(methodName);
+                Scope scope = new Scope(globalScope, parentMethod.getVariables());
                 parseInnerScopesBlock(fileScanner, scope, lineIndex);
             }
         }
-        return false;
     }
 
     public static void parseInnerScopesBlock(Scanner fileScanner, Scope scope, int lineNumber) throws SjavaException{

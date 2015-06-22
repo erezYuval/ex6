@@ -1,7 +1,7 @@
 package oop.ex6.main;
 
 import oop.ex6.main.exceptions.SjavaException;
-import oop.ex6.parser.JavaSPatterns;
+import oop.ex6.parser.*;
 import oop.ex6.scopes.Scope;
 
 import java.io.File;
@@ -25,13 +25,13 @@ public class Sjavac {
                 File sourceFile = new File(args[PATH]);
                 fileScanner = new Scanner(sourceFile);
                 try {
-                    oop.ex6.parser.Parser.parseGlobalScope(fileScanner, global);
+                    Parser.parseGlobalScope(fileScanner, global);
                     fileScanner.reset();
                     fileScanner = new Scanner(sourceFile);
-                    oop.ex6.parser.Parser.parseInsideMethods(fileScanner, global);
+                    Parser.parseInsideMethods(fileScanner, global);
                 }catch(SjavaException e) {
                     System.out.println(1);
-                    System.err.println(e.getErrorMessage());
+                    System.err.println(e.getMessage());
                     return;
                 }
             } catch (IOException e) {
@@ -40,31 +40,5 @@ public class Sjavac {
             }
             System.out.println(0);
             return;
-    }
-
-    static void runOneTest(String filePath){
-        JavaSPatterns.compilePatterns();
-        Scope global = new Scope(); //create global scope
-        Scanner fileScanner;
-        try {
-            File sourceFile = new File(filePath);
-            fileScanner = new Scanner(sourceFile);
-            try {
-                oop.ex6.parser.Parser.parseGlobalScope(fileScanner, global);
-                fileScanner.reset();
-                fileScanner = new Scanner(sourceFile);
-                oop.ex6.parser.Parser.parseInsideMethods(fileScanner, global);
-            }catch(SjavaException e) {
-                System.out.println(1);
-//                System.err.println(e.getErrorMessage());
-//                e.printStackTrace();
-                return;
-            }
-        } catch (IOException e) {
-            System.out.println(2);
-            return;
-        }
-        System.out.println(0);
-        return;
     }
 }
