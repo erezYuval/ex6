@@ -28,7 +28,7 @@ public class Sjavac {
      * 0: if file is a valid S-Java file;
      * 1: if file is an illegal S-Java file;
      * 2: if there are I/O exceptions.
-     * @param args
+     * @param args arguments the program receives (in this case should be just 1 path to a SJava code text file)
      */
     public static void main(String[] args) {
             JavaSPatterns.generatePatterns();

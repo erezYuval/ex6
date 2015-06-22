@@ -9,7 +9,7 @@ public class IllegalNameException extends VariableException {
     /**
      * constructor for exception. holds an error message according to the type of exception,
      * and a unique message updated according to the illegal name for which it was thrown.
-     * @param name
+     * @param name relevant illegal name
      */
     public IllegalNameException(String name) {
         ERROR_MESSAGE = TYPE_ERROR_MESSAGE;

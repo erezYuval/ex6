@@ -20,7 +20,7 @@ public abstract class SjavaException extends Exception {
 
     /**
      * adds a line number to the exception's error message
-     * @param lineNumber
+     * @param lineNumber relevant line's number in code
      */
     public void addLineNumber(int lineNumber) {
         this.lineNumber = lineNumber;

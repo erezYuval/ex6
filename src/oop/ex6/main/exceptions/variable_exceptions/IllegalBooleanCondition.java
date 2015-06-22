@@ -10,7 +10,7 @@ public class IllegalBooleanCondition extends VariableException {
     /**
      * constructor for exception. holds an error message according to the type of exception,
      * and a unique message updated according to the illegal boolean value for which it was thrown.
-     * @param name
+     * @param name relevanr expression that is not a legal boolean value
      */
     public IllegalBooleanCondition(String name) {
         ERROR_MESSAGE = TYPE_ERROR_MESSAGE;
