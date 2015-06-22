@@ -10,6 +10,7 @@ public class NonExistingMethodException extends MethodException {
     /**
      * constructor for exception. holds an error message according to the type of exception,
      * and a unique message updated according to the illegal method name for which it was thrown.
+     * @param methodName the name of the method being trying to reach
      */
     public NonExistingMethodException(String methodName) {
         ERROR_MESSAGE = TYPE_ERROR_MESSAGE;

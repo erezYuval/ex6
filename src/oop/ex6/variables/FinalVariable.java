@@ -16,7 +16,7 @@ public class FinalVariable extends Variable {
      * constructor for a final variable that receives a variable
      *
      * @param variable the variable to be encapsuled
-     * @throws DeclaredFinalIntWithoutInitializationException
+     * @throws DeclaredFinalIntWithoutInitializationException trying to declare uninitializd final variable
      */
     public FinalVariable(Variable variable) throws DeclaredFinalIntWithoutInitializationException {
         if (!variable.isInitialized()) {
