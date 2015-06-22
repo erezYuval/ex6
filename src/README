@@ -9,26 +9,60 @@ erez.levanon
 README 			this file
 QUESTIONS 		answers to multiple selection questions
 
-main 									- package
-    -   exceptions
-            method_exceptions
-                MethodException
-                    IllegalArgumentNameException
-                    IllegalArgumentTypeException
-                    IllegalArgumentValueException
-                    IllegalMethodNameException
-                    NonExistingMethodException
-                    WrongArgumentNumberException
-            parser_exceptions
-                IllegalLineException
-                ReturnStatementInGlobalScopeException
-                UnbalancedScopeException
-                UnexpectedExpressionAfterReturnException
-            scope_exceptions
-                ScopeException
-                    NonexistingVariableException
-            variable_exceptions
-        Sjavac
+
+methods                                                             - package
+    Method                                                          - class representing a method
+parser                                                              - package
+    Parser                                                          - static class with parsing methods
+    JavaSPatterns                                                   - static class with language regex patterns
+scopes                                                              - package
+    Scope                                                           - class representing a method
+variables                                                           - package
+    PREDECLERATIONS                                                 - enum, reserved words before variable declaration
+    VARIABLE_TYPES                                                  - enum, reserved words of variable types
+    Variable                                                        - abstract class, representing a variable
+        VariableUtils                                               - static class, variable related utility methods
+        VariableFactory                                             - static class, create Variable instances
+        FinalVariable                                               - final decorator for a Variable instance
+        VariableBoolean                                             - extends Variable
+        VariableChar                                                - extends Variable
+        VariableDouble                                              - extends Variable
+        VariableInteger                                             - extends Variable
+        VariableString                                              - extends Variable
+main 									                            - package
+        Sjavac                                                      - this is where the
+    -   exceptions                                                  - sub package
+            SjavaException                                          - abstract class
+            method_exceptions                                       - sub package
+                MethodException                                     - abstract class, implements SjavaException
+                    IllegalArgumentNameException                    - implements Method Exception
+                    IllegalArgumentTypeException                    - implements Method Exception
+                    IllegalArgumentValueException                   - implements Method Exception
+                    IllegalMethodNameException                      - implements Method Exception
+                    NonExistingMethodException                      - implements Method Exception
+                    WrongArgumentNumberException                    - implements Method Exception
+            parser_exceptions                                       - sub package
+                IllegalLineException                                - implements SjavaException
+                ReturnStatementInGlobalScopeException               - implements SjavaException
+                UnbalancedScopeException                            - implements SjavaException
+                UnexpectedExpressionAfterReturnException            - implements SjavaException
+            scope_exceptions                                        - sub package
+                ScopeException                                      - abstract class, implements SjavaException
+                    NonexistingVariableException                    - implements ScopeException
+                    VarNameExistsInBlockException                   - implements ScopeException
+            variable_exceptions                                     - sup package
+                VariableException                                   - abstract class, implements SjavaException
+                    AssignUninitializedVariableException            - implements VariableException
+                    IllegalBooleanCondition                         - implements VariableException
+                    IllegalNameException                            - implements VariableException
+                    MultipleAssignmentWithoutDeclerationException   - implements VariableException
+                    TypeMismatchException                           - implements VariableException
+                    FinalVariableException                          - abstract class, implements VariableException
+                        AttemptChangeFinalVarException              - implements FinalVariableException
+                        DeclaredFinalVarWithoutInitialization       - implements FinalVariableException
+
+
+
 		
 
 
