@@ -13,6 +13,8 @@ public class TypeMismatchException extends VariableException {
     /**
      * constructor for exception. holds an error message according to the type of exception,
      * and a unique message updated according to the illegal assignment for which it was thrown.
+     * @param intoVariable
+     * @param value
      */
     public TypeMismatchException(Variable intoVariable, String value) {
         ERROR_MESSAGE = TYPE_ERROR_MESSAGE;
@@ -24,6 +26,8 @@ public class TypeMismatchException extends VariableException {
     /**
      * constructor for exception. holds an error message according to the type of exception,
      * and a unique message updated according to the illegal assignment for which it was thrown.
+     * @param intoVariable
+     * @param variable
      */
     public TypeMismatchException(Variable intoVariable, Variable variable) {
         ERROR_MESSAGE = TYPE_ERROR_MESSAGE;

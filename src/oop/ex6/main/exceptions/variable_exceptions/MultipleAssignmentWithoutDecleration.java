@@ -12,6 +12,7 @@ public class MultipleAssignmentWithoutDecleration extends VariableException {
     /**
      * constructor for exception. holds an error message according to the type of exception,
      * and a unique message updated according to illegal line variable for which it was thrown.
+     * @param line
      */
     public MultipleAssignmentWithoutDecleration (String line) {
         ERROR_MESSAGE = TYPE_ERROR_MESSAGE;
@@ -21,6 +22,8 @@ public class MultipleAssignmentWithoutDecleration extends VariableException {
     /**
      * constructor for exception. holds an error message according to the type of exception,
      * and a unique message updated according to illegal assignment for which it was thrown.
+     * @param intoVariable
+     * @param variable
      */
     public MultipleAssignmentWithoutDecleration(Variable intoVariable, Variable variable) {
         ERROR_MESSAGE = TYPE_ERROR_MESSAGE;

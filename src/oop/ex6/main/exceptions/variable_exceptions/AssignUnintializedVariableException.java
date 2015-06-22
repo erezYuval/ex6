@@ -12,6 +12,7 @@ public class AssignUnintializedVariableException extends VariableException {
     /**
      * constructor for exception. holds an error message according to the type of exception,
      * and a unique message updated according to the uninitialized variable for which it was thrown.
+     * @param variable
      */
     public AssignUnintializedVariableException(Variable variable) {
         ERROR_MESSAGE = TYPE_ERROR_MESSAGE;

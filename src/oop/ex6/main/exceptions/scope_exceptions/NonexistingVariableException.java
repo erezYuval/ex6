@@ -9,6 +9,7 @@ public class NonexistingVariableException extends ScopeException {
    /**
     * constructor for exception. holds an error message according to the type of exception,
     * and a unique message updated according to the non-existing variable that was called for which it was thrown.
+    * @param variableName
     */
    public NonexistingVariableException(String variableName) {
       ERROR_MESSAGE = TYPE_ERROR_MESSAGE;

@@ -9,6 +9,7 @@ public class DeclaredFinalIntWithoutInitializationException extends FinalVariabl
     /**
      * constructor for exception. holds an error message according to the type of exception,
      * and a unique message updated according to the final variable for which it was thrown.
+     * @param variableName
      */
     public DeclaredFinalIntWithoutInitializationException(String variableName) {
         ERROR_MESSAGE = TYPE_ERROR_MESSAGE;
