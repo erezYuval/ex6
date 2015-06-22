@@ -19,20 +19,21 @@ public class Scope {
     //this will be the parent scope of this scope, (we need it for outer scope variables.)
     private Scope parent;
 
+    // collections that hold this scope's available variables and methods.
     private Hashtable<String, Variable> variables;
     private Hashtable<String, Method> methods;
 
 
     /**
-     * create a new scope object, and set its first line to be the given int.
+     * create a new scope object to be the given int.
      */
     public Scope() {
         initializeCollections();
     }
 
     /**
-     * create a new scope object, and set it first line to be the given int, and his parent scope to be the given scope.
-     * @param parent
+     * create a new scope object, and his parent scope to be the given scope.
+     * @param parent this scope's parent scope.
      */
     public Scope(Scope parent) {
         initializeCollections();
