@@ -12,25 +12,49 @@ public class FinalVariable extends Variable {
 
     private Variable insideVar;
 
-    public FinalVariable(Variable variable) throws DeclaredFinalIntWithoutInitializationException{
+    /**
+     * constructor for a final variable that receives a variable
+     *
+     * @param variable
+     * @throws DeclaredFinalIntWithoutInitializationException
+     */
+    public FinalVariable(Variable variable) throws DeclaredFinalIntWithoutInitializationException {
         if (!variable.isInitialized()) {
             throw new DeclaredFinalIntWithoutInitializationException(variable.toString());
         }
         insideVar = variable;
     }
 
+    /**
+     * constructor for a final variable that receives a name and a variable - is not supported
+     * @param variableName
+     * @param variable
+     */
     public FinalVariable(String variableName, Variable variable){
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * constructor for a final variable that only receives a variable name - is not supported
+     * @param variableName
+     * @throws DeclaredFinalIntWithoutInitializationException
+     */
     public FinalVariable(String variableName) throws DeclaredFinalIntWithoutInitializationException{
         throw new DeclaredFinalIntWithoutInitializationException(variableName);
     }
 
+    /**
+     * all final variables must be initialized - this method always returns true
+     * @return
+     */
     public boolean isInitialized() {
         return true;
     }
 
+    /**
+     * returns String representation of variable
+     * @return
+     */
     @Override
     public String toString() {
         return insideVar.toString();
@@ -56,11 +80,21 @@ public class FinalVariable extends Variable {
         return insideVar.canGetVariable(otherVariable);
     }
 
+    /**
+     * attempting to change a final variable's value after initialization is illegal
+     * @param value the new value as a string.
+     * @throws VariableException
+     */
     @Override
     public void setValue(String value) throws VariableException{
         throw new AttemptedChangeFinalVarException(this.toString());
     }
 
+    /**
+     * attempting to change a final variable's value after initialization is illegal
+     * @param variable the new variable
+     * @throws VariableException
+     */
     @Override
     public void setValue(Variable variable) throws VariableException{
         throw new AttemptedChangeFinalVarException(this.toString());
@@ -77,6 +111,10 @@ public class FinalVariable extends Variable {
 
     }
 
+    /**
+     * return true isFinal state for all final variables
+     * @return
+     */
     @Override
     protected boolean isFinal() {
         return true;
