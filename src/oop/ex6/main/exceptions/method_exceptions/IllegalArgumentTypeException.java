@@ -12,6 +12,9 @@ public class IllegalArgumentTypeException extends MethodException {
     /**
      * constructor for exception. holds an error message according to the type of exception,
      * and a unique message updated according to the illegal argument for which it was thrown.
+     * @param method
+     * @param argumentIndex
+     * @param variable
      */
     public IllegalArgumentTypeException(Method method, int argumentIndex, Variable variable) {
         uniqueMessage = "in " + method.getName() + " method the variable " + variable +
