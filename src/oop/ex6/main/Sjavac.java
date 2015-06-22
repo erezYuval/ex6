@@ -19,6 +19,9 @@ public class Sjavac {
     // return values constants
     private final static int ALL_OK = 0, LANGUAGE_ISSUE = 1, IO_ISSUE = 2;
     private final static String IO_ERROR_MESSAGE = "there was a problem reading the file.";
+    private final static String WRONG_FILE_TYPE_MESSAGE = "WARNING: Running on a non sjava file";
+
+    private final static String S_JAVA_FILE = ".+\\.sjava";
 
     /**
      * main method. receives a text file, and returns one of the following:
@@ -35,6 +38,9 @@ public class Sjavac {
                 File sourceFile = new File(args[PATH]);
                 fileScanner = new Scanner(sourceFile);
                 try {
+                    if (!sourceFile.getName().matches(S_JAVA_FILE)){ // these is from the school solution
+                        System.err.println(WRONG_FILE_TYPE_MESSAGE);
+                    }
                     Parser.parseGlobalScope(fileScanner, global);
                     fileScanner.reset();
                     fileScanner = new Scanner(sourceFile);

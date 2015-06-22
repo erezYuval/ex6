@@ -9,46 +9,26 @@ erez.levanon
 README 			this file
 QUESTIONS 		answers to multiple selection questions
 
-filters							- package
-	FilterFactory				- produce Filter objects
-	Filter						- interface
-		SizeLimitationFilter	- abstract class
-			GreaterFilter		- pass files greater than given size.
-			SmallerFilter		- pass files smaller than given size.
-			BetweenFilter		- pass files between two given sizes.
-		FileNameRelatedFilter 	- abstract class
-			FileNameFilter		- pass files with exact name
-			PrefixFilter		- pass files beginning with given string
-			ContainsFilter		- pass files containing a given string
-			SuffixFilter		- pass files ending with a given string
-		PremissionFilter		- abstract class
-			WritableFilter		- pass writable files
-			ExecutableFilter	- pass executable files
-			HiddenFilter		- pass hidden files.
-		NegFilter				- Filter decorator, returns opposite.
-		FilterAll				- pass all files.
-	filters.exceptions			- sub-package
-		FilterException			- abstract class extends Exception. (TYPE 1)
-			IllegalArg			- illegal arguments
-			UnexistingFilter	- wrong filter name
-			WrongNumberOfArgs	- wrong number of arguments.
-orders							- package
-	OrderFactory				- produce Order objects.
-	Order						- interface - implements Comparator<File>
-		AbsPathOrder			- order by absolute path name
-		SizeOrder				- order by file size.
-		TypeOrder				- order by file type alphabetically
-		RevOrder				- a decorator, return original value times -1.
-	orders.exceptions			- sub-package
-		OrderException			- abstract class extends Exception (TYPE 1)
-		UnexistingOrder			- wrong order name
-		WrongNumberOfArgs		- wrong number of arguments.
-parsing							- package
-	Parser						- parse the command file
-	parsing.exceptions			- sub.package
-		ParserException			- implements Exception. format issue (TYPE 2 ERROR).
-sections						- package
-	Section						- represent a section of the command file.
+main 									- package
+    -   exceptions
+            method_exceptions
+                MethodException
+                    IllegalArgumentNameException
+                    IllegalArgumentTypeException
+                    IllegalArgumentValueException
+                    IllegalMethodNameException
+                    NonExistingMethodException
+                    WrongArgumentNumberException
+            parser_exceptions
+                IllegalLineException
+                ReturnStatementInGlobalScopeException
+                UnbalancedScopeException
+                UnexpectedExpressionAfterReturnException
+            scope_exceptions
+                ScopeException
+                    NonexistingVariableException
+            variable_exceptions
+        Sjavac
 		
 
 
