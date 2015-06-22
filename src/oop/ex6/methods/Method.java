@@ -19,9 +19,9 @@ public class Method{
 
     /**
      * construct a new method using the given variable types and names.
-     * @param methodName
-     * @param variablesInOrder
-     * @throws IllegalMethodNameException
+     * @param methodName method's name
+     * @param variablesInOrder methods arguments (type and name) as variables
+     * @throws IllegalMethodNameException in case method name is illegal
      */
     public Method(String methodName, ArrayList<Variable> variablesInOrder) throws IllegalMethodNameException {
         this.variablesInOrder = variablesInOrder;
@@ -30,8 +30,8 @@ public class Method{
 
     /**
      * construct a new method (that receives no arguments)
-     * @param methodName
-     * @throws MethodException
+     * @param methodName method's name
+     * @throws MethodException in case any one of method exceptions arises
      */
     public Method(String methodName) throws MethodException{
         variablesInOrder = new ArrayList<>();
@@ -43,8 +43,8 @@ public class Method{
      * is legal in the location it was given in the call.
      * @param index the location in the method call, starting with 0
      * @param value the value to be used.
-     * @throws VariableException
-     * @throws MethodException
+     * @throws VariableException in case any variable exception arises
+     * @throws MethodException in case any method exception arises
      */
     public void checkArgumentInIndex(int index, String value) throws VariableException, MethodException{
         try {
@@ -56,7 +56,7 @@ public class Method{
 
     /**
      * adds variable to a method's arguments list and initializes it
-     * @param variable
+     * @param variable relevant variable
      */
     public void addVariable(Variable variable) {
         variable.setInitialized();
@@ -68,8 +68,8 @@ public class Method{
      * is legal in the location it was given in the call.
      * @param index the location in the method call, starting with 0
      * @param variable the variable to be used.
-     * @throws VariableException
-     * @throws MethodException
+     * @throws VariableException in case any variable exception arises
+     * @throws MethodException in case any method exception arises
      */
     public void checkArgumentInIndex(int index, Variable variable) throws VariableException, MethodException {
         try {
@@ -105,7 +105,7 @@ public class Method{
 
     /**
      * set a method's name to the given name
-     * @param name
+     * @param name method's name
      * @throws IllegalMethodNameException
      */
     private void setName(String name) throws IllegalMethodNameException{
