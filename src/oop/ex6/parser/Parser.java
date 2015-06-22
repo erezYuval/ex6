@@ -105,7 +105,7 @@ public class Parser{
             String line = fileScanner.nextLine();
             if(line.matches(JavaSPatterns.METHOD_SIGNATURE)) {
                 Method newMethod = parseMethodSignature(line);
-                Scope scope = new Scope(lineIndex, globalScope, newMethod.getVariables());
+                Scope scope = new Scope(globalScope, newMethod.getVariables());
                 parseInnerScopesBlock(fileScanner, scope, lineIndex);
             }
         }
@@ -126,7 +126,7 @@ public class Parser{
                     dealWithMethodCall(line, scope);
                 } else if (line.matches(JavaSPatterns.CONDITION_AND_BOOLEAN_IN_PARENTHESIS)) {
                     dealWithBooleanConditionLine(line, scope);
-                    Scope innerScope = new Scope(lineNumber, scope);
+                    Scope innerScope = new Scope(scope);
                     parseInnerScopesBlock(fileScanner, innerScope, lineNumber);
                 } else if (line.matches(JavaSPatterns.END_BLOCK)) {
                     return;
