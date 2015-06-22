@@ -5,23 +5,24 @@ package oop.ex6.main.exceptions;
  */
 public abstract class SjavaException extends Exception {
 
-    protected String ERROR_MESSAGE;
-    protected String uniqueMessage;
-    private int lineNumber;
+    // data members all SJavaExceptions must have //
+    protected String ERROR_MESSAGE; // an error message according to the type of exception
+    protected String uniqueMessage; // a unique, more informative message, updated according to the illegal value that
+        //caused it
+    private int lineNumber; //lineNumber in which the exception was thrown, for error message purposes
 
-    public String getErrorMessage(){
-        return ERROR_MESSAGE;
-    }
-
+    /**
+     * @return an exception's error messages
+     */
     public String getMessage() {
         return "Error in line " + lineNumber + "\n\t" + ERROR_MESSAGE + "\n" + uniqueMessage;
     }
 
+    /**
+     * adds a line number to the exception's error message
+     * @param lineNumber
+     */
     public void addLineNumber(int lineNumber) {
         this.lineNumber = lineNumber;
-    }
-
-    public int getLineNumber() {
-        return lineNumber;
     }
 }

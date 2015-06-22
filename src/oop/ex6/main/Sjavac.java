@@ -17,6 +17,13 @@ public class Sjavac {
 
     private final static int PATH = 0;
 
+    /**
+     * main method. receives a text file, and returns one of the following:
+     * 0: if file is a valid S-Java file;
+     * 1: if file is an illegal S-Java file;
+     * 2: if there are I/O exceptions.
+     * @param args
+     */
     public static void main(String[] args) {
             JavaSPatterns.compilePatterns();
             Scope global = new Scope(); //create global scope
