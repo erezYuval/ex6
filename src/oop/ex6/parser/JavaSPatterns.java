@@ -52,16 +52,17 @@ public class JavaSPatterns {
      * @return a string representing a regex expression of or relationship between all given enums.
      */
     private static String generateOrString(Enum[] values) {
-        String returnString = "(";
+        final String REGEX_START_GROUP = "(", REGEX_END_GROUP = ")", REGEX_OR_OPERATOR = "|";
+        String returnString = REGEX_START_GROUP;
         if (values != null && values.length !=0) {
             for (int i = 0 ; i < values.length ; i++) {
                 if( i == values.length - 1) {
                     returnString += values[i].toString();
                 } else {
-                    returnString += values[i].toString() + "|";
+                    returnString += values[i].toString() + REGEX_OR_OPERATOR;
                 }
             }
-            returnString += ")";
+            returnString += REGEX_END_GROUP;
         }
         return returnString;
     }
