@@ -1,4 +1,4 @@
-package oop.ex6.main.exceptions.variableExceptions;
+package oop.ex6.main.exceptions.variable_exceptions;
 
 /**
  an exception representing an attempted declaration of a final variable without initialization with a value

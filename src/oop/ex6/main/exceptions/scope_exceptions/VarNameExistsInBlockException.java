@@ -1,4 +1,4 @@
-package oop.ex6.main.exceptions.scopeExceptions;
+package oop.ex6.main.exceptions.scope_exceptions;
 
 /**
  an exception representing a state where a variable name already exists in the current block.

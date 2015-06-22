@@ -1,4 +1,4 @@
-package oop.ex6.main.exceptions.methodExceptions;
+package oop.ex6.main.exceptions.method_exceptions;
 
 import oop.ex6.methods.Method;
 

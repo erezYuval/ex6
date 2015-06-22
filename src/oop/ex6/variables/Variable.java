@@ -1,6 +1,6 @@
 package oop.ex6.variables;
 
-import oop.ex6.main.exceptions.variableExceptions.*;
+import oop.ex6.main.exceptions.variable_exceptions.*;
 
 /**
  * classes extending this abstract class will represent variables of different types in

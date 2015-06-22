@@ -1,4 +1,4 @@
-package oop.ex6.main.exceptions.variableExceptions;
+package oop.ex6.main.exceptions.variable_exceptions;
 
 /**
  an exception representing an attempted assignment of a variable with an illegal name.

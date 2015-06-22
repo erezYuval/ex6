@@ -1,9 +1,9 @@
 package oop.ex6.methods;
 
-import oop.ex6.main.exceptions.methodExceptions.IllegalMethodNameException;
-import oop.ex6.main.exceptions.methodExceptions.MethodException;
-import oop.ex6.main.exceptions.methodExceptions.WrongArgumentsNumberException;
-import oop.ex6.main.exceptions.variableExceptions.VariableException;
+import oop.ex6.main.exceptions.method_exceptions.IllegalMethodNameException;
+import oop.ex6.main.exceptions.method_exceptions.MethodException;
+import oop.ex6.main.exceptions.method_exceptions.WrongArgumentsNumberException;
+import oop.ex6.main.exceptions.variable_exceptions.VariableException;
 import oop.ex6.variables.Variable;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package oop.ex6.main.exceptions.variableExceptions;
+package oop.ex6.main.exceptions.variable_exceptions;
 
 import oop.ex6.variables.Variable;
 

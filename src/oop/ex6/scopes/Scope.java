@@ -1,9 +1,9 @@
 package oop.ex6.scopes;
 
-import oop.ex6.main.exceptions.scopeExceptions.NonexistingVariableException;
-import oop.ex6.main.exceptions.scopeExceptions.ScopeException;
-import oop.ex6.main.exceptions.scopeExceptions.VarNameExistsInBlockException;
-import oop.ex6.main.exceptions.variableExceptions.VariableException;
+import oop.ex6.main.exceptions.scope_exceptions.NonexistingVariableException;
+import oop.ex6.main.exceptions.scope_exceptions.ScopeException;
+import oop.ex6.main.exceptions.scope_exceptions.VarNameExistsInBlockException;
+import oop.ex6.main.exceptions.variable_exceptions.VariableException;
 import oop.ex6.methods.Method;
 import oop.ex6.variables.Variable;
 import oop.ex6.variables.VariableUtils;

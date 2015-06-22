@@ -1,4 +1,4 @@
-package oop.ex6.main.exceptions.methodExceptions;
+package oop.ex6.main.exceptions.method_exceptions;
 
 /**
  an exception representing a state where a method argument's name is illegal.
