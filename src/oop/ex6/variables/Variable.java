@@ -12,6 +12,13 @@ public abstract class Variable {
     private String varName;
 
     /**
+     * constructor for a variable that doesn't receive a value nor a name - is unsupported (all vars must have a name)
+     */
+    public Variable() {
+        throw new UnsupportedOperationException();
+    }
+
+    /**
      * create a new variable, setValue with the value of an old one to setValue.
      * @param variable the value to be used
      * @param variableName the name of the variable
